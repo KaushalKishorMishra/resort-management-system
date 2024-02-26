@@ -10,6 +10,10 @@ export default {
 				"custom-bg-dark": "#2c2421",
 				"custom-bg-light": "#fcf7f1",
 			},
+			fontFamily: {
+				"maconda": "Maconda, cursive",
+				"ostwald": "Oswald, sans-serif",
+			}
 		},
 	},
 	plugins: [daisyui],

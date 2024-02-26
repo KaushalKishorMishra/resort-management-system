@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
 		<>
 			<div className="w-full bg-custom-bg-dark">
 				<div className="md:container mx-auto">
-					<div className="navbar bg-custom-bg-dark text-white border-b border-custom-bg-light border-opacity-40">
+					<div className="navbar bg-custom-bg-dark text-white border-b border-custom-bg-light border-opacity-40 font-ostwald">
 						<div className="navbar-start">
 							<div className="dropdown">
 								<div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
