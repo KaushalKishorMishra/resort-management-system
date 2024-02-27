@@ -6,7 +6,7 @@ const Navbar: React.FC = () => {
 	return (
 		<>
 			<div className="w-full bg-custom-bg-dark">
-				<div className="md:container mx-auto">
+				<div className="md:container">
 					<div className="navbar bg-custom-bg-dark text-white border-b border-custom-bg-light border-opacity-40 font-ostwald">
 						<div className="navbar-start">
 							<div className="dropdown">

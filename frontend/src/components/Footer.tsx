@@ -6,13 +6,13 @@ const Footer: React.FC = () => {
 	return (
 		<>
 			<div className="bg-custom-bg-dark">
-				<footer className="footer p-10 text-white font-ostwald container mx-auto flex flex-col">
-					<div className="flex justify-between items-center w-full">
+				<footer className="footer p-8 text-white font-ostwald md:container flex flex-col">
+					<div className="flex flex-col md:flex-row justify-between items-center w-full">
 						<div className="flex items-center gap-5">
 							<img src="../../public/carnation-flower.png" alt="carnation flowers" className="h-24" />
 							<p className="font-bold text-5xl">CALL FOR BOOKING</p>
 						</div>
-						<div className="flex items-center gap-5">
+						<div className="flex items-center gap-5 my-5">
 							<FaPhoneAlt size={20} />
 							<p className="font-semibold text-lg">015-123456</p>
 							<Link
@@ -24,24 +24,28 @@ const Footer: React.FC = () => {
 						</div>
 					</div>
 					<div className="line border-b border-white border-opacity-20 w-full"></div>
-					<div className="w-full flex justify-evenly font-ostwald">
-						<Link to="/explore" className="btn btn-ghost text-xl">
-							EXPLORE
-						</Link>
-						<Link to="/rooms" className="btn btn-ghost text-xl">
-							ROOMS
-						</Link>
+					<div className="w-full flex flex-col md:flex-row justify-evenly items-center font-ostwald">
+						<span className="flex w-full justify-evenly">
+							<Link to="/explore" className="btn btn-ghost text-xl">
+								EXPLORE
+							</Link>
+							<Link to="/rooms" className="btn btn-ghost text-xl">
+								ROOMS
+							</Link>
+						</span>
 						<p className="text-4xl">ResortUI</p>
-						<Link to="/about" className="btn btn-ghost text-xl">
-							ABOUT
-						</Link>
-						<Link to="/activities" className="btn btn-ghost text-xl">
-							ACTIVITIES
-						</Link>
+						<span className="flex w-full justify-evenly">
+							<Link to="/about" className="btn btn-ghost text-xl">
+								ABOUT
+							</Link>
+							<Link to="/activities" className="btn btn-ghost text-xl">
+								ACTIVITIES
+							</Link>
+						</span>
 					</div>
 					<div className="line border-b border-white border-opacity-20 w-full relative">
 						<p
-							className="absolute text-white top-0 left-[50%] font-sans bg-custom-bg-dark"
+							className="absolute text-white top-0 left-[50%] font-sans bg-custom-bg-dark text-xs md:text-sm text-center min-w-max"
 							style={{
 								transform: "translate(-50%, -50%)",
 							}}
