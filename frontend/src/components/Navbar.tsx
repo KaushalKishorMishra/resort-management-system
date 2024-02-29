@@ -2,10 +2,14 @@ import React from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const Navbar: React.FC = () => {
+type NavbarProps = {
+	positionFixed: boolean;
+};
+
+const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
 	return (
 		<>
-			<div className="w-full bg-custom-bg-dark">
+			<div className={`w-full bg-custom-bg-dark ${positionFixed ? "fixed top-0 left-0" : ""}`}>
 				<div className="md:container">
 					<div className="navbar bg-custom-bg-dark text-white border-b border-custom-bg-light border-opacity-40 font-ostwald">
 						<div className="navbar-start">

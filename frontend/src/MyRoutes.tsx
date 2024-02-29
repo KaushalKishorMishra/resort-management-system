@@ -1,18 +1,25 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layouts from "./pages/Layouts";
 import Home from "./pages/Home";
 import Room from "./pages/Room";
+import Book from "./pages/Book";
+import SignUp from "./pages/SignUp";
+import FixedNavLayout from "./layouts/FixedNavLayout";
+import BasicLayout from "./layouts/BasicLayout";
 
 const MyRoutes: React.FC = () => {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="" element={<Layouts />} >
+				<Route path="" element={<BasicLayout />}>
 					<Route index element={<Home />} />
 					<Route path="/rooms" element={<Room />} />
 					<Route path="/about" element={<h1>About</h1>} />
 					<Route path="/contact" element={<h1>Contact</h1>} />
+					<Route path="/book" element={<Book />} />
+				</Route>
+				<Route path="" element={<FixedNavLayout />}>
+					<Route path="/signup" element={<SignUp />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
