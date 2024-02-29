@@ -13,7 +13,9 @@ const Room = () => {
 			<MapContainer center={[27.717387, 85.325933]} zoom={13} scrollWheelZoom={true} className="w-[600px] h-[600px] border-2 border-red-600">
 				<TileLayer
 					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+					// url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+					url="../../public/map/new-leaf.jpg"
+					noWrap={true}
 				/>
 				<Marker position={[27.717387, 85.325933]}>
 					<Popup>
@@ -22,6 +24,10 @@ const Room = () => {
 				</Marker>
 				{/* <MyComponent /> */}
 			</MapContainer>
+			<div className="prose">
+
+				<h1>apple</h1>
+			</div>
 		</div>
 	);
 };
