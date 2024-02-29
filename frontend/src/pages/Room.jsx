@@ -3,12 +3,6 @@ import { MapContainer, Marker, Popup, Rectangle, TileLayer } from "react-leaflet
 import 'leaflet/dist/leaflet.css';
 
 const Room = () => {
-	// function MyComponent() {
-	// 	const map = useMap();
-	// 	console.log("map center:", map.getCenter());
-	// 	return null;
-	// }
-
 	const arbyte = [27.717387, 85.325933];
 
 	const bound = [
@@ -16,7 +10,7 @@ const Room = () => {
 		[27.717487, 85.326033]
 	];
 	return (
-		<div >
+		<>
 			<MapContainer
 				center={arbyte} zoom={14} bounds={bound} scrollWheelZoom={true} className="w-[600px] h-[600px] border-2 border-red-600">
 				<TileLayer
@@ -36,7 +30,7 @@ const Room = () => {
 				<Rectangle bounds={bound} color="red" />
 			</MapContainer>
 			<iframe width="500" height="300" src="https://api.maptiler.com/tiles/cadastre/?key=CMUPZs4qPm8L6U38zJnK#6.3/47.39125/7.36378"></iframe>
-		</div>
+		</>
 	);
 };
 
