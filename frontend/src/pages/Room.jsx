@@ -24,10 +24,6 @@ const Room = () => {
 				</Marker>
 				{/* <MyComponent /> */}
 			</MapContainer>
-			<div className="prose">
-
-				<h1>apple</h1>
-			</div>
 		</div>
 	);
 };
