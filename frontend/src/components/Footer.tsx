@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
 							<FaPhoneAlt size={20} />
 							<p className="font-semibold text-lg">015-123456</p>
 							<Link
-								to="/"
+								to="/book"
 								className="btn text-lg rounded-none text-white border-white hover:border-custom-accent bg-custom-accent hover:bg-custom-bg-dark hover:text-custom-accent"
 							>
 								BOOK NOW <FaArrowRight />
@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
 					<div className="line border-b border-white border-opacity-20 w-full"></div>
 					<div className="w-full flex flex-col md:flex-row justify-evenly items-center font-ostwald">
 						<span className="flex w-full justify-evenly">
-							<Link to="/explore" className="btn btn-ghost text-xl">
+							<Link to="/" className="btn btn-ghost text-xl">
 								EXPLORE
 							</Link>
 							<Link to="/rooms" className="btn btn-ghost text-xl">

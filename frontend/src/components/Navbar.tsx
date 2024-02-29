@@ -32,10 +32,10 @@ const Navbar: React.FC = () => {
 									className="menu menu-lg dropdown-content mt-3 z-[1] py-2 px-4 shadow rounded-box w-[90vw] bg-custom-bg-dark"
 								>
 									<li className="underline decoration-custom-accent underline-offset-4 border-b border-opacity-5 border-white">
-										<Link to="/explore">EXPLORE</Link>
+										<Link to="/">EXPLORE</Link>
 									</li>
 									<li className="underline-offset-4 border-b border-opacity-5 border-white">
-										<Link to="/">ROOMS</Link>
+										<Link to="/rooms">ROOMS</Link>
 									</li>
 									<li className="underline-offset-4 border-b border-opacity-5 border-white">
 										<Link to="/">ABOUT</Link>
@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
 						</div>
 						<div className="navbar-end">
 							<Link
-								to="/"
+								to="/book"
 								className="btn text-lg rounded-none text-white border-white bg-transparent hover:bg-white hover:text-custom-bg-dark"
 							>
 								BOOK NOW <FaArrowRight className="text-custom-accent" />
