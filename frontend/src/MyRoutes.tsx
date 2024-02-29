@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layouts from "./pages/Layouts";
 import Home from "./pages/Home";
+import Room from "./pages/Room";
 
 const MyRoutes: React.FC = () => {
 	return (
@@ -9,6 +10,7 @@ const MyRoutes: React.FC = () => {
 			<Routes>
 				<Route path="" element={<Layouts />} >
 					<Route index element={<Home />} />
+					<Route path="/rooms" element={<Room />} />
 					<Route path="/about" element={<h1>About</h1>} />
 					<Route path="/contact" element={<h1>Contact</h1>} />
 				</Route>

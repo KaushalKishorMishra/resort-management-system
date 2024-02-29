@@ -51,10 +51,10 @@ const Navbar: React.FC = () => {
 						<div className="navbar-center hidden lg:flex">
 							<ul className="menu menu-horizontal px-1 text-lg">
 								<li className="underline decoration-custom-accent underline-offset-4">
-									<Link to="/explore">EXPLORE</Link>
+									<Link to="/">EXPLORE</Link>
 								</li>
 								<li>
-									<Link to="/">ROOMS</Link>
+									<Link to="/rooms">ROOMS</Link>
 								</li>
 								<li>
 									<Link to="/">ABOUT</Link>
