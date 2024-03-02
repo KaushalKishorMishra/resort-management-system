@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { createConnection, ConnectionOptions } from 'typeorm';
-import { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DATABASE } from '@config';
+import { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DATABASE } from '../config/index';
 
 export const dbConnection = async () => {
   const dbConfig: ConnectionOptions = {

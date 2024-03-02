@@ -8,11 +8,12 @@ import morgan from 'morgan';
 import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
-import { dbConnection } from '@database';
+// import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
+import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from './config/index';
+import { dbConnection } from './database/index';
 import { Routes } from '@interfaces/routes.interface';
 // import { ErrorMiddleware } from '@middlewares/error.middleware';
-import { logger, stream } from '@utils/logger';
+import { logger, stream } from './utils/logger';
 
 export class App {
   public app: express.Application;
@@ -33,10 +34,12 @@ export class App {
 
   public listen() {
     this.app.listen(this.port, () => {
-      logger.info(`=================================`);
-      logger.info(`======= ENV: ${this.env} =======`);
-      logger.info(`🚀 App listening on the port ${this.port}`);
-      logger.info(`=================================`);
+      console.log(`I am here`);
+      // logger.info(`=================================`);
+      // logger.info(`======= ENV: ${this.env} =======`);
+      // logger.info(`🚀 App listening on the port ${this.port}`);
+      // logger.info(`=================================`);
+      console.log(`App listening on the port ${this.port}`);
     });
   }
 
