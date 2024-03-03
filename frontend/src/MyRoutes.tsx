@@ -6,6 +6,7 @@ import Book from "./pages/Book";
 import SignUp from "./pages/SignUp";
 import FixedNavLayout from "./layouts/FixedNavLayout";
 import BasicLayout from "./layouts/BasicLayout";
+import Login from "./pages/forms/login/Login";
 
 const MyRoutes: React.FC = () => {
 	return (
@@ -20,6 +21,7 @@ const MyRoutes: React.FC = () => {
 				</Route>
 				<Route path="" element={<FixedNavLayout />}>
 					<Route path="/signup" element={<SignUp />} />
+					<Route path="/login" element={<Login />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
