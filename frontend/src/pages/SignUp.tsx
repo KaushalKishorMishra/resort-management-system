@@ -19,13 +19,13 @@ const Signup: React.FC = () => {
 				</div>
 				<div
 					id="item2"
-					className="carousel-item h-full w-screen flex justify-center items-center gap-10 flex-col  md:container bg-transparent"
+					className="carousel-item h-full w-screen flex justify-center items-center flex-col  md:container bg-transparent"
 				>
 					<SignupForm />
 				</div>
 				<div
 					id="item3"
-					className="carousel-item h-full w-screen flex justify-center items-center gap-10 flex-col  md:container bg-transparent"
+					className="carousel-item h-full w-screen flex justify-center items-center flex-col  md:container bg-transparent"
 				>
 					<SignupForm />
 				</div>
