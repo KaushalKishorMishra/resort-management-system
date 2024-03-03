@@ -1,52 +1,37 @@
 import React from "react";
+import SignupForm from "../components/forms/signup/SignupForm";
 
-const SignUp: React.FC = () => {
+const Signup: React.FC = () => {
 	return (
 		<>
-			<div className="carousel carousel-vertical h-screen w-screen">
+			<div
+				className="carousel carousel-vertical h-screen w-screen image-full bg-cover"
+				style={{
+					backgroundImage: "url('../../public/hero-flower.jpg')",
+					backgroundPosition: "center",
+				}}
+			>
 				<div
 					id="item1"
-					className="carousel-item h-full w-screen flex justify-center items-center gap-10 flex-col  md:container bg-red-500"
+					className="carousel-item h-full w-screen flex justify-center items-center flex-col md:container bg-transparent"
 				>
-					<p>item 1</p>
-					<div className="flex items-center gap-10">
-						<a className="btn btn-disabled">Prev</a>
-						<a href="#item2" className="btn btn-primary">
-							Next
-						</a>
-					</div>
+					<SignupForm />
 				</div>
 				<div
 					id="item2"
-					className="carousel-item h-full w-screen flex justify-center items-center gap-10 flex-col  md:container bg-yellow-500"
+					className="carousel-item h-full w-screen flex justify-center items-center gap-10 flex-col  md:container bg-transparent"
 				>
-					<p>item 2</p>
-					<div className="flex items-center gap-10">
-						<a href="#item1" className="btn btn-primary">
-							Prev
-						</a>
-						<a href="#item3" className="btn btn-primary">
-							Next
-						</a>
-					</div>
+					<SignupForm />
 				</div>
 				<div
 					id="item3"
-					className="carousel-item h-full w-screen flex justify-center items-center gap-10 flex-col  md:container bg-blue-500"
+					className="carousel-item h-full w-screen flex justify-center items-center gap-10 flex-col  md:container bg-transparent"
 				>
-					<p>item 3</p>
-					<div className="flex items-center gap-10">
-						<a href="#item2" className="btn btn-primary">
-							Prev
-						</a>
-						<a className="btn btn-primary">
-							Submit
-						</a>
-					</div>
+					<SignupForm />
 				</div>
 			</div>
 		</>
 	);
 };
 
-export default SignUp;
+export default Signup;

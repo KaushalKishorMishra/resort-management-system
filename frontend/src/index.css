@@ -8,6 +8,12 @@
 
 /* to customize leaflet map tile */
 .leaflet-container {
-	background-repeat: no-repeat!important;
-	background-size: cover!important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+}
+
+@layer utilities {
+	.btn-custom-accent {
+		@apply text-white bg-[#E87030] hover:bg-[#e87030]/80 focus:outline-none focus:ring-4 focus:ring-[#e87030]/30 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 border-none;
+	}
 }

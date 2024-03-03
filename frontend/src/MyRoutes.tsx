@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Room from "./pages/Room";
 import Book from "./pages/Book";
-import SignUp from "./pages/SignUp";
+import Signup from "./pages/Signup";
 import FixedNavLayout from "./layouts/FixedNavLayout";
 import BasicLayout from "./layouts/BasicLayout";
 import Login from "./pages/Login";
@@ -20,7 +20,7 @@ const MyRoutes: React.FC = () => {
 					<Route path="/book" element={<Book />} />
 				</Route>
 				<Route path="" element={<FixedNavLayout />}>
-					<Route path="/signup" element={<SignUp />} />
+					<Route path="/signup" element={<Signup />} />
 					<Route path="/login" element={<Login />} />
 				</Route>
 			</Routes>

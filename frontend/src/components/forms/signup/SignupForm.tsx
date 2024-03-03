@@ -17,7 +17,7 @@ export type FormFieldProps = {
 	valueAsNumber?: boolean;
 };
 
-const LoginForm: React.FC = () => {
+const SignupForm: React.FC = () => {
 	const {
 		register,
 		handleSubmit,
@@ -38,7 +38,7 @@ const LoginForm: React.FC = () => {
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
-			className="form-control gap-6 p-4 md:p-10 w-full text-white border bg-white bg-opacity-60 rounded-xl"
+			className="form-control gap-6 p-4 md:p-10 w-full max-w-lg text-white border bg-white bg-opacity-60 rounded-xl"
 		>
 			<h1 className="mb-2 text-5xl font-bold text-black">Welcome Back</h1>
 			<p className="mb-3 font-semibold text-xl text-black">Login to start booking</p>
@@ -88,4 +88,4 @@ const LoginForm: React.FC = () => {
 	);
 };
 
-export default LoginForm;
+export default SignupForm;
