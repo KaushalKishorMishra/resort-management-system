@@ -1,21 +1,10 @@
 import React from "react";
-import { FieldError, FieldValues, UseFormRegister, useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { useScrollToElement } from "../../../hooks/useScrollToElement";
-
-type ValidFieldName = "email" | "password";
 
 export type FormData = {
 	email: string;
 	password: string;
-};
-
-export type FormFieldProps = {
-	type: string;
-	placeholder: string;
-	name: ValidFieldName;
-	register: UseFormRegister<FormData>;
-	error: FieldError | undefined;
-	valueAsNumber?: boolean;
 };
 
 const SignupForm: React.FC = () => {

@@ -1,5 +1,8 @@
 import React from "react";
 import SignupForm from "../components/forms/signup/SignupForm";
+import AccountForm from "../components/forms/signup/AccountForm";
+import PasswordForm from "../components/forms/signup/PasswordForm";
+import TermsForm from "../components/forms/signup/TermsForm";
 
 const Signup: React.FC = () => {
 	return (
@@ -15,19 +18,19 @@ const Signup: React.FC = () => {
 					id="item1"
 					className="carousel-item h-full w-screen flex justify-center items-center flex-col md:container bg-transparent"
 				>
-					<SignupForm />
+					<AccountForm />
 				</div>
 				<div
 					id="item2"
 					className="carousel-item h-full w-screen flex justify-center items-center flex-col  md:container bg-transparent"
 				>
-					<SignupForm />
+					<PasswordForm />
 				</div>
 				<div
 					id="item3"
 					className="carousel-item h-full w-screen flex justify-center items-center flex-col  md:container bg-transparent"
 				>
-					<SignupForm />
+					<TermsForm />
 				</div>
 			</div>
 		</>
