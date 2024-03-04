@@ -29,13 +29,13 @@ const TermsForm: React.FC = () => {
 		<>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="form-control gap-6 p-4 md:p-10 w-full max-w-lg text-white border bg-white bg-opacity-60 rounded-xl"
+				className="signup-form"
 			>
-				<h1 className="mb-2 text-6xl font-bold text-black text-center">Sign Up</h1>
-				<p className="mb-3 font-semibold text-xl text-black text-center">
+				<h1 className="mb-2 text-6xl font-bold text-white text-center">Sign Up</h1>
+				<p className="mb-3 font-semibold text-xl text-white text-center">
 					"Great! Now, let's set up your account password.
 				</p>
-				<ul className="steps text-black">
+				<ul className="steps text-white">
 					<li className="step step-primary" data-content="✓">
 						Account
 					</li>
