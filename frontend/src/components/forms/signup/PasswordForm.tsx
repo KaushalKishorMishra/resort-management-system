@@ -45,7 +45,7 @@ const PasswordForm: React.FC = () => {
 					<li className="step">Terms</li>
 				</ul>
 				<div className="flex flex-col">
-					<label htmlFor="password" className="text-black font-semibold text-lg">
+					<label htmlFor="password" className="font-semibold text-lg">
 						Password*
 					</label>
 					<input
@@ -75,7 +75,7 @@ const PasswordForm: React.FC = () => {
 					)}
 				</div>
 				<div className="flex flex-col">
-					<label htmlFor="confirmPassword" className="text-black font-semibold text-lg">
+					<label htmlFor="confirmPassword" className="font-semibold text-lg">
 						Confirm Password*
 					</label>
 					<input
@@ -94,12 +94,12 @@ const PasswordForm: React.FC = () => {
 					)}
 				</div>
 				<div className="flex justify-between">
-					<button className="btn btn-info w-fit rounded-full" onClick={onPrev}>
-						Prev
-					</button>
+					<div className="btn btn-primary btn-outline w-fit rounded-full px-6 text-lg" onClick={onPrev}>
+						Back
+					</div>
 					<button
 						type="submit"
-						className="btn btn-custom-accent w-fit rounded-full self-end"
+						className="btn btn-primary w-fit rounded-full self-end px-6 text-lg"
 						disabled={isSubmitting}
 					>
 						{isSubmitting ? "Submitting..." : "Next"}

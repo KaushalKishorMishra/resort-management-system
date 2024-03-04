@@ -23,10 +23,7 @@ const AccountForm: React.FC = () => {
 
 	return (
 		<>
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-				className="signup-form"
-			>
+			<form onSubmit={handleSubmit(onSubmit)} className="signup-form">
 				<h1 className="mb-2 text-6xl font-bold text-white text-center">Sign Up</h1>
 				<p className="mb-3 font-semibold text-xl text-white text-center">
 					Welcome to our platform! Let's get started with some basic information.
@@ -49,7 +46,7 @@ const AccountForm: React.FC = () => {
 						placeholder="Name"
 					/>
 					{errors.name && (
-						<span className="text-red-600">
+						<span className="text-scarlet">
 							<>{errors.name.message}</>
 						</span>
 					)}
@@ -67,7 +64,7 @@ const AccountForm: React.FC = () => {
 						placeholder="Email"
 					/>
 					{errors.email && (
-						<span className="text-red-500">
+						<span className="text-scarlet">
 							<>{errors.email.message}</>
 						</span>
 					)}
@@ -76,14 +73,9 @@ const AccountForm: React.FC = () => {
 					<label htmlFor="name" className="font-semibold text-lg">
 						Phone
 					</label>
-					<input
-						{...register("phone", {})}
-						className="signup-input"
-						type="text"
-						placeholder="Phone"
-					/>
+					<input {...register("phone", {})} className="signup-input" type="text" placeholder="Phone" />
 					{errors.phone && (
-						<span className="text-red-500">
+						<span className="text-scarlet">
 							<>{errors.phone.message}</>
 						</span>
 					)}

@@ -45,10 +45,10 @@ const TermsForm: React.FC = () => {
 					<li className="step step-primary">Terms</li>
 				</ul>
 				<div className="flex flex-col text-black">
-					<label htmlFor="terms" className=" font-semibold text-lg">
+					<label htmlFor="terms" className="text-white font-semibold text-lg">
 						<input
 							{...register("terms", {
-								required: "Terms is required",
+								required: "Your must agree to the terms and conditions to continue",
 							})}
 							className="checkbox-primary rounded-lg"
 							type="checkbox"
@@ -65,20 +65,21 @@ const TermsForm: React.FC = () => {
 						<Link to="/privacy-policy" className="inline font-semibold underline text-custom-accent w-fit">
 							Privacy policy
 						</Link>
+						<br />
 						{errors.terms && (
-							<span className="text-red-500">
+							<span className="text-red-500 font-normal">
 								<>{errors.terms.message}</>
 							</span>
 						)}
 					</label>
 				</div>
 				<div className="flex justify-between">
-					<button className="btn btn-info w-fit rounded-full" onClick={onPrev}>
-						Prev
-					</button>
+					<div className="btn btn-primary btn-outline w-fit rounded-full px-6 text-lg" onClick={onPrev}>
+						Back
+					</div>
 					<button
 						type="submit"
-						className="btn btn-custom-accent w-fit rounded-full self-end"
+						className="btn btn-primary w-fit rounded-full self-end px-6 text-lg"
 						disabled={isSubmitting}
 					>
 						{isSubmitting ? "Submitting..." : "Submit"}

@@ -14,6 +14,7 @@ export default {
 				"custom-accent": "#e87030",
 				"custom-bg-dark": "#2c2421",
 				"custom-bg-light": "#fcf7f1",
+				"scarlet": "#FF2400",
 			},
 			fontFamily: {
 				maconda: "Maconda, cursive",
