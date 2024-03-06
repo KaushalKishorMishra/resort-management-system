@@ -1,17 +1,20 @@
 import React from "react";
-import LoginForm from "../components/forms/LoginForm";
+import LoginForm from "../components/forms/login/LoginForm";
 
 const Login: React.FC = () => {
 	return (
 		<>
 			<div
-				className="hero min-h-screen"
+				data-theme="halloween"
+				className="carousel carousel-vertical h-screen w-screen image-full bg-cover"
 				style={{
-					backgroundImage: "url('../../public/resort-pool.jpg')",
+					backgroundImage: "url('../../public/campfire.jpg')",
+					backgroundPosition: "center",
 				}}
 			>
-				<div className="hero-overlay bg-opacity-30"></div>
-				<div className="text-center w-full max-w-lg p-10">
+				<div
+					className="h-full px-4 flex justify-center items-center flex-col md:container bg-transparent"
+				>
 					<LoginForm />
 				</div>
 			</div>

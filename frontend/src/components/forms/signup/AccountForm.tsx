@@ -16,7 +16,7 @@ const AccountForm: React.FC = () => {
 			setTimeout(() => {
 				console.log(data);
 				scrollToSecond();
-				resolve();
+				resolve();	
 			}, 1000);
 		});
 	};
@@ -52,7 +52,7 @@ const AccountForm: React.FC = () => {
 					)}
 				</div>
 				<div className="flex flex-col">
-					<label htmlFor="name" className="font-semibold text-lg">
+					<label htmlFor="email" className="font-semibold text-lg">
 						Email*
 					</label>
 					<input
@@ -70,7 +70,7 @@ const AccountForm: React.FC = () => {
 					)}
 				</div>
 				<div className="flex flex-col">
-					<label htmlFor="name" className="font-semibold text-lg">
+					<label htmlFor="phone" className="font-semibold text-lg">
 						Phone
 					</label>
 					<input {...register("phone", {})} className="signup-input" type="text" placeholder="Phone" />
