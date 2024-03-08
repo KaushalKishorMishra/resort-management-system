@@ -41,9 +41,9 @@ export class UserService extends Repository<UserEntity> {
     return createUserData;
   }
 
-  public async verifyUser(userData: User): Promise<User> {
+  public async verifyUser({ email, verification_token }): Promise<User> {
     const findUser: User = await UserRepository.findOne({
-      email: userData.email,
+      email: email,
     });
     if (!findUser) throw new HttpException(404, "User doesn't exist");
     if (findUser.isVerified === true)

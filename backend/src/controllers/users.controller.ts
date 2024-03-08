@@ -58,8 +58,8 @@ export class UserController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const userData: User = req.body;
-      const verifyUserData: User = await this.user.verifyUser(userData);
+      const {email,verification_token}= req.body;
+      const verifyUserData: User = await this.user.verifyUser({email,verification_token});
       res
         .status(200)
         .json({ data: verifyUserData, message: "Verified user successfully" });
