@@ -19,9 +19,4 @@ export class Service {
     return base;
   }
 
-  static createErrorAndThrow(message: string, status: number): never {
-    let err: Error = new Error(message);
-    (err as any).errorStatus = status;
-    throw err;
-  }
 }
