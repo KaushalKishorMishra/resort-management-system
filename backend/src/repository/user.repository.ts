@@ -16,7 +16,7 @@ export class UserRepository extends Repository<User> {
 
   static async update(id: number, key: object): Promise<User> {
     await getRepository(UserEntity).update(id, key);
-    const updatedUser = await getRepository(UserEntity).findOne(id);
+    const updatedUser: User = await getRepository(UserEntity).findOne(id);
     return updatedUser;
   }
 }
