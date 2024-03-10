@@ -23,3 +23,7 @@
 		@apply input input-bordered border-white rounded-full bg-opacity-60;
 	}	
 }
+
+.map-nav-button {
+	@apply w-full h-full p-2 text-[#4C68C1];
+}
