@@ -13,5 +13,15 @@ export class TokenService extends Repository<TokenEntity> {
     return tokens;
   }
 
-  
+  public async getUserToken(tokenId: string): Promise<Token> {
+    const token: Token = await TokenRepository.findOneToken({ token: tokenId });
+    return token;
+  }
+
+  public async createToken(tokenData: Token): Promise<Token> {
+    const createTokenData: Token = await TokenRepository.createToken({
+      ...tokenData,
+    });
+    return createTokenData;
+  }
 }

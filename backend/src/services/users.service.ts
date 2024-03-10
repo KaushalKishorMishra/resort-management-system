@@ -23,9 +23,7 @@ export class UserService extends Repository<UserEntity> {
   }
 
   public async createUser(userData: User): Promise<User> {
-    const findUser: User = await UserEntity.findOne({
-      where: { email: userData.email },
-    });
+    const findUser : User = await UserRepository.findOne({email: userData.email})
     if (findUser)
       throw new HttpException(
         409,
