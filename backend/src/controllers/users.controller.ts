@@ -5,9 +5,14 @@ import { UserService } from "@services/users.service";
 import { UserRepository } from "@/repository/user.repository";
 import { Token } from "@/interfaces/tokens.interface";
 import { Service } from "@/utils/utils";
+import { TokenRepository } from "@/repository/token.repository";
+import { TokenService } from "@/services/token.service";
+import { HttpException } from "@/exceptions/httpException";
+import { NodeMailer } from "@/utils/nodeMailer";
 
 export class UserController {
   public user = Container.get(UserService);
+  public token = Container.get(TokenService);
 
   public getUsers = async (
     req: Request,
@@ -45,6 +50,9 @@ export class UserController {
   ): Promise<void> => {
     try {
       const userData: User = req.body;
+
+      // user.service to save user data to database is called
+      // repository is not called here rather called in service
       const createUserData: User = await this.user.createUser(userData);
 
       const tokenData: Token = {
@@ -54,9 +62,25 @@ export class UserController {
         userId: createUserData.id,
       };
 
+      // token.service to create token and save to database
+      let createToken: Token = await this.token.createToken(tokenData);
+
+      if (!createToken) {
+        throw new HttpException(409, `Token cant be created.`);
+      }
+
+      // send mail
+      await NodeMailer.sendEmail({
+        from: "event-management@api.com",
+        to: createUserData.email,
+        subject: "Email Verification",
+        text: `To verify your event management account use the OTP ${createToken.value}`,
+        html: `<a href="https://localhost:3000/api/user/verify-email">Click to verify ${createToken.value}</a>`,
+      });
+
       res
         .status(201)
-        .json({ data: createUserData, message: "Created user successfully" });
+        .json({ data: createUserData, message: "Created user successfully." });
     } catch (error) {
       next(error);
     }
