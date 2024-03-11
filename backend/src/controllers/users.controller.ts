@@ -3,6 +3,8 @@ import { Container } from "typedi";
 import { User } from "@interfaces/users.interface";
 import { UserService } from "@services/users.service";
 import { UserRepository } from "@/repository/user.repository";
+import { Token } from "@/interfaces/tokens.interface";
+import { Service } from "@/utils/utils";
 
 export class UserController {
   public user = Container.get(UserService);
@@ -44,6 +46,14 @@ export class UserController {
     try {
       const userData: User = req.body;
       const createUserData: User = await this.user.createUser(userData);
+
+      const tokenData: Token = {
+        purpose: "verify-email",
+        expires_in: Service.generateVerificationTime(new Date(), 5),
+        value: Service.generateOTP(),
+        userId: createUserData.id,
+      };
+
       res
         .status(201)
         .json({ data: createUserData, message: "Created user successfully" });
@@ -98,13 +108,11 @@ export class UserController {
       const userData: User = req.body;
       const updateUserData: User = await this.user.updateUser(userId, userData);
 
-      res
-        .status(200)
-        .json({
-          status: 200,
-          data: updateUserData,
-          message: "Updated user successfully",
-        });
+      res.status(200).json({
+        status: 200,
+        data: updateUserData,
+        message: "Updated user successfully",
+      });
     } catch (error) {
       next(error);
     }
