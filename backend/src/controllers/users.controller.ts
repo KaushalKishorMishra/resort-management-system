@@ -70,13 +70,13 @@ export class UserController {
       }
 
       // send mail
-      await NodeMailer.sendEmail({
-        from: "event-management@api.com",
-        to: createUserData.email,
-        subject: "Email Verification",
-        text: `To verify your event management account use the OTP ${createToken.value}`,
-        html: `<a href="https://localhost:3000/api/user/verify-email">Click to verify ${createToken.value}</a>`,
-      });
+      // await NodeMailer.sendEmail({
+      //   from: "event-management@api.com",
+      //   to: createUserData.email,
+      //   subject: "Email Verification",
+      //   text: `To verify your event management account use the OTP ${createToken.value}`,
+      //   html: `<a href="https://localhost:3000/api/user/verify-email">Click to verify ${createToken.value}</a>`,
+      // });
 
       res
         .status(201)
