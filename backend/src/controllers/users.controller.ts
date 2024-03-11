@@ -12,6 +12,7 @@ import { NodeMailer } from "@/utils/nodeMailer";
 import { Payload } from "@/interfaces/payload.interface";
 import { PayloadPurpose } from "@/enums/payload.enum";
 import { Jwt } from "@/utils/jwt";
+import { UserRole } from "@/enums/users.enum";
 
 export class UserController {
   public user = Container.get(UserService);
@@ -158,7 +159,7 @@ export class UserController {
       const payload: Payload = {
         userId: loginUserData.id,
         email: loginUserData.email,
-        type: loginUserData.role,
+        type: loginUserData.role === "guest" ? UserRole.GUEST : UserRole.ADMIN,
         purpose: PayloadPurpose.LOGIN,
       };
 
@@ -217,10 +218,13 @@ export class UserController {
       //   text: `To verify your event management account use the OTP ${createToken.value}`,
       //   html: `<a href="https://localhost:3000/api/user/verify-email">Click to verify ${createToken.value}</a>`,
       // });
+
+      // payload
       const payload: Payload = {
         userId: forgotPasswordData.id,
         email: forgotPasswordData.email,
-        type: forgotPasswordData.role,
+        type:
+          forgotPasswordData.role === "guest" ? UserRole.GUEST : UserRole.ADMIN,
         purpose: PayloadPurpose.RESET_PASSWORD,
       };
 
@@ -232,7 +236,6 @@ export class UserController {
         message: "Password reset OTP sent successfully",
         jwt: jwt,
       });
-      
     } catch (error) {
       next(error);
     }
@@ -270,6 +273,30 @@ export class UserController {
       res
         .status(200)
         .json({ data: deleteUserData, message: "Deleted user successfully" });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public verifyJwt = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    const decoded: Payload = req.body.decoded;
+    try {
+      if (decoded) {
+        res.status(200).json({
+          status: 200,
+          data: decoded,
+          message: "Jwt successfully verified",
+          type: decoded.type,
+          userId: decoded.userId,
+          email: decoded.email,
+        });
+      } else {
+        throw new HttpException(404, "Jwt not found");
+      }
     } catch (error) {
       next(error);
     }
