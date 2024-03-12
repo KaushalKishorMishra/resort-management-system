@@ -3,8 +3,8 @@ import { Token } from "@/interfaces/tokens.interface";
 import { getRepository, Repository } from "typeorm";
 
 export class TokenRepository extends Repository<Token> {
-  static async findAllToken(): Promise<Token[]> {
-    return await getRepository(TokenEntity).find();
+  static async findAllToken(key: object): Promise<Token[]> {
+    return await getRepository(TokenEntity).find({ where: key });
   }
 
   static async findOneToken(key: object): Promise<Token> {
@@ -13,5 +13,17 @@ export class TokenRepository extends Repository<Token> {
 
   static async createToken(tokenData: Token): Promise<Token> {
     return await getRepository(TokenEntity).save(tokenData);
+  }
+
+  static async updateToken(id: number, key: object): Promise<Token> {
+    await getRepository(TokenEntity).update(id, key);
+    const updatedToken: Token = await getRepository(TokenEntity).findOne(id);
+    return updatedToken;
+  }
+
+  static async deleteToken(id: number, purpose: string): Promise<Token> {
+    const deletedToken: Token = await getRepository(TokenEntity).findOne(id);
+    await getRepository(TokenEntity).delete({ id, purpose });
+    return deletedToken;
   }
 }

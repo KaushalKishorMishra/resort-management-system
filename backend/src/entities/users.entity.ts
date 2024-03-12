@@ -7,9 +7,12 @@ import {
   Unique,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
 import { User } from "@interfaces/users.interface";
 import { UserRole } from "@/enums/users.enum";
+import { Token } from "@/interfaces/tokens.interface";
+import { TokenEntity } from "./tokens.entity";
 
 @Entity()
 export class UserEntity extends BaseEntity implements User {
@@ -43,6 +46,9 @@ export class UserEntity extends BaseEntity implements User {
 
   @Column({ default: false })
   isVerified: boolean;
+
+  @OneToMany(() => TokenEntity, (token) => token.id, { nullable: false })
+  token: Token[];
 
   @Column()
   @CreateDateColumn()

@@ -40,6 +40,30 @@ export class LoginUserDto {
   public password: string;
 }
 
+export class VerifyUserDto {
+  @IsEmail()
+  @IsNotEmpty()
+  public email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(6)
+  public value: string;
+}
+
+export class ResendVerificationDto {
+  @IsEmail()
+  @IsNotEmpty()
+  public email: string;
+}
+
+export class ForgotPasswordDto{
+  @IsEmail()
+  @IsNotEmpty()
+  public email: string;
+
+}
+
 export class UpdateUserDto {
   @IsString()
   @IsNotEmpty()

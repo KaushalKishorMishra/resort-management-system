@@ -2,10 +2,11 @@ import { Token } from "@/interfaces/tokens.interface";
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
-  JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { UserEntity } from "./users.entity";
 
@@ -23,7 +24,15 @@ export class TokenEntity extends BaseEntity implements Token {
   @Column()
   value: string;
 
-  @OneToOne(() => UserEntity, (userId) => userId.id, { nullable: false })
-  @JoinColumn()
-  userId: UserEntity;
+  @ManyToOne(() => UserEntity, (userId) => userId.id, { nullable: false })
+  userId: number;
+
+  @Column()
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @Column()
+  @UpdateDateColumn()
+  updatedAt: Date;
+  
 }
