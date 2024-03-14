@@ -126,13 +126,13 @@ export class UserController {
       if (resendVerificationData) {
         {
           // send mail
-          // await NodeMailer.sendEmail({
-          //   from: "event-management@api.com",
-          //   to: createUserData.email,
-          //   subject: "Email Verification",
-          //   text: `To verify your event management account use the OTP ${createToken.value}`,
-          //   html: `<a href="https://localhost:3000/api/user/verify-email">Click to verify ${createToken.value}</a>`,
-          // });
+          await NodeMailer.sendEmail({
+            from: "event-management@api.com",
+            to: email,
+            subject: "Email Verification",
+            text: `To verify your event management account use the OTP ${resendVerificationData.value}`,
+            html: `<a href="https://localhost:3000/users/verify-email">Click to verify ${resendVerificationData.value}</a>`,
+          });
 
           res.status(201).json({
             data: resendVerificationData,
@@ -213,13 +213,13 @@ export class UserController {
       });
 
       // send mail
-      // await NodeMailer.sendEmail({
-      //   from: "event-management@api.com",
-      //   to: createUserData.email,
-      //   subject: "Email Verification",
-      //   text: `To verify your event management account use the OTP ${createToken.value}`,
-      //   html: `<a href="https://localhost:3000/api/user/verify-email">Click to verify ${createToken.value}</a>`,
-      // });
+      await NodeMailer.sendEmail({
+        from: "event-management@api.com",
+        to: forgotPasswordData.email,
+        subject: "Email Verification",
+        text: `To verify your event management account use the OTP ${newToken.value}`,
+        html: `<a href="https://localhost:3000/api/user/verify-email">Click to verify ${newToken.value}</a>`,
+      });
 
       // payload
       const payload: Payload = {
