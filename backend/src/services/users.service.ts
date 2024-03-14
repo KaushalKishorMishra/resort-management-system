@@ -10,13 +10,17 @@ import { Token } from "@/interfaces/tokens.interface";
 import { TokenRepository } from "@/repository/token.repository";
 import { Utils } from "@/utils/utils";
 import { Payload } from "@/interfaces/payload.interface";
+import { GetProfile } from "@/interfaces/getProfile.interface";
 
 @Service()
 @EntityRepository()
 export class UserService extends Repository<UserEntity> {
-  public async findAllUser(): Promise<User[]> {
-    const users: User[] = await UserRepository.findAll();
-    return users;
+  public async findAllUser(email): Promise<User[]> {
+    const findOne: User = await UserRepository.findOne({ email });
+    if (findOne.role === "admin") {
+      const users: User[] = await UserRepository.findAll();
+      return users;
+    }
   }
 
   public async findUserById(userId: number): Promise<User> {
@@ -142,6 +146,76 @@ export class UserService extends Repository<UserEntity> {
 
     return findUser;
   }
+
+  public async resetPassword({
+    email,
+    password,
+    password_reset_token,
+    decoded,
+  }): Promise<User> {
+    if (!decoded) {
+      throw new HttpException(404, "Jwt not found");
+    } else if (decoded.email !== email) {
+      throw new HttpException(401, "Invalid Jwt, email doesn't match.");
+    }
+    const findUser: User = await UserRepository.findOne({ email });
+    if (!findUser) {
+      throw new HttpException(404, "Email not registered.");
+    }
+    if (!findUser.isVerified) {
+      throw new HttpException(401, "Email not verified");
+    }
+
+    const resetToken: Token = await TokenRepository.findOneToken({
+      userId: decoded.userId,
+      purpose: "reset-password",
+    });
+
+    if (!resetToken) {
+      throw new HttpException(400, "Password reset token not generated.");
+    } else if (new Date() > resetToken.expires_in) {
+      throw new HttpException(401, "Reset token expired");
+    } else if (password_reset_token !== resetToken.value) {
+      throw new HttpException(401, "Invalid password reset token");
+    }
+
+    const hashedPassword: string = await Bcrypt.encryptPassword(password);
+    const updatePassword: User = await UserRepository.update(findUser.id, {
+      password: hashedPassword,
+    });
+
+    const deleteToken = await TokenRepository.deleteToken(
+      findUser.id,
+      "reset-password",
+    );
+    if (!deleteToken) {
+      throw new HttpException(401, "Token deletion error");
+    }
+    return updatePassword;
+  }
+
+  public async getProfile(decoded, user_id): Promise<GetProfile | User> {
+    const findUser: User = await UserRepository.findOne({ user_id });
+    if (!findUser) {
+      throw new HttpException(404, "User doesn't exist");
+    }
+    if (!findUser.isVerified) {
+      throw new HttpException(401, "Email not verified");
+    }
+
+    let user: GetProfile = {
+      id: findUser.id,
+      email: findUser.email,
+      phone: findUser.phone,
+      name: findUser.name,
+      createdAt: findUser.createdAt,
+      updatedAt: findUser.updatedAt,
+    };
+    if (decoded.type === "admin" || decoded.userId == user_id) {
+      return findUser;
+    }
+    return user;
+  } 
 
   public async updateUser(userId: number, userData: User): Promise<User> {
     const findUser: User = await UserEntity.findOne({ where: { id: userId } });

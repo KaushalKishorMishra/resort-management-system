@@ -8,7 +8,13 @@ export class TokenRepository extends Repository<Token> {
   }
 
   static async findOneToken(key: object): Promise<Token> {
-    return await getRepository(TokenEntity).findOne({ where: key });
+    const token = await getRepository(TokenEntity).findOne({
+      where: key ,
+    });
+    if (token) {
+      return token;
+    }
+    return null;
   }
 
   static async createToken(tokenData: Token): Promise<Token> {

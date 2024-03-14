@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { UserController } from "@controllers/users.controller";
-import { CreateUserDto, LoginUserDto } from "@dtos/users.dto";
+import { CreateUserDto, LoginUserDto, ResendVerificationDto, VerifyUserDto } from "@dtos/users.dto";
 import { Routes } from "@interfaces/routes.interface";
 import { ValidationMiddleware } from "@middlewares/validation.middleware";
 
@@ -31,6 +31,17 @@ export class UserRoute implements Routes {
       `${this.path}/login`,
       ValidationMiddleware(LoginUserDto),
       this.user.loginUser,
+    );
+    this.router.patch(
+      `${this.path}/verify-user`,
+      ValidationMiddleware(VerifyUserDto),
+      this.user.verifyUser,
+    );
+
+    this.router.patch(
+      `${this.path}/resend-verification`,
+      ValidationMiddleware(ResendVerificationDto),
+      this.user.resendVerification,
     );
   }
 }

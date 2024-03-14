@@ -1,7 +1,10 @@
-const nodemailer = require("nodemailer");
+import { Email } from "@/interfaces/email.interface";
+import * as nodemailer from "nodemailer";
 
-class NodeMailer {
-  static initializeTransporter() {
+export class NodeMailer {
+  private static transporter: nodemailer.Transporter;
+
+  private static initializeTransporter() {
     console.log(process.env.NODEMAILER_USER);
 
     NodeMailer.transporter = nodemailer.createTransport({
@@ -12,10 +15,11 @@ class NodeMailer {
         user: process.env.NODEMAILER_USER,
         pass: process.env.NODEMAILER_PASS,
       },
+      logger: true,
     });
   }
 
-  static async sendEmail(email) {
+  static async sendEmail(email: Email): Promise<void> {
     if (!NodeMailer.transporter) {
       NodeMailer.initializeTransporter();
     }
@@ -34,6 +38,8 @@ class NodeMailer {
       console.log("Error sending email: ", error);
     }
   }
-}
 
-module.exports = NodeMailer;
+  static async test() {
+    console.log("test");
+  }
+}
