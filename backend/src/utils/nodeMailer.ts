@@ -19,27 +19,27 @@ export class NodeMailer {
     });
   }
 
-//   static async sendEmail(email: Email): Promise<void> {
-//     if (!NodeMailer.transporter) {
-//       NodeMailer.initializeTransporter();
-//     }
-//     try {
-//       // send mail with defined transport object
-//       const info = await NodeMailer.transporter.sendMail({
-//         from: email.from, // sender address
-//         to: email.to, // list of receivers
-//         subject: email.subject, // Subject line
-//         text: email.text, // plain text body
-//         html: email.html, // html body
-//       });
+  static async sendEmail(email: Email): Promise<void> {
+    if (!NodeMailer.transporter) {
+      NodeMailer.initializeTransporter();
+    }
+    try {
+      // send mail with defined transport object
+      const info = await NodeMailer.transporter.sendMail({
+        from: email.from, // sender address
+        to: email.to, // list of receivers
+        subject: email.subject, // Subject line
+        text: email.text, // plain text body
+        html: email.html, // html body
+      });
 
-//       console.log("Message sent: ", info.messageId);
-//     } catch (error) {
-//       console.log("Error sending email: ", error);
-//     }
-//   }
+      console.log("Message sent: ", info.messageId);
+    } catch (error) {
+      console.log("Error sending email: ", error);
+    }
+  }
 
   static async test() {
-	console.log("test")
+    console.log("test");
   }
 }

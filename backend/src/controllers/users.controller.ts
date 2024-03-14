@@ -13,6 +13,7 @@ import { Payload } from "@/interfaces/payload.interface";
 import { PayloadPurpose } from "@/enums/payload.enum";
 import { Jwt } from "@/utils/jwt";
 import { UserRole } from "@/enums/users.enum";
+import { GetProfile } from "@/interfaces/getProfile.interface";
 
 export class UserController {
   public user = Container.get(UserService);
@@ -24,8 +25,8 @@ export class UserController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      // const findAllUsersData: User[] = await this.user.findAllUser();
-      const findAllUsersData: User[] = await UserRepository.findAll();
+      const { email } = req.body;
+      const findAllUsersData: User[] = await this.user.findAllUser(email);
 
       res.status(200).json({ data: findAllUsersData, message: "findAll" });
     } catch (error) {
@@ -74,13 +75,14 @@ export class UserController {
       }
 
       // send mail
-      // await NodeMailer.sendEmail({
-      //   from: "event-management@api.com",
-      //   to: createUserData.email,
-      //   subject: "Email Verification",
-      //   text: `To verify your event management account use the OTP ${createToken.value}`,
-      //   html: `<a href="https://localhost:3000/api/user/verify-email">Click to verify ${createToken.value}</a>`,
-      // });
+    //  await NodeMailer.test()
+      await NodeMailer.sendEmail({
+        from: "event-management@api.com",
+        to: createUserData.email,
+        subject: "Email Verification",
+        text: `To verify your event management account use the OTP ${createToken.value}`,
+        html: `<a href="https://localhost:3000/users/verify-email">Click to verify ${createToken.value}</a>`,
+      });
 
       res
         .status(201)
@@ -235,6 +237,54 @@ export class UserController {
         data: forgotPasswordData,
         message: "Password reset OTP sent successfully",
         jwt: jwt,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public resetPassword = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const { email, password, password_reset_token } = req.body;
+      const decoded = req.body.decoded;
+
+      const passwordResetData: User = await this.user.resetPassword({
+        email,
+        password,
+        password_reset_token,
+        decoded,
+      });
+
+      res.status(200).json({
+        status: 200,
+        data: passwordResetData,
+        message: "Password Reset Successfully",
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public getProfile = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const decoded = req.body.decoded;
+      const user_id = parseInt(req.params.user_id);
+      const getProfileData: GetProfile | User = await this.user.getProfile(
+        decoded,
+        user_id,
+      );
+      res.status(200).json({
+        status: 200,
+        data: getProfileData,
+        message: "Successfully get user profile",
       });
     } catch (error) {
       next(error);

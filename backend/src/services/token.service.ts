@@ -8,13 +8,16 @@ import { EntityRepository, Repository } from "typeorm";
 @EntityRepository()
 export class TokenService extends Repository<TokenEntity> {
   // finds all the tokens
-  public async getTokens(): Promise<Token[]> {
-    const tokens: Token[] = await TokenRepository.findAllToken();
+  public async getTokens({}): Promise<Token[]> {
+    const tokens: Token[] = await TokenRepository.findAllToken({});
     return tokens;
   }
 
-  public async getUserToken(tokenId: string): Promise<Token> {
-    const token: Token = await TokenRepository.findOneToken({ token: tokenId });
+  public async getUserToken({tokenId, purpose}): Promise<Token> {
+    const token: Token = await TokenRepository.findOneToken({
+      token: tokenId,
+      purpose: purpose,
+    });
     return token;
   }
 

@@ -1,4 +1,4 @@
-export class Service {
+export class Utils {
   // generate otp for email verification
   static generateOTP(digit: number = 6): string {
     let otp: string = "";
@@ -18,5 +18,4 @@ export class Service {
     base.setMinutes(base.getMinutes() + minutesAdded);
     return base;
   }
-
 }
