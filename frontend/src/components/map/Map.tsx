@@ -54,9 +54,6 @@ const Map = ({ image, alt, ref }: MapProps) => {
 			<PanViewer
 			// ! WTF: adding flex in classname gives error
 				className="w-full justify-center items-center"
-				style={{
-					display: "flex",
-				}}
 				zoom={zoom}
 				setZoom={setZoom}
 				pandx={dx}
@@ -70,7 +67,7 @@ const Map = ({ image, alt, ref }: MapProps) => {
 				<MapElement top="10%" left="40%" id="1"/>
 			</PanViewer>
 		</div>
-	);
+	); 
 };
 
 export default Map;
