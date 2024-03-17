@@ -42,6 +42,9 @@ const Map = ({ image, alt, ref }: MapProps) => {
 				<div onClick={zoomIn} className="text-center cursor-pointer h-10 w-10 hover:bg-slate-100">
 					<GoZoomIn className="map-nav-button" />
 				</div>
+				<div className="text-center cursor-pointer h-10 w-10 py-2 hover:bg-slate-100 text-[#4C68C1]">
+					x{zoom.toFixed(1)}
+				</div>
 				<div onClick={zoomOut} className="text-center cursor-pointer h-10 w-10 hover:bg-slate-100">
 					<GoZoomOut className="map-nav-button" />
 				</div>
