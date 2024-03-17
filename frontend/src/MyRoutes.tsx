@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import FixedNavLayout from "./layouts/FixedNavLayout";
 import BasicLayout from "./layouts/BasicLayout";
 import Login from "./pages/Login";
+import PageNotFound from "./pages/PageNotFound";
 
 const MyRoutes: React.FC = () => {
 	return (
@@ -23,6 +24,7 @@ const MyRoutes: React.FC = () => {
 					<Route path="/signup" element={<Signup />} />
 					<Route path="/login" element={<Login />} />
 				</Route>
+				<Route path="*" element={<PageNotFound />} />
 			</Routes>
 		</BrowserRouter>
 	);

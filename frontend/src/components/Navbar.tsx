@@ -61,10 +61,10 @@ const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
 									<Link to="/rooms">ROOMS</Link>
 								</li>
 								<li>
-									<Link to="/">ABOUT</Link>
+									<Link to="/about">ABOUT</Link>
 								</li>
 								<li>
-									<Link to="/">ACTIVITIES</Link>
+									<Link to="/activities">ACTIVITIES</Link>
 								</li>
 							</ul>
 						</div>

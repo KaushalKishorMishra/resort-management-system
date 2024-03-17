@@ -13,7 +13,7 @@ const Room: React.FC = () => {
 				<div className="map-container w-full h-fit md:w-1/2 border border-blue-500 overflow-clip">
 					<Map image={"../../public/map/resort-map-photoshop.png"} alt={"resort map"} />
 				</div>
-				<div className="room-details w-full md:w-1/2 md:mx-4 overflow-hidden bg-custom-bg-light text-black">
+				<div className="room-details w-full md:w-1/2 md:mx-4 mb-4 overflow-hidden bg-custom-bg-light text-black">
 					<div className="flex flex-col">
 						<RoomCarousel />
 
@@ -68,14 +68,16 @@ const Room: React.FC = () => {
 							</p>
 						</div>
 						{/* book now */}
-						<div className="book-now flex justify-around items-center bg-white rounded-lg mt-2 py-2">
-							<div>
-								<p className="font-semibold text-xl">RS 6000</p>
+						<div className="book-now flex justify-around items-center bg-custom-bg-dark rounded-t-xl mt-2 py-2">
+							<div className="text-white">
+								<p className="font-bold text-xl">RS 6000</p>
 								<p>Per Night</p>
 							</div>
 							<div></div>
-							<div className="btn text-lg rounded-none text-white border-white hover:border-custom-accent bg-custom-accent hover:bg-custom-bg-dark hover:text-custom-accent">
-								Book Now
+							<div
+								className="btn text-lg rounded-none text-white border-white hover:border-custom-accent bg-custom-accent hover:bg-custom-bg-dark hover:text-custom-accent font-ostwald"
+							>
+								BOOK
 							</div>
 						</div>
 					</div>
