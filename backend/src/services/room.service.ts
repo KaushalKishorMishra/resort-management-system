@@ -1,0 +1,37 @@
+import { Service } from "typedi";
+import { EntityRepository, Repository } from "typeorm";
+// import { UserRepository } from "../repository/user.repository";
+import { RoomRepository } from "../repository/room.repository";
+import { Rooms } from "@/interfaces/rooms.interface";
+
+@Service()
+@EntityRepository()
+export class RoomService extends Repository<Rooms> {
+  public async findAllRooms(): Promise<Rooms[]> {
+    const rooms: Rooms[] = await RoomRepository.findALl();
+    return rooms;
+  }
+
+  public async findOneRoom(key: object): Promise<Rooms> {
+    const room: Rooms = await RoomRepository.findOne(key);
+    if (!room) return null;
+    return room;
+  }
+
+  public async createRoom(roomData: Rooms): Promise<Rooms> {
+    const createRoomData: Rooms = await RoomRepository.create(roomData);
+    return createRoomData;
+  }
+
+  public async updateRoom(roomId: number, roomData: Rooms): Promise<Rooms> {
+    const updateRoomData: Rooms = await RoomRepository.update(roomId, roomData);
+    return updateRoomData;
+  }
+
+  public async deleteRoom(roomId: number): Promise<Rooms> {
+    const deleteRoomData: Rooms = await RoomRepository.delete(roomId);
+    if (!deleteRoomData) return null;
+    await this.delete({ id: roomId });
+    return deleteRoomData;
+  }
+}
