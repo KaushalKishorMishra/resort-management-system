@@ -1,7 +1,8 @@
 import React from "react";
-import { GoHome, GoScreenFull, GoZoomIn, GoZoomOut } from "react-icons/go";
+import { GoScreenFull, GoZoomIn, GoZoomOut } from "react-icons/go";
 import { PanViewer } from "react-image-pan-zoom-rotate";
 import MapElement from "./MapElement";
+import { roomData } from "./mapData";
 
 type MapProps = {
 	image: string;
@@ -65,9 +66,21 @@ const Map = ({ image, alt, ref }: MapProps) => {
 				key={dx}
 			>
 				<img className="w-full relative" src={image} alt={alt} ref={ref} />
-				<GoHome className="absolute h-6 w-6 top-36 left-5 text-success cursor-pointer" onClick={()=>alert('click bhayo hai')} />
-				<div className="absolute h-5 w-5 bg-red-300 top-3 left-3">I</div>
-				<MapElement top="10%" left="40%" id="1"/>
+				
+				{/* map elements */}
+				{
+					roomData.map((room) => (
+						<MapElement
+							key={room.id}
+							top={room.top}
+							left={room.left}
+							id={room.id.toString()}
+							color={room.type === "family" ? "#bbcb31" : room.type === "deluxe" ? "#f7d070" : room.type === "standard" ? "#f7a278" : "#f77070"}
+						/>
+					))
+				}
+				
+				
 			</PanViewer>
 		</div>
 	); 
