@@ -11,22 +11,21 @@ const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
 	const location = useLocation();
 
 	useEffect(() => {
+		const highlightCurrentPage = () => {
+			const currentUrl = location.pathname;
+			if (currentUrl.includes("rooms")) {
+				setCurrentPage("rooms");
+			} else if (currentUrl.includes("about")) {
+				setCurrentPage("about");
+			} else if (currentUrl.includes("activities")) {
+				setCurrentPage("activities");
+			} else {
+				setCurrentPage("explore");
+			}
+			// window.location.reload();
+		};
 		highlightCurrentPage();
-	}, []);
-
-	const highlightCurrentPage = () => {
-		const currentUrl = location.pathname;
-		if (currentUrl.includes("rooms")) {
-			setCurrentPage("rooms");
-		} else if (currentUrl.includes("about")) {
-			setCurrentPage("about");
-		} else if (currentUrl.includes("activities")) {
-			setCurrentPage("activities");
-		} else {
-			setCurrentPage("explore");
-		}
-		// window.location.reload();
-	};
+	}, [location.pathname]);
 
 	return (
 		<>
