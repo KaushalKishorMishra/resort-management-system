@@ -56,7 +56,7 @@ const Map = ({ image, alt, ref }: MapProps) => {
 
 			{/* map */}
 			<PanViewer
-			// ! WTF: adding flex in classname gives error
+				// ! WTF: adding flex in classname gives error
 				className="w-full justify-center items-center"
 				zoom={zoom}
 				setZoom={setZoom}
@@ -66,24 +66,14 @@ const Map = ({ image, alt, ref }: MapProps) => {
 				key={dx}
 			>
 				<img className="w-full relative" src={image} alt={alt} ref={ref} />
-				
+
 				{/* map elements */}
-				{
-					roomData.map((room) => (
-						<MapElement
-							key={room.id}
-							top={room.top}
-							left={room.left}
-							id={room.id.toString()}
-							color={room.type === "family" ? "#bbcb31" : room.type === "deluxe" ? "#f7d070" : room.type === "standard" ? "#f7a278" : "#f77070"}
-						/>
-					))
-				}
-				
-				
+				{roomData.map(room => (
+					<MapElement top={room.top} left={room.left} id={room.id} status={room.status} type={room.type} />
+				))}
 			</PanViewer>
 		</div>
-	); 
+	);
 };
 
 export default Map;
