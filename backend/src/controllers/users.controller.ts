@@ -259,6 +259,15 @@ export class UserController {
         decoded,
       });
 
+      // send mail
+      await NodeMailer.sendEmail({
+        from: "",
+        to: email,
+        subject: "Password Reset",
+        text: `Your password has been reset successfully`,
+        html: `<a href="https://localhost:3000/users/verify-email">Click to verify</a>`,
+      })
+
       res.status(200).json({
         status: 200,
         data: passwordResetData,

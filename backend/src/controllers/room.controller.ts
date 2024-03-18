@@ -31,7 +31,7 @@ export class RoomController {
     try {
       const roomId = req.params.roomId;
 
-      const room: Rooms = await this.room.findOne(roomId);
+      const room: Rooms = await this.room.findOneRoom({ id: roomId });
 
       if (!room) throw new HttpException(404, "room not found");
 
@@ -52,16 +52,16 @@ export class RoomController {
   ): Promise<void> => {
     try {
       const roomData: Rooms = req.body;
-
+      console.log(roomData);
       const findRoomData: Rooms = await this.room.findOneRoom({
         name: roomData.name,
       });
 
-      if (roomData.name === findRoomData.name) {
+      console.log(findRoomData);
+      if (null !== findRoomData) {
         throw new HttpException(401, "room already exists");
       }
-      const createRoomData: Rooms = await this.room.create(roomData);
-
+      const createRoomData: Rooms = await this.room.createRoom(roomData);
       res.status(200).json({
         status: 200,
         data: createRoomData,
