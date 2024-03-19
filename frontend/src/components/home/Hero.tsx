@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
 					</div>
 
 					{/* cards carousel */}
-					<div className="visible md:hidden carousel carousel-center space-x-5 text-[#18130f] w-full p-5">
+					<div className="visible md:hidden carousel carousel-center space-x-5 text-[#18130f] w-full p-5" data-carousel="static">
 						<div className="carousel-item">
 							<div className="bg-[#9fd76a] aspect-square p-6 h-64 w-64 flex flex-col justify-center text-2xl font-bold font-kalam">
 								<span>DESTINATION.</span>

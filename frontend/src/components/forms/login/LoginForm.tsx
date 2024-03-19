@@ -1,5 +1,6 @@
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const LoginForm: React.FC = () => {
 	const {
@@ -78,6 +79,23 @@ const LoginForm: React.FC = () => {
 			>
 				{isSubmitting ? "Submitting..." : "Next"}
 			</button>
+			<Link to="/signup" className="text-gray-100 text-center text-lg w-full max-w-lg mt-2 btn btn-ghost">
+				Don't have an account?{" "}
+				<span className="text-primary font-bold">
+					Sign Up
+				</span>
+			</Link>
+			<p className="text-gray-200 text-center text-sm w-full max-w-lg mt-5">
+				By continuing to use ResortUI, you agree to our{" "}
+				<Link to="terms-and-service" className="text-primary underline font-semibold">
+					Terms of Service
+				</Link>{" "}
+				and{" "}
+				<Link to="privacy-policy" className="text-primary underline font-semibold">
+					Privacy Policy
+				</Link>
+				. Personal data added to ResortUI is public by default
+			</p>
 		</form>
 	);
 };

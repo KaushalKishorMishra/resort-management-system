@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { FaArrowRight } from "react-icons/fa";
+import { LuUserCircle2 } from "react-icons/lu";
 import { Link, useLocation } from "react-router-dom";
 
 type NavbarProps = {
@@ -89,7 +90,9 @@ const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
 									</li>
 								</ul>
 							</div>
-							<a className="btn btn-ghost text-xl">ResortUI</a>
+							<Link to="/" className="btn btn-ghost text-xl">
+								ResortUI
+							</Link>
 						</div>
 						{/* center nav */}
 						<div className="navbar-center hidden lg:flex">
@@ -129,8 +132,11 @@ const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
 							</ul>
 						</div>
 						<div className="navbar-end">
+							<Link to="login">
+								<LuUserCircle2 className="text-4xl me-5 hover:scale-105" />
+							</Link>
 							<Link
-								to="/book"
+								to="/rooms"
 								className="btn text-lg rounded-none text-white border-white bg-transparent hover:bg-white hover:text-custom-bg-dark"
 							>
 								BOOK NOW <FaArrowRight className="text-custom-accent" />

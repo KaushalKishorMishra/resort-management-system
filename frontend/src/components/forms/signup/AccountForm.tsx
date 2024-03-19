@@ -1,6 +1,7 @@
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useScrollToElement } from "../../../hooks/useScrollToElement";
+import { Link } from "react-router-dom";
 
 const AccountForm: React.FC = () => {
 	const {
@@ -16,7 +17,7 @@ const AccountForm: React.FC = () => {
 			setTimeout(() => {
 				console.log(data);
 				scrollToSecond();
-				resolve();	
+				resolve();
 			}, 1000);
 		});
 	};
@@ -87,6 +88,12 @@ const AccountForm: React.FC = () => {
 				>
 					{isSubmitting ? "Submitting..." : "Next"}
 				</button>
+				<div className="text-gray-300 text-center w-full max-w-lg mt-3">
+					Already have an account?{" "}
+					<Link to="/login" className="text-primary font-semibold">
+						Login
+					</Link>
+				</div>
 			</form>
 		</>
 	);

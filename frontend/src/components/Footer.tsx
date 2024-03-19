@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
 							<FaPhoneAlt size={20} />
 							<p className="font-semibold text-lg">015-123456</p>
 							<Link
-								to="/book"
+								to="/rooms"
 								className="btn text-lg rounded-none text-white border-white hover:border-custom-accent bg-custom-accent hover:bg-custom-bg-dark hover:text-custom-accent"
 							>
 								BOOK NOW <FaArrowRight />
