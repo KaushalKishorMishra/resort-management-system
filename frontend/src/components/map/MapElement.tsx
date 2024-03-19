@@ -2,8 +2,7 @@ import React from "react";
 // import { FaMapMarkerAlt } from "react-icons/fa";
 import { GiPlainCircle } from "react-icons/gi";
 import { useRoomStore } from "../../store/useRoomStore";
-import { RiDoorFill } from "react-icons/ri";
-import { BsFillSuitDiamondFill } from "react-icons/bs";
+import { FaDiamond } from "react-icons/fa6";
 
 type MapElementProps = {
 	top: string;
@@ -27,16 +26,16 @@ const MapElement: React.FC<MapElementProps> = ({ top, left, id, status, type }) 
 				style={{ top: `${top}`, left: `${left}`, translate: "-50% -50%" }}
 			></span>
 			<div
-				className={`absolute h-6 w-6 cursor-pointer flex-center text-lg
-					${status == "available" && "text-green-300"} 
-					${status == "cleaning" && "text-green-300"} 
-					${status == "maintenance" && "text-slate-500 cursor-not-allowed"} 
+				className={`absolute h-6 w-6 cursor-pointer flex-center text-xl lg:text-2xl text-opacity-75
+					${status == "available" && "text-green-400"} 
+					${status == "cleaning" && "text-green-400"} 
 					${status == "booked" && "text-red-600"}`}
 				style={{
 					top: `${top}`,
 					left: `${left}`,
 					translate: "-50% -50%",
 					color: `${id == selectedId ? "#55e" : ""}`,
+					cursor: `${status == "maintenance" && "not-allowed"}`,
 				}}
 				onClick={() => {
 					if (status == "available" || status == "cleaning") {
@@ -48,9 +47,15 @@ const MapElement: React.FC<MapElementProps> = ({ top, left, id, status, type }) 
 					}
 				}}
 			>
-				{type == "deluxe" && <BsFillSuitDiamondFill />}
+				{type == "deluxe" && <FaDiamond />}
 				{type == "family" && <GiPlainCircle />}
-				{type == "standard" && <RiDoorFill />}
+				{type == "standard" && <GiPlainCircle />}
+				<span
+					className={`text-black text-sm absolute font-semibold`}
+					style={{ top: `50%`, left: `50%`, translate: "-50% -50%" }}
+				>
+					{id}
+				</span>
 			</div>
 		</>
 	);
