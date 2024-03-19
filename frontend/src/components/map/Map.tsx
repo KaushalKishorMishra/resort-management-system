@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { GoScreenFull, GoZoomIn, GoZoomOut } from "react-icons/go";
 import { PanViewer } from "react-image-pan-zoom-rotate";
 import MapElement from "./MapElement";
@@ -32,12 +32,34 @@ const Map = ({ image, alt, ref }: MapProps) => {
 	};
 
 	const onPan = (dx: number, dy: number) => {
+		console.log("dx", dx, "dy", dy);
+
+		// don't use setDx(100) as when zooming the dx will be multiplied by zoom
 		setDx(dx);
 		setDy(dy);
 	};
 
+	// note: stopPropagation() didn't perform as expected
+
+	// note: using this combinatin of useEffect and addEventListener to prevent scrolling on touch devices when u touch the map
+	/*
+	By setting overflow: hidden on start of touch it makes everything exceeding window hidden 
+	thus removing availability to scroll anything (no content to scroll).
+
+	After touchend the lock can be freed by setting overflow to auto.
+	*/
+	//! fix: also handle pinch in and pinch out propagation
+	useEffect(() => {
+		document.getElementById("map-container")?.addEventListener("touchstart", () => {
+			document.documentElement.style.overflow = "hidden";
+		});
+		document?.addEventListener("touchstart", () => {
+			document.documentElement.style.overflow = "auto";
+		});
+	}, []);
+
 	return (
-		<div className="relative bg-slate-400 w-full">
+		<div className="relative bg-slate-400 w-full" id="map-container">
 			{/* map navigation button */}
 			<div className="absolute right-2 z-10 top-2 rounded bg-white shadow divide-y divide-slate-300">
 				<div onClick={zoomIn} className="text-center cursor-pointer h-10 w-10 hover:bg-slate-100">
