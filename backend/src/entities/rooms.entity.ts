@@ -5,6 +5,7 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -51,4 +52,8 @@ export class RoomsEntity extends BaseEntity implements Rooms {
   @Column()
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Column()
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

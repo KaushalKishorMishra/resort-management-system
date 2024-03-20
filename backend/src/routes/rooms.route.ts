@@ -13,9 +13,18 @@ export class RoomRoute implements Routes {
 
   private initializeRoutes() {
     this.router.get(`${this.path}`, this.room.getRoom);
-    this.router.get(`${this.path}/:id(\\d+)`, this.room.getRoomById);
+    this.router.get(`${this.path}/find-room`, this.room.getRoomByOption);
     this.router.post(`${this.path}/create`, this.room.createRoom);
-    this.router.patch(`${this.path}/:id(\\d+)`, this.room.updateRoom);
-    this.router.delete(`${this.path}/:id(\\d+)`, this.room.deleteRoom);
+    this.router.patch(`${this.path}/update/:id(\\d+)`, this.room.updateRoom);
+    this.router.delete(
+      `${this.path}/soft-delete/:id(\\d+)`,
+      this.room.softDeleteRoom,
+    );
+
+    this.router.delete(
+      `${this.path}/hard-delete/:id(\\d+)`,
+      this.room.hardDeleteRoom,
+    );
+    this.router.post(`${this.path}/recover/:id(\\d+)`, this.room.recoverRoom);
   }
 }

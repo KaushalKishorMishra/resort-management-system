@@ -21,10 +21,34 @@ export class RoomRepository extends Repository<RoomsEntity> {
     return updatedRoom;
   }
 
+  static async softDelete(id: number): Promise<RoomsEntity> {
+    const deletedRoom: RoomsEntity =
+      await getRepository(RoomsEntity).findOne(id);
+    await getRepository(RoomsEntity)
+      .createQueryBuilder()
+      .softDelete()
+      .where("id = :id", { id: id })
+      .execute();
+    return deletedRoom;
+  }
+
   static async delete(id: number): Promise<RoomsEntity> {
     const deletedRoom: RoomsEntity =
       await getRepository(RoomsEntity).findOne(id);
     await getRepository(RoomsEntity).delete(id);
     return deletedRoom;
+  }
+
+  static async recover(id: number): Promise<RoomsEntity> {
+    const recoveredRoom: RoomsEntity =
+      await getRepository(RoomsEntity).findOne(id, {
+        withDeleted: true,
+      });
+    await getRepository(RoomsEntity)
+      .createQueryBuilder()
+      .restore()
+      .where("id = :id", { id: id })
+      .execute();
+    return recoveredRoom;
   }
 }

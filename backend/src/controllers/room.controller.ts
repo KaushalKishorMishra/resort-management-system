@@ -23,15 +23,15 @@ export class RoomController {
     }
   };
 
-  public getRoomById = async (
+  public getRoomByOption = async (
     req: Request,
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const roomId = req.params.roomId;
+      const roomOption: any = req.body;
 
-      const room: Rooms = await this.room.findOneRoom({ id: roomId });
+      const room: Rooms = await this.room.findOneRoom(roomOption);
 
       if (!room) throw new HttpException(404, "room not found");
 
@@ -78,12 +78,14 @@ export class RoomController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const roomId: number = Number(req.params.roomId);
+      const roomId: number = Number(req.params.id);
+
       const roomData: Rooms = req.body;
 
       const findRoom: Rooms = await this.room.findOneRoom({ id: roomId });
 
-      if (findRoom.id == roomId) throw new HttpException(404, "room not found");
+      if (findRoom.id !== roomId)
+        throw new HttpException(404, "room doesn't exist");
 
       const updateRoomData: Rooms = await this.room.updateRoom(
         roomId,
@@ -103,26 +105,82 @@ export class RoomController {
     }
   };
 
-  public deleteRoom = async (
+  public softDeleteRoom = async (
     req: Request,
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const roomId: number = Number(req.params.roomId);
+      const roomId: number = Number(req.params.id);
 
       const findRoom: Rooms = await this.room.findOneRoom({ id: roomId });
 
-      if (roomId === findRoom.id)
+      if (roomId !== findRoom.id)
         throw new HttpException(404, "room not found");
 
-      const deletedRoom: Rooms = await this.room.deleteRoom(roomId);
+      const deletedRoom: Rooms = await this.room.softDeleteRoom(roomId);
       if (!deletedRoom) throw new HttpException(401, "could not delete room");
 
       res.status(200).json({
         status: 200,
         data: deletedRoom,
         message: "successfully deleted room",
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public hardDeleteRoom = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const roomId: number = Number(req.params.id);
+
+      const findRoom: Rooms = await this.room.findOneRoom({ id: roomId });
+
+      if (roomId !== findRoom.id)
+        throw new HttpException(404, "room not found");
+
+      const deletedRoom: Rooms = await this.room.hardDeleteRoom(roomId);
+      if (!deletedRoom) throw new HttpException(401, "could not delete room");
+
+      res.status(200).json({
+        status: 200,
+        data: deletedRoom,
+        message: "successfully deleted room",
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public recoverRoom = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const roomId: number = Number(req.params.id);
+      console.log("1");
+      const findRoom: Rooms = await this.room.findOneRoom({ id: roomId, withDeleted: true, });
+      console.log("2");
+
+      if (roomId !== findRoom.id)
+        throw new HttpException(404, "room not found");
+      console.log("3");
+
+      const recoverRoom: Rooms = await this.room.recoverRoom(roomId);
+      console.log("4");
+      if (!recoverRoom) throw new HttpException(401, "could not recover room");
+      console.log("5");
+
+      res.status(200).json({
+        status: 200,
+        data: recoverRoom,
+        message: "successfully recovered room",
       });
     } catch (error) {
       next(error);

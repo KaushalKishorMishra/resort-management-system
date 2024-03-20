@@ -28,10 +28,21 @@ export class RoomService extends Repository<Rooms> {
     return updateRoomData;
   }
 
-  public async deleteRoom(roomId: number): Promise<Rooms> {
+  public async softDeleteRoom(roomId: number): Promise<Rooms> {
+    const deleteRoomData: Rooms = await RoomRepository.softDelete(roomId);
+    if (!deleteRoomData) return null;
+    return deleteRoomData;
+  }
+
+  public async hardDeleteRoom(roomId: number): Promise<Rooms> {
     const deleteRoomData: Rooms = await RoomRepository.delete(roomId);
     if (!deleteRoomData) return null;
-    await this.delete({ id: roomId });
     return deleteRoomData;
+  }
+
+  public async recoverRoom(roomId: number): Promise<Rooms> {
+    const recoverRoomData: Rooms = await RoomRepository.recover(roomId);
+    if (!recoverRoomData) return null;
+    return recoverRoomData;
   }
 }

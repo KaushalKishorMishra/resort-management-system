@@ -1,6 +1,5 @@
 import { join } from "path";
 import { createConnection, ConnectionOptions } from "typeorm";
-// import { DataSource } from "typeorm";
 import {
   POSTGRES_USER,
   POSTGRES_PASSWORD,
