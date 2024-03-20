@@ -1,12 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaArrowRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { LuUserCircle2 } from "react-icons/lu";
+import { Link, useLocation } from "react-router-dom";
 
 type NavbarProps = {
 	positionFixed: boolean;
 };
 
 const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
+	const [currentPage, setCurrentPage] = React.useState<string>("");
+	const location = useLocation();
+
+	useEffect(() => {
+		const highlightCurrentPage = () => {
+			const currentUrl = location.pathname;
+			if (currentUrl.includes("rooms")) {
+				setCurrentPage("rooms");
+			} else if (currentUrl.includes("about")) {
+				setCurrentPage("about");
+			} else if (currentUrl.includes("activities")) {
+				setCurrentPage("activities");
+			} else {
+				setCurrentPage("explore");
+			}
+			// window.location.reload();
+		};
+		highlightCurrentPage();
+	}, [location.pathname]);
+
 	return (
 		<>
 			<div className={`w-full bg-custom-bg-dark ${positionFixed ? "fixed top-0 left-0" : ""}`}>
@@ -33,44 +54,89 @@ const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
 								{/* dropdown nav */}
 								<ul
 									tabIndex={0}
-									className="menu menu-lg dropdown-content mt-3 z-[1] py-2 px-4 shadow rounded-box w-[90vw] bg-custom-bg-dark"
+									className="menu menu-lg dropdown-content mt-3 z-[1] py-2 px-4 shadow rounded-box w-[90vw] bg-custom-bg-dark divide-y"
 								>
-									<li className="underline decoration-custom-accent underline-offset-4 border-b border-opacity-5 border-white">
+									<li
+										className={`${
+											currentPage == "explore" &&
+											"underline decoration-custom-accent underline-offset-4"
+										}`}
+									>
 										<Link to="/">EXPLORE</Link>
 									</li>
-									<li className="underline-offset-4 border-b border-opacity-5 border-white">
+									<li
+										className={`${
+											currentPage == "rooms" &&
+											"underline decoration-custom-accent underline-offset-4"
+										}`}
+									>
 										<Link to="/rooms">ROOMS</Link>
 									</li>
-									<li className="underline-offset-4 border-b border-opacity-5 border-white">
-										<Link to="/">ABOUT</Link>
+									<li
+										className={`${
+											currentPage == "about" &&
+											"underline decoration-custom-accent underline-offset-4"
+										}`}
+									>
+										<Link to="/about">ABOUT</Link>
 									</li>
-									<li>
-										<Link to="/">ACTIVITIES</Link>
+									<li
+										className={`${
+											currentPage == "activities" &&
+											"underline decoration-custom-accent underline-offset-4"
+										}`}
+									>
+										<Link to="/activities">ACTIVITIES</Link>
 									</li>
 								</ul>
 							</div>
-							<a className="btn btn-ghost text-xl">ResortUI</a>
+							<Link to="/" className="btn btn-ghost text-xl">
+								ResortUI
+							</Link>
 						</div>
 						{/* center nav */}
 						<div className="navbar-center hidden lg:flex">
 							<ul className="menu menu-horizontal px-1 text-lg">
-								<li className="underline decoration-custom-accent underline-offset-4">
+								<li
+									className={`${
+										currentPage == "explore" &&
+										"underline decoration-custom-accent underline-offset-4"
+									}`}
+								>
 									<Link to="/">EXPLORE</Link>
 								</li>
-								<li>
+								<li
+									className={`${
+										currentPage == "rooms" &&
+										"underline decoration-custom-accent underline-offset-4"
+									}`}
+								>
 									<Link to="/rooms">ROOMS</Link>
 								</li>
-								<li>
-									<Link to="/">ABOUT</Link>
+								<li
+									className={`${
+										currentPage == "about" &&
+										"underline decoration-custom-accent underline-offset-4"
+									}`}
+								>
+									<Link to="/about">ABOUT</Link>
 								</li>
-								<li>
-									<Link to="/">ACTIVITIES</Link>
+								<li
+									className={`${
+										currentPage == "activities" &&
+										"underline decoration-custom-accent underline-offset-4"
+									}`}
+								>
+									<Link to="/activities">ACTIVITIES</Link>
 								</li>
 							</ul>
 						</div>
 						<div className="navbar-end">
+							<Link to="login">
+								<LuUserCircle2 className="text-4xl me-5 hover:scale-105" />
+							</Link>
 							<Link
-								to="/book"
+								to="/rooms"
 								className="btn text-lg rounded-none text-white border-white bg-transparent hover:bg-white hover:text-custom-bg-dark"
 							>
 								BOOK NOW <FaArrowRight className="text-custom-accent" />
