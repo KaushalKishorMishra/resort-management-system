@@ -19,4 +19,13 @@ export class UserRepository extends Repository<User> {
     const updatedUser: User = await getRepository(UserEntity).findOne(id);
     return updatedUser;
   }
+
+  static async delete(key: object): Promise<User> {
+    const deletedUser: User = await getRepository(UserEntity).findOne({
+      where: key,
+    });
+    if (!deletedUser) return null;
+    await getRepository(UserEntity).delete(deletedUser.id);
+    return deletedUser;
+  }
 }
