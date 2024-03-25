@@ -7,4 +7,6 @@ export interface Booking {
   roomId: number;
   paymentId: number;
   status: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
