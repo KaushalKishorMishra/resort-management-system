@@ -9,7 +9,7 @@ export class TokenRepository extends Repository<Token> {
 
   static async findOneToken(key: object): Promise<Token> {
     const token = await getRepository(TokenEntity).findOne({
-      where: key ,
+      where: key,
     });
     if (token) {
       return token;

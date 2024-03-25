@@ -1,4 +1,4 @@
-import { DataSource, getRepository, Repository } from "typeorm";
+import { getRepository, Repository } from "typeorm";
 import { User } from "@/interfaces/users.interface";
 import { UserEntity } from "@/entities/users.entity";
 
@@ -20,10 +20,12 @@ export class UserRepository extends Repository<User> {
     return updatedUser;
   }
 
-  static async delete(id: number): Promise<User> {
-    const deletedUser: User = await getRepository(UserEntity).findOne(id);
+  static async delete(key: object): Promise<User> {
+    const deletedUser: User = await getRepository(UserEntity).findOne({
+      where: key,
+    });
     if (!deletedUser) return null;
-    await getRepository(UserEntity).delete(id);
+    await getRepository(UserEntity).delete(deletedUser.id);
     return deletedUser;
   }
 }

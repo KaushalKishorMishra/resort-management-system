@@ -35,9 +35,16 @@ export class UserRoute implements Routes {
     );
     this.router.delete(
       // delete user
-      `${this.path}/:id(\\d+)`,
+      `${this.path}/delete`,
       this.user.deleteUser,
     );
+
+    this.router.delete(
+      // delete user by id
+      `${this.path}/delete/confirm-delete-user`,
+      this.user.confirmDeleteUser,
+    );
+    
     this.router.post(
       // login user
       `${this.path}/login`,
