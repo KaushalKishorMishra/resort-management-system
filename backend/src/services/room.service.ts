@@ -18,6 +18,12 @@ export class RoomService extends Repository<Rooms> {
     return room;
   }
 
+  public async findOneDeletedRoom(key: object): Promise<Rooms> {
+    const room: Rooms = await RoomRepository.findOneDeleted(key);
+    if (!room) return null;
+    return room;
+  }
+
   public async createRoom(roomData: Rooms): Promise<Rooms> {
     const createRoomData: Rooms = await RoomRepository.create(roomData);
     return createRoomData;
@@ -41,7 +47,8 @@ export class RoomService extends Repository<Rooms> {
   }
 
   public async recoverRoom(roomId: number): Promise<Rooms> {
-    const recoverRoomData: Rooms = await RoomRepository.recover(roomId);
+    // fix any type
+    const recoverRoomData: any = await RoomRepository.recover(roomId);
     if (!recoverRoomData) return null;
     return recoverRoomData;
   }
