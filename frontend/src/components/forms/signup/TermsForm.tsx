@@ -2,6 +2,9 @@ import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useScrollToElement } from "../../../hooks/useScrollToElement";
 import { Link } from "react-router-dom";
+import { UserApi } from "../../../apis/auth/userApi";
+import { useFormStore } from "../../../store/useFormStore";
+import { AxiosResponse } from "axios";
 
 const TermsForm: React.FC = () => {
 	const {
@@ -16,21 +19,24 @@ const TermsForm: React.FC = () => {
 		scrollToSecond();
 	};
 
-	const onSubmit = (data: FieldValues) => {
-		return new Promise<void>(resolve => {
-			setTimeout(() => {
-				console.log(data);
-				resolve();
-			}, 1000);
-		});
+	const signUpData = useFormStore(state => ({
+		name: state.name,
+		email: state.email,
+		phone: state.phone,
+		password: state.password,
+	}));
+
+	const onSubmit = async (data: FieldValues) => {
+		if(data.terms === false) {
+			return;
+		}		
+		const response: AxiosResponse = await UserApi.signup(signUpData);
+		console.log(response.data.message);
 	};
 
 	return (
 		<>
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-				className="signup-form"
-			>
+			<form onSubmit={handleSubmit(onSubmit)} className="signup-form">
 				<h1 className="mb-2 text-6xl font-bold text-white text-center">Sign Up</h1>
 				<p className="mb-3 font-semibold text-xl text-white text-center">
 					"Great! Now, let's set up your account password.
