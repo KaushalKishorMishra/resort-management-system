@@ -2,6 +2,7 @@ import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useScrollToElement } from "../../../hooks/useScrollToElement";
 import { Link } from "react-router-dom";
+import { useFormStore } from "../../../store/useFormStore";
 
 const AccountForm: React.FC = () => {
 	const {
@@ -13,13 +14,10 @@ const AccountForm: React.FC = () => {
 	const scrollToSecond = useScrollToElement("item2");
 
 	const onSubmit = (data: FieldValues) => {
-		return new Promise<void>(resolve => {
-			setTimeout(() => {
-				console.log(data);
-				scrollToSecond();
-				resolve();
-			}, 1000);
-		});
+		// set data to global state
+		useFormStore.getState().setAccountData(data.name, data.email, data.phone);
+		console.log(useFormStore.getState());
+		scrollToSecond();
 	};
 
 	return (

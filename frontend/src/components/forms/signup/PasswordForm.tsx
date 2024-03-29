@@ -1,6 +1,7 @@
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useScrollToElement } from "../../../hooks/useScrollToElement";
+import { useFormStore } from "../../../store/useFormStore";
 
 const PasswordForm: React.FC = () => {
 	const {
@@ -18,21 +19,14 @@ const PasswordForm: React.FC = () => {
 	};
 
 	const onSubmit = (data: FieldValues) => {
-		return new Promise<void>(resolve => {
-			setTimeout(() => {
-				console.log(data);
-				scrollToThird();
-				resolve();
-			}, 1000);
-		});
+		useFormStore.getState().setPassword(data.password);
+		console.log(useFormStore.getState());
+		scrollToThird();
 	};
 
 	return (
 		<>
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-				className="signup-form"
-			>
+			<form onSubmit={handleSubmit(onSubmit)} className="signup-form">
 				<h1 className="mb-2 text-6xl font-bold text-white text-center">Sign Up</h1>
 				<p className="mb-3 font-semibold text-xl text-white text-center">
 					"Great! Now, let's set up your account password.
