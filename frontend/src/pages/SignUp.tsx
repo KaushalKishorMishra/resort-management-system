@@ -29,7 +29,7 @@ const Signup: React.FC = () => {
 		<>
 			<div
 				data-theme="halloween"
-				className="carousel carousel-vertical h-screen w-screen image-full bg-cover"
+				className="carousel carousel-vertical h-screen w-screen image-full bg-cover z-[1]"
 				style={{
 					backgroundImage: "url('../../public/campfire.jpg')",
 					backgroundPosition: "center",

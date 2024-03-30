@@ -82,7 +82,7 @@ export class UserController {
         to: createUserData.email,
         subject: "Email Verification",
         text: `To verify your event management account use the OTP ${createToken.value}`,
-        html: `<a href="https://localhost:3000/users/verify-email">Click to verify ${createToken.value}</a>`,
+        html: `<a target="_blank" href="${process.env.FRONTEND_URL}/verify-email/${createUserData.email}">Click to verify ${createToken.value}</a>`,
       });
 
       res
@@ -132,7 +132,7 @@ export class UserController {
             to: email,
             subject: "Email Verification",
             text: `To verify your event management account use the OTP ${resendVerificationData.value}`,
-            html: `<a href="https://localhost:3000/users/verify-email">Click to verify ${resendVerificationData.value}</a>`,
+            html: `<a href="${process.env.FRONTEND_URL}/verify-email/${email}">Click to verify ${resendVerificationData.value}</a>`,
           });
 
           res.status(201).json({
