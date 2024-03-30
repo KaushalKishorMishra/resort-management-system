@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import serverUrl from "../../config";
 
 export class UserApi {
@@ -19,21 +19,28 @@ export class UserApi {
 				console.log(response.data.message);
 				return response;
 			})
-			.catch((error) => {
-				console.log(error.response.status)
-                console.log('Error occurred in signup: ', error.response.data);
+			.catch(error => {
+				console.log(error.response.status);
+				console.log("Error occurred in signup: ", error.response.data);
 				return error.response;
 			});
 	}
 
-	static async register(data: { email: string; password: string }): Promise<any> {
-		const response = await fetch("http://localhost:3000/auth/register", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(data),
-		});
-		return response.json();
+	static async login(data: { email: string; password: string }): Promise<AxiosResponse> {
+		return axios
+			.post(`${serverUrl}/users/login`, data, {
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+			.then(response => {
+				console.log(response.status, response.data.message);
+				localStorage.setItem("token", response.data.jwt);
+				return response;
+			})
+			.catch(error => {
+				console.log("Error occurred in signup: ", error.response.status, error.response.data);
+				return error.response;
+			});
 	}
 }

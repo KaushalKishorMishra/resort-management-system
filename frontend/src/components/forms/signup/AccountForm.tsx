@@ -86,12 +86,18 @@ const AccountForm: React.FC = () => {
 				>
 					{isSubmitting ? "Submitting..." : "Next"}
 				</button>
-				<div className="text-gray-300 text-center w-full max-w-lg mt-3">
+				{/* <div className="text-gray-300 text-center w-full max-w-lg mt-3">
 					Already have an account?{" "}
 					<Link to="/login" className="text-primary font-semibold">
 						Login
 					</Link>
-				</div>
+				</div> */}
+				<Link to="/login" className="text-gray-100 text-center text-lg w-full max-w-lg btn btn-ghost">
+				Already have an account?{" "}
+				<span className="text-primary font-bold">
+					Login
+				</span>
+			</Link>
 			</form>
 		</>
 	);

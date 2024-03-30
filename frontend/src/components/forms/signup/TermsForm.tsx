@@ -41,7 +41,7 @@ const TermsForm: React.FC = () => {
 				theme: "dark"
 			});
 			setTimeout(() => {
-				navigate("/login");
+				navigate("/verify-email");
 			},3000)
 		} else {
 			toast.error(response.data.message, {
