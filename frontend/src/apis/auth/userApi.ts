@@ -15,9 +15,12 @@ export class UserApi {
 				},
 			})
 			.then(response => {
+				console.log(response.status);
+				console.log(response.data.message);
 				return response;
 			})
 			.catch((error) => {
+				console.log(error.response.status)
                 console.log('Error occurred in signup: ', error.response.data);
 				return error.response;
 			});

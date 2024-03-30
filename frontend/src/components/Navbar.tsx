@@ -30,7 +30,7 @@ const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
 
 	return (
 		<>
-			<div className={`w-full bg-custom-bg-dark ${positionFixed ? "fixed top-0 left-0" : ""}`}>
+			<div className={`w-full bg-custom-bg-dark z-10 ${positionFixed ? "fixed top-0 left-0" : ""}`}>
 				<div className="md:container">
 					<div className="navbar bg-custom-bg-dark text-white border-b border-custom-bg-light border-opacity-40 font-ostwald">
 						<div className="navbar-start">
@@ -54,7 +54,7 @@ const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
 								{/* dropdown nav */}
 								<ul
 									tabIndex={0}
-									className="menu menu-lg dropdown-content mt-3 z-[1] py-2 px-4 shadow rounded-box w-[90vw] bg-custom-bg-dark divide-y"
+									className="menu menu-lg dropdown-content mt-3 z-[1] py-2 px-4 shadow rounded-box w-[90vw] max-w-lg bg-custom-bg-dark divide-y"
 								>
 									<li
 										className={`${

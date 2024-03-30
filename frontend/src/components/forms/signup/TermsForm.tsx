@@ -1,12 +1,15 @@
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useScrollToElement } from "../../../hooks/useScrollToElement";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserApi } from "../../../apis/auth/userApi";
 import { useFormStore } from "../../../store/useFormStore";
 import { AxiosResponse } from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const TermsForm: React.FC = () => {
+	const navigate = useNavigate();
 	const {
 		register,
 		handleSubmit,
@@ -27,15 +30,30 @@ const TermsForm: React.FC = () => {
 	}));
 
 	const onSubmit = async (data: FieldValues) => {
-		if(data.terms === false) {
+		if (data.terms === false) {
 			return;
-		}		
+		}
 		const response: AxiosResponse = await UserApi.signup(signUpData);
 		console.log(response.data.message);
+		if (response.status >= 200 && response.status < 300) {
+			toast.success("SignUp Successful. Redirecting...", {
+				position: "top-right",
+				theme: "dark"
+			});
+			setTimeout(() => {
+				navigate("/login");
+			},3000)
+		} else {
+			toast.error(response.data.message, {
+				position: "top-right",
+				theme: "dark"
+			});
+		}
 	};
 
 	return (
 		<>
+			<ToastContainer />
 			<form onSubmit={handleSubmit(onSubmit)} className="signup-form">
 				<h1 className="mb-2 text-6xl font-bold text-white text-center">Sign Up</h1>
 				<p className="mb-3 font-semibold text-xl text-white text-center">
@@ -56,7 +74,7 @@ const TermsForm: React.FC = () => {
 							{...register("terms", {
 								required: "Your must agree to the terms and conditions to continue",
 							})}
-							className="checkbox-primary rounded-lg"
+							className="checkbox checkbox-primary rounded-lg me-2"
 							type="checkbox"
 							id="terms"
 						/>
