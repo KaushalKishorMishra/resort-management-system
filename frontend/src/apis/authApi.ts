@@ -60,4 +60,25 @@ export class AuthApi {
 				return error.response;
 			});
 	}
+
+	static async resendVerificationEmail(data: { email: string }): Promise<AxiosResponse> {
+		return axios
+			.patch(`${serverUrl}/users/resend-verification`, data, {
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+			.then(response => {
+				console.log(response.status, response.data.message);
+				return response;
+			})
+			.catch(error => {
+				console.log(
+					"Error occurred in resend verification email: ",
+					error.response.status,
+					error.response.data
+				);
+				return error.response;
+			});
+	}
 }

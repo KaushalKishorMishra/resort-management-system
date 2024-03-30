@@ -24,7 +24,7 @@ const VerifyEmailForm: React.FC = () => {
 		const response: AxiosResponse = await AuthApi.verifyEmail(verifyEmailData);
 		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
-			toast.success("Login Successful. Redirecting...", {
+			toast.success("Email Verified. Redirecting...", {
 				position: "top-right",
 				theme: "dark",
 			});
@@ -39,8 +39,20 @@ const VerifyEmailForm: React.FC = () => {
 		}
 	};
 
-	const resendVerificationEmail = ()=>{
-		alert('Resend Email')
+	const resendVerificationEmail = async ()=>{
+		const response: AxiosResponse = await AuthApi.resendVerificationEmail({email: email!});
+		console.log(response.data.message);
+		if (response.status >= 200 && response.status < 300) {
+			toast.success("Resent Verification Email", {
+				position: "top-right",
+				theme: "dark",
+			});
+		} else {
+			toast.error(response.data.message, {
+				position: "top-right",
+				theme: "dark",
+			});
+		}
 	}
 
 	return (
@@ -107,9 +119,9 @@ const VerifyEmailForm: React.FC = () => {
 				>
 					{isSubmitting ? "verifying..." : "Verify"}
 				</button>
-				<button className="text-gray-100 text-center text-lg w-full max-w-lg mt-2 btn btn-ghost" onClick={resendVerificationEmail}>
+				<div className={`text-gray-100 text-center text-lg w-full max-w-lg mt-2 btn btn-ghost`} onClick={resendVerificationEmail}>
 					Didn't receive email? <span className="text-primary font-bold">Resend Email</span>
-				</button>
+				</div>
 			</form>
 		</>
 	);
