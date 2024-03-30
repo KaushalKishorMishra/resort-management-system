@@ -43,4 +43,21 @@ export class UserApi {
 				return error.response;
 			});
 	}
+
+	static async verifyEmail(data: { email: string; value: string }): Promise<AxiosResponse> {
+		return axios
+			.patch(`${serverUrl}/users/verify-user`, data, {
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+			.then(response => {
+				console.log(response.status, response.data.message);
+				return response;
+			})
+			.catch(error => {
+				console.log("Error occurred in verify email: ", error.response.status, error.response.data);
+				return error.response;
+			});
+	}
 }
