@@ -47,7 +47,7 @@ const PasswordForm: React.FC = () => {
 							required: "Password is required",
 							minLength: {
 								value: 8,
-								message: "Password must be at least 8 characters",
+								message: "Password must be at least 9 characters",
 							},
 							maxLength: {
 								value: 20,
