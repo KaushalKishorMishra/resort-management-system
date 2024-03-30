@@ -30,26 +30,32 @@ export class UserService extends Repository<UserEntity> {
 
   public async findUser(key: object): Promise<User> {
     const findUser: User = await UserRepository.findOne(key);
-    console.log(findUser);
+    // console.log(findUser);
     if (!findUser) throw new HttpException(409, "User doesn't exist");
     return findUser;
   }
 
   public async createUser(userData: User): Promise<User> {
-    const findUser: User = await UserRepository.findOne({
+    const findUserEmail: User = await UserRepository.findOne({
       email: userData.email,
     });
-    if (findUser)
+    if (findUserEmail) {
       throw new HttpException(
         409,
-        `This email ${userData.email} already exists`,
+        `the user with email ${userData.email} already exists`,
       );
+    }
 
-    if (findUser.phone === userData.phone)
+    const findUserPhone: User = await UserRepository.findOne({
+      phone: userData.phone,
+    });
+
+    if (findUserPhone) {
       throw new HttpException(
         409,
-        `This phone ${userData.phone} already exists`,
+        `the user with phone number ${userData.phone} already exists`,
       );
+    }
 
     const hashedPassword = await Bcrypt.encryptPassword(userData.password);
     const createUserData: User = await UserRepository.create({
