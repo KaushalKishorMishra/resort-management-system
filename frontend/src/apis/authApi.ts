@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
-import serverUrl from "../../config";
+import serverUrl from "../config";
 
-export class UserApi {
+export class AuthApi {
 	static async signup(data: {
 		name: string;
 		email: string;

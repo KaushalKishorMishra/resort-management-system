@@ -61,6 +61,7 @@ const PasswordForm: React.FC = () => {
 						className="input input-bordered border-1 rounded-full bg-opacity-60"
 						type="text"
 						placeholder="Name"
+						autoComplete="off"
 					/>
 					{errors.password && (
 						<span className="text-red-500">
@@ -80,6 +81,7 @@ const PasswordForm: React.FC = () => {
 						className="input input-bordered border-1 rounded-full bg-opacity-60"
 						type="text"
 						placeholder="Confirm Password"
+						autoComplete="off"
 					/>
 					{errors.confirmPassword && (
 						<span className="text-red-500">

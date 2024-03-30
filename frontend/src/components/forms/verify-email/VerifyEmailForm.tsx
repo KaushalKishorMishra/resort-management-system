@@ -3,7 +3,7 @@ import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import { UserApi } from "../../../apis/auth/userApi";
+import { AuthApi } from "../../../apis/authApi";
 
 const VerifyEmailForm: React.FC = () => {
 	const email = useParams().email;
@@ -21,7 +21,7 @@ const VerifyEmailForm: React.FC = () => {
 			email: data.email,
 			value: data.verificationToken,
 		};
-		const response: AxiosResponse = await UserApi.verifyEmail(verifyEmailData);
+		const response: AxiosResponse = await AuthApi.verifyEmail(verifyEmailData);
 		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("Login Successful. Redirecting...", {

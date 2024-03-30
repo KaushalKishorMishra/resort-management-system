@@ -3,7 +3,7 @@ import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import { UserApi } from "../../../apis/auth/userApi";
+import { AuthApi } from "../../../apis/authApi";
 
 const LoginForm: React.FC = () => {
 	const navigate = useNavigate();
@@ -20,7 +20,7 @@ const LoginForm: React.FC = () => {
 			email: data.email,
 			password: data.password,
 		};
-		const response: AxiosResponse = await UserApi.login(signUpData);
+		const response: AxiosResponse = await AuthApi.login(signUpData);
 		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("Login Successful. Redirecting...", {

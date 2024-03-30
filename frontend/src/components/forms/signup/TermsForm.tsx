@@ -2,7 +2,7 @@ import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useScrollToElement } from "../../../hooks/useScrollToElement";
 import { Link, useNavigate } from "react-router-dom";
-import { UserApi } from "../../../apis/auth/userApi";
+import { AuthApi } from "../../../apis/authApi";
 import { useFormStore } from "../../../store/useFormStore";
 import { AxiosResponse } from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -33,7 +33,7 @@ const TermsForm: React.FC = () => {
 		if (data.terms === false) {
 			return;
 		}
-		const response: AxiosResponse = await UserApi.signup(signUpData);
+		const response: AxiosResponse = await AuthApi.signup(signUpData);
 		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("SignUp Successful. Redirecting...", {
@@ -41,7 +41,7 @@ const TermsForm: React.FC = () => {
 				theme: "dark"
 			});
 			setTimeout(() => {
-				navigate("/verify-email");
+				navigate(`/verify-email/${signUpData.email}`);
 			},3000)
 		} else {
 			toast.error(response.data.message, {
