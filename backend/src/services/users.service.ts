@@ -15,6 +15,7 @@ import { UserRole } from "@/enums/users.enum";
 import { PayloadPurpose } from "@/enums/payload.enum";
 import { Jwt } from "@/utils/jwt";
 import { NodeMailer } from "@/utils/nodeMailer";
+// import { TokenEntity } from "@/entities/tokens.entity";
 
 @Service()
 @EntityRepository()
@@ -42,6 +43,12 @@ export class UserService extends Repository<UserEntity> {
       throw new HttpException(
         409,
         `This email ${userData.email} already exists`,
+      );
+
+    if (findUser.phone === userData.phone)
+      throw new HttpException(
+        409,
+        `This phone ${userData.phone} already exists`,
       );
 
     const hashedPassword = await Bcrypt.encryptPassword(userData.password);
