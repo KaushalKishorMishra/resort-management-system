@@ -132,7 +132,7 @@ const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
 							</ul>
 						</div>
 						<div className="navbar-end">
-							<Link to="login">
+							<Link to="/login">
 								<LuUserCircle2 className="text-4xl me-5 hover:scale-105" />
 							</Link>
 							<Link

@@ -41,8 +41,8 @@ export class UserController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const userId = Number(req.params.id);
-      const findOneUserData: User = await this.user.findUser({ userId });
+      const id = Number(req.params.id);
+      const findOneUserData: User = await this.user.findUser({ id });
       res.status(200).json({ data: findOneUserData, message: "findOne" });
     } catch (error) {
       next(error);
@@ -82,7 +82,7 @@ export class UserController {
         to: createUserData.email,
         subject: "Email Verification",
         text: `To verify your event management account use the OTP ${createToken.value}`,
-        html: `<a target="_blank" href="${process.env.FRONTEND_URL}/verify-email/${createUserData.email}">Click to verify ${createToken.value}</a>`,
+        html: `<a href="${process.env.FRONTEND_URL}/verify-email/${createUserData.email}">Click to verify ${createToken.value}</a>`,
       });
 
       res
