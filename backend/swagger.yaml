@@ -103,6 +103,58 @@ paths:
         500:
           description: 'Server Error'
 
+# [POST] users/forgot-password
+    post:
+      tags:
+      - users
+      summary: Forgot Password
+      parameters:
+      - name: email
+        in: body
+        description: user email
+        required: true
+        type: string
+      responses:
+        201:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# [PATCH] users/reset-password
+    post:
+      tags:
+      - users
+      summary: Reset Password
+      parameters:
+      - name: email
+        in: body
+        description: user email
+        required: true
+        type: string
+      - password: password
+        in: body
+        description: new password
+        required: true
+        type: string
+      - name: password_reset_token
+        in: body
+        description: password reset token 
+        required: true
+        type: string
+      responses:
+        201:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
 # definitions
 definitions:
   users:
