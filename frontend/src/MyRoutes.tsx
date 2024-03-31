@@ -9,6 +9,8 @@ import BasicLayout from "./layouts/BasicLayout";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import VerifyEmail from "./pages/VerifyEmail";
+import Profile from "./pages/Profile";
+import PrivateRoute from "./auth/PrivateRoute";
 
 const MyRoutes: React.FC = () => {
 	return (
@@ -25,6 +27,10 @@ const MyRoutes: React.FC = () => {
 					<Route path="/signup" element={<Signup />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/verify-email/:email" element={<VerifyEmail />} />
+				</Route>
+				{/* private route */}
+				<Route path="" element={<PrivateRoute />}>
+					<Route path="profile" element={<Profile />} />
 				</Route>
 				<Route path="*" element={<PageNotFound />} />
 			</Routes>
