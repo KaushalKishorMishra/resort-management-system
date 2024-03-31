@@ -11,6 +11,7 @@ import PageNotFound from "./pages/PageNotFound";
 import VerifyEmail from "./pages/VerifyEmail";
 import Profile from "./pages/Profile";
 import PrivateRoute from "./auth/PrivateRoute";
+import Unauthorized from "./pages/Unauthorized";
 
 const MyRoutes: React.FC = () => {
 	return (
@@ -32,7 +33,9 @@ const MyRoutes: React.FC = () => {
 				<Route path="" element={<PrivateRoute />}>
 					<Route path="profile" element={<Profile />} />
 				</Route>
+				{/* exceptions */}
 				<Route path="*" element={<PageNotFound />} />
+				<Route path="/unauthorized" element={<Unauthorized />} />
 			</Routes>
 		</BrowserRouter>
 	);
