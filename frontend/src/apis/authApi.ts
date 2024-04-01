@@ -89,4 +89,21 @@ export class AuthApi {
 				return error.response;
 			});
 	}
+
+	static async forgotPassword(data: { email: string }): Promise<AxiosResponse> {
+		return axios
+			.post(`${serverUrl}/users/forgot-password`, data, {
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+			.then(response => {
+				console.log(response.status, response.data.message);
+				return response;
+			})
+			.catch(error => {
+				console.error("Error occurred in forgot password: ", error.response.status, error.response.data);
+				return error.response;
+			});
+	}
 }
