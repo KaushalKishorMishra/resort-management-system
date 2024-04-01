@@ -12,7 +12,7 @@ import VerifyEmail from "./pages/VerifyEmail";
 import Profile from "./pages/Profile";
 import PrivateRoute from "./auth/PrivateRoute";
 import Unauthorized from "./pages/Unauthorized";
-import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 const MyRoutes: React.FC = () => {
 	return (
@@ -29,7 +29,7 @@ const MyRoutes: React.FC = () => {
 					<Route path="/signup" element={<Signup />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/verify-email/:email" element={<VerifyEmail />} />
-					<Route path="/forgot-password" element={<ForgotPassword />} />
+					<Route path="/reset-password" element={<ResetPassword />} />
 				</Route>
 				{/* private route */}
 				<Route path="" element={<PrivateRoute />}>

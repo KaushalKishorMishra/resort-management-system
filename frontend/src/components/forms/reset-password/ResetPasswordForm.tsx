@@ -3,7 +3,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-const ForgotPasswordForm: React.FC = () => {
+const ResetPasswordForm: React.FC = () => {
 	const {
 		register,
 		handleSubmit,
@@ -123,4 +123,4 @@ const ForgotPasswordForm: React.FC = () => {
 	);
 };
 
-export default ForgotPasswordForm;
+export default ResetPasswordForm;

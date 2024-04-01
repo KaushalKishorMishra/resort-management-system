@@ -39,7 +39,7 @@ const LoginForm: React.FC = () => {
 	};
 
 	const handleForgotPassword = () => {
-		navigate("/forgot-password");
+		navigate("/reset-password");
 	};
 
 	return (

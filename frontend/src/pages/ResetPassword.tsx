@@ -1,7 +1,7 @@
 import React from "react";
-import ForgotPasswordForm from "../components/forms/forgot-password/ForgotPassworForm";
+import ResetPasswordForm from "../components/forms/reset-password/ResetPasswordForm";
 
-const ForgotPassword: React.FC = () => {
+const ResetPassword: React.FC = () => {
 	return (
 		<>
 			<div
@@ -13,11 +13,11 @@ const ForgotPassword: React.FC = () => {
 				}}
 			>
 				<div className="h-full px-4 flex justify-center items-center flex-col md:container bg-transparent">
-					<ForgotPasswordForm />
+					<ResetPasswordForm />
 				</div>
 			</div>
 		</>
 	);
 };
 
-export default ForgotPassword;
+export default ResetPassword;

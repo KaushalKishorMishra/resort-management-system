@@ -99,10 +99,33 @@ export class AuthApi {
 			})
 			.then(response => {
 				console.log(response.status, response.data.message);
+				localStorage.setItem("resetToken", response.data.jwt);
 				return response;
 			})
 			.catch(error => {
 				console.error("Error occurred in forgot password: ", error.response.status, error.response.data);
+				return error.response;
+			});
+	}
+
+	static async resetPassword(data: {
+		email: string;
+		password: string;
+		password_reset_token: string;
+	}): Promise<AxiosResponse> {
+		return axios
+			.patch(`${serverUrl}/users/reset-password`, data, {
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("resetToken")}`,
+				},
+			})
+			.then(response => {
+				console.log(response.status, response.data.message);
+				return response;
+			})
+			.catch(error => {
+				console.error("Error occurred in reset password: ", error.response.status, error.response.data);
 				return error.response;
 			});
 	}
