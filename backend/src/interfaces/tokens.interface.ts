@@ -1,4 +1,3 @@
-
 export interface Token {
   id?: number;
   purpose: string;
