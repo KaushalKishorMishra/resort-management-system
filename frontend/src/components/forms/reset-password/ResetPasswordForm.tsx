@@ -1,13 +1,11 @@
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { AuthApi } from "../../../apis/authApi";
 
-type EmailFormProps = {
-	setFormState: React.Dispatch<React.SetStateAction<number>>;
-};
-
-const ResetPasswordForm: React.FC<EmailFormProps> = ({ setFormState }) => {
+const ResetPasswordForm: React.FC = () => {
+	const navigate = useNavigate();
 	const {
 		register,
 		handleSubmit,
@@ -17,8 +15,27 @@ const ResetPasswordForm: React.FC<EmailFormProps> = ({ setFormState }) => {
 	} = useForm();
 
 	const onSubmit = async (data: FieldValues) => {
-		console.log(data);
-		setFormState(1);
+		const ResetPasswordData = {
+			email: localStorage.getItem("resetEmail") as string,
+			password: data.password as string,
+			password_reset_token: data.password_reset_token as string,
+		};
+		const response = await AuthApi.resetPassword(ResetPasswordData);
+		console.log(response.data.message);
+		if (response.status >= 200 && response.status < 300) {
+			toast.success("Your account password has been reset. Redirecting to Login page...", {
+				position: "top-right",
+				theme: "dark",
+			});
+			setTimeout(() => {
+				navigate("/login");
+			}, 5000)
+		} else {
+			toast.error(`${response.data.message} Please try again`, {
+				position: "top-right",
+				theme: "dark",
+			});
+		}
 	};
 
 	return (

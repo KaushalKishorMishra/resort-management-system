@@ -1,7 +1,7 @@
 import React from "react";
-import ResetPasswordForm from "../components/forms/reset-password/ResetPasswordForm";
+import EmailForm from "../components/forms/reset-password/EmailForm";
 
-const ResetPassword: React.FC = () => {
+const ForgotPassword: React.FC = () => {
 	return (
 		<>
 			<div
@@ -13,11 +13,11 @@ const ResetPassword: React.FC = () => {
 				}}
 			>
 				<div className="h-full px-4 flex justify-center items-center flex-col md:container bg-transparent">
-					<ResetPasswordForm />
+					<EmailForm />
 				</div>
 			</div>
 		</>
 	);
 };
 
-export default ResetPassword;
+export default ForgotPassword;

@@ -1,15 +1,12 @@
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthApi } from "../../../apis/authApi";
 import { AxiosResponse } from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
-type EmailFormProps = {
-	setFormState: React.Dispatch<React.SetStateAction<number>>;
-};
-
-const EmailForm: React.FC<EmailFormProps> = ({ setFormState }) => {
+const EmailForm: React.FC= () => {
+	const navigate = useNavigate();
 	const {
 		register,
 		handleSubmit,
@@ -27,8 +24,11 @@ const EmailForm: React.FC<EmailFormProps> = ({ setFormState }) => {
 				position: "top-right",
 				theme: "dark",
 			});
-			sessionStorage.setItem("resetEmail", forgotPasswordData.email);
-			setFormState(2);
+			localStorage.setItem("resetEmail", forgotPasswordData.email);
+			localStorage.setItem("resetJwt", response.data.jwt);
+			setTimeout(() => {
+				navigate("/reset-password");
+			}, 3000)
 		} else {
 			toast.error(response.data.message, {
 				position: "top-right",

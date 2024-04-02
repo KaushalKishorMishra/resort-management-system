@@ -113,11 +113,12 @@ export class AuthApi {
 		password: string;
 		password_reset_token: string;
 	}): Promise<AxiosResponse> {
+		console.log(localStorage.getItem("resetJwt"));
 		return axios
 			.patch(`${serverUrl}/users/reset-password`, data, {
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${localStorage.getItem("resetToken")}`,
+					Authorization: `Bearer ${localStorage.getItem("resetJwt")}`,
 				},
 			})
 			.then(response => {
