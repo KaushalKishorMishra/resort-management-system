@@ -1,5 +1,5 @@
 import { RoomsEntity } from "@/entities/rooms.entity";
-import { Repository, getRepository } from "typeorm";
+import { Repository, UpdateResult, getRepository } from "typeorm";
 
 export class RoomRepository extends Repository<RoomsEntity> {
   static async findALl(): Promise<RoomsEntity[]> {
@@ -8,6 +8,13 @@ export class RoomRepository extends Repository<RoomsEntity> {
 
   static async findOne(key: object): Promise<RoomsEntity> {
     return await getRepository(RoomsEntity).findOne({ where: key });
+  }
+
+  static async findOneDeleted(key: object): Promise<RoomsEntity> {
+    return await getRepository(RoomsEntity).findOne({
+      where: key,
+      withDeleted: true,
+    });
   }
 
   static async create(key: object): Promise<RoomsEntity> {
@@ -32,6 +39,7 @@ export class RoomRepository extends Repository<RoomsEntity> {
     return deletedRoom;
   }
 
+
   static async delete(id: number): Promise<RoomsEntity> {
     const deletedRoom: RoomsEntity =
       await getRepository(RoomsEntity).findOne(id);
@@ -39,19 +47,15 @@ export class RoomRepository extends Repository<RoomsEntity> {
     return deletedRoom;
   }
 
-  static async recover(id: number): Promise<RoomsEntity> {
-    const recoveredRoom: RoomsEntity = await getRepository(RoomsEntity).findOne(
-      id,
-      {
-        withDeleted: true,
-      },
-    );
-    await getRepository(RoomsEntity)
+
+  static async recover(id: number): Promise<UpdateResult> {
+    // fix type UpdateResult is placeholder
+    const test: UpdateResult = await getRepository(RoomsEntity)
       .createQueryBuilder()
       .restore()
       .where("id = :id", { id: id })
       .execute();
-    return recoveredRoom;
+    return test;
   }
 
   static async rangeSearch({ startDate, endDate }): Promise<RoomsEntity[]> {

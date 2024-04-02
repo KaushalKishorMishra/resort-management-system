@@ -1,16 +1,14 @@
 import { Outlet } from "react-router-dom";
 import { ReactNode } from "react";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
-const Layouts = (): ReactNode => {
+const FixedNavLayout = (): ReactNode => {
 	return (
 		<>
-			<Navbar />
+			<Navbar positionFixed={true} />
 			<Outlet />
-			<Footer />
 		</>
 	);
 };
 
-export default Layouts;
+export default FixedNavLayout;
