@@ -60,7 +60,7 @@ const PasswordForm: React.FC = () => {
 						})}
 						className="input input-bordered border-1 rounded-full bg-opacity-60"
 						type="text"
-						placeholder="Name"
+						placeholder="Password"
 						autoComplete="off"
 					/>
 					{errors.password && (

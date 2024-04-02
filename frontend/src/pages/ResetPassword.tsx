@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import ResetPasswordForm from "../components/forms/reset-password/ResetPasswordForm";
+import EmailForm from "../components/forms/reset-password/EmailForm";
 
 const ResetPassword: React.FC = () => {
+	const [formState, setFormState] = useState(1);
 	return (
 		<>
 			<div
@@ -13,7 +15,8 @@ const ResetPassword: React.FC = () => {
 				}}
 			>
 				<div className="h-full px-4 flex justify-center items-center flex-col md:container bg-transparent">
-					<ResetPasswordForm />
+					{formState === 1 && <EmailForm setFormState={setFormState} />}
+					{formState === 2 && <ResetPasswordForm setFormState={setFormState} />}
 				</div>
 			</div>
 		</>

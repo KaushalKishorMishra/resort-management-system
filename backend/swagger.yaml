@@ -125,7 +125,7 @@ paths:
           description: 'Server Error'
 
 # [PATCH] users/reset-password
-    post:
+    patch:
       tags:
       - users
       summary: Reset Password
