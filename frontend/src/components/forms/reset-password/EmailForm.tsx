@@ -1,6 +1,9 @@
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthApi } from "../../../apis/authApi";
+import { AxiosResponse } from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 type EmailFormProps = {
 	setFormState: React.Dispatch<React.SetStateAction<number>>;
@@ -16,12 +19,27 @@ const EmailForm: React.FC<EmailFormProps> = ({ setFormState }) => {
 	} = useForm();
 
 	const onSubmit = async (data: FieldValues) => {
-		console.log(data);
-		setFormState(2);
+		const forgotPasswordData = { email: data.email as string };
+		const response: AxiosResponse = await AuthApi.forgotPassword(forgotPasswordData);
+		console.log(response.data.message);
+		if (response.status >= 200 && response.status < 300) {
+			toast.success("Password reset token has been sent to you email.", {
+				position: "top-right",
+				theme: "dark",
+			});
+			sessionStorage.setItem("resetEmail", forgotPasswordData.email);
+			setFormState(2);
+		} else {
+			toast.error(response.data.message, {
+				position: "top-right",
+				theme: "dark",
+			});
+		}
 	};
 
 	return (
 		<>
+			<ToastContainer />
 			<form onSubmit={handleSubmit(onSubmit)} className="signup-form">
 				<h1 className="mb-2 text-4xl font-bold text-white text-center">Forgot your password</h1>
 				<p className="mb-3 font-semibold text-lg text-white text-center">
