@@ -12,7 +12,7 @@ export class TokenController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const findAllTokensData = await this.token.getTokens();
+      const findAllTokensData = await this.token.getTokens({});
       res.status(200).json({ data: findAllTokensData, message: "findAll" });
     } catch (error) {
       next(error);
@@ -25,8 +25,12 @@ export class TokenController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const tokenId = req.params.id;
-      const findOneTokenData: Token = await this.token.getUserToken(tokenId);
+      const tokenId = Number(req.params.id);
+      const tokenPurpose: string = req.body;
+      const findOneTokenData: Token = await this.token.getUserToken({
+        tokenId,
+        tokenPurpose,
+      });
 
       if (!findOneTokenData) {
         res.status(404).json({ message: "Token not found" });

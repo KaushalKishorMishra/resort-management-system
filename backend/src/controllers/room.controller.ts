@@ -78,7 +78,7 @@ export class RoomController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const roomId: number = Number(req.params.id);
+      const roomId = Number(req.params.id);
 
       const roomData: Rooms = req.body;
 
@@ -111,7 +111,7 @@ export class RoomController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const roomId: number = Number(req.params.id);
+      const roomId = Number(req.params.id);
 
       const findRoom: Rooms = await this.room.findOneRoom({ id: roomId });
 
@@ -137,7 +137,7 @@ export class RoomController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const roomId: number = Number(req.params.id);
+      const roomId = Number(req.params.id);
 
       const findRoom: Rooms = await this.room.findOneRoom({ id: roomId });
 
@@ -163,9 +163,12 @@ export class RoomController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const roomId: number = Number(req.params.id);
+      const roomId = Number(req.params.id);
       console.log("1");
-      const findRoom: Rooms = await this.room.findOneRoom({ id: roomId, withDeleted: true, });
+      const findRoom: Rooms = await this.room.findOneRoom({
+        id: roomId,
+        withDeleted: true,
+      });
       console.log("2");
 
       if (roomId !== findRoom.id)

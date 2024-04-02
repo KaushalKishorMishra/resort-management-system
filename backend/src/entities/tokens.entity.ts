@@ -34,5 +34,4 @@ export class TokenEntity extends BaseEntity implements Token {
   @Column()
   @UpdateDateColumn()
   updatedAt: Date;
-  
 }

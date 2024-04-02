@@ -18,12 +18,17 @@ export class RoomService extends Repository<Rooms> {
     return room;
   }
 
+  // public async searchAvailableRooms(roomData: object): Promise<Rooms[]> {
+  //   const room: Rooms = await 
+  //   return 
+  // }
+
   public async createRoom(roomData: Rooms): Promise<Rooms> {
     const createRoomData: Rooms = await RoomRepository.create(roomData);
     return createRoomData;
   }
 
-  public async updateRoom(roomId: number, roomData: Rooms): Promise<Rooms> {
+  public async updateRoom(roomId: number, roomData: object): Promise<Rooms> {
     const updateRoomData: Rooms = await RoomRepository.update(roomId, roomData);
     return updateRoomData;
   }

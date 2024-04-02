@@ -40,15 +40,28 @@ export class RoomRepository extends Repository<RoomsEntity> {
   }
 
   static async recover(id: number): Promise<RoomsEntity> {
-    const recoveredRoom: RoomsEntity =
-      await getRepository(RoomsEntity).findOne(id, {
+    const recoveredRoom: RoomsEntity = await getRepository(RoomsEntity).findOne(
+      id,
+      {
         withDeleted: true,
-      });
+      },
+    );
     await getRepository(RoomsEntity)
       .createQueryBuilder()
       .restore()
       .where("id = :id", { id: id })
       .execute();
     return recoveredRoom;
+  }
+
+  static async rangeSearch({ startDate, endDate }): Promise<RoomsEntity[]> {
+    const findRangeData: RoomsEntity[] = await getRepository(RoomsEntity)
+      .createQueryBuilder("rooms")
+      .where("room.price BETWEEN :startDate AND :endDate", {
+        startDate,
+        endDate,
+      })
+      .getMany();
+    return findRangeData;
   }
 }
