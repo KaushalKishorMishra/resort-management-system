@@ -112,7 +112,17 @@ export class BookingController {
       const booking = await this.booking.deleteBooking({ id: id });
       if (!booking)
         throw new HttpException(404, `no booking with ${id}  exist`);
-      res.status(200).json({ data: booking, message: "deleteBooking" });
+      const updateRoom = await this.room.updateRoom(booking.roomId, {
+        status: RoomStatus.AVAILABLE,
+      });
+      if (!updateRoom)
+        throw new HttpException(
+          404,
+          "room status could not be changed after deleting booking",
+        );
+      res
+        .status(200)
+        .json({ status: 200, data: booking, message: "deleteBooking" });
     } catch (error) {
       next(error);
     }

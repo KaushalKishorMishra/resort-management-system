@@ -5,6 +5,7 @@ import { ValidateEnv } from "@utils/validateEnv";
 import { RoomRoute } from "./routes/rooms.route";
 import { BookingRoute } from "./routes/booking.route";
 import { PaymentRoute } from "./routes/payment.route";
+import { SeederRoute } from "./routes/seeder.route";
 
 ValidateEnv();
 
@@ -14,6 +15,7 @@ const app = new App([
   new RoomRoute(),
   new BookingRoute(),
   new PaymentRoute(),
+  new SeederRoute(),
 ]);
 
 app.listen();
