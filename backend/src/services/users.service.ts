@@ -29,8 +29,9 @@ export class UserService extends Repository<UserEntity> {
   }
 
   public async findUser(key: object): Promise<User> {
+    console.log("findUser")
     const findUser: User = await UserRepository.findOne(key);
-    // console.log(findUser);
+    console.log(findUser);
     if (!findUser) throw new HttpException(409, "User doesn't exist");
     return findUser;
   }

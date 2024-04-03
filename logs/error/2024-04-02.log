@@ -20,3 +20,30 @@ TSError: ⨯ Unable to compile TypeScript:
     at Module.load (node:internal/modules/cjs/loader:1119:32)
     at Function.Module._load (node:internal/modules/cjs/loader:960:12)
     at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-04-02 22:04:16 error: uncaughtException: column "top" of relation "rooms_entity" contains null values
+QueryFailedError: column "top" of relation "rooms_entity" contains null values
+    at QueryFailedError.TypeORMError [as constructor] (E:\Office\resort management system\resort-management-system\backend\node_modules\src\error\TypeORMError.ts:7:9)
+    at new QueryFailedError (E:\Office\resort management system\resort-management-system\backend\node_modules\src\error\QueryFailedError.ts:9:9)
+    at PostgresQueryRunner.<anonymous> (E:\Office\resort management system\resort-management-system\backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:263:19)
+    at step (E:\Office\resort management system\resort-management-system\backend\node_modules\typeorm\node_modules\tslib\tslib.js:195:27)
+    at Object.throw (E:\Office\resort management system\resort-management-system\backend\node_modules\typeorm\node_modules\tslib\tslib.js:176:57)
+    at rejected (E:\Office\resort management system\resort-management-system\backend\node_modules\typeorm\node_modules\tslib\tslib.js:167:69)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-04-02 22:05:00 error: uncaughtException: column "top" of relation "rooms_entity" contains null values
+QueryFailedError: column "top" of relation "rooms_entity" contains null values
+    at QueryFailedError.TypeORMError [as constructor] (E:\Office\resort management system\resort-management-system\backend\node_modules\src\error\TypeORMError.ts:7:9)
+    at new QueryFailedError (E:\Office\resort management system\resort-management-system\backend\node_modules\src\error\QueryFailedError.ts:9:9)
+    at PostgresQueryRunner.<anonymous> (E:\Office\resort management system\resort-management-system\backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:263:19)
+    at step (E:\Office\resort management system\resort-management-system\backend\node_modules\typeorm\node_modules\tslib\tslib.js:195:27)
+    at Object.throw (E:\Office\resort management system\resort-management-system\backend\node_modules\typeorm\node_modules\tslib\tslib.js:176:57)
+    at rejected (E:\Office\resort management system\resort-management-system\backend\node_modules\typeorm\node_modules\tslib\tslib.js:167:69)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-04-02 22:07:38 error: uncaughtException: column "top" of relation "rooms_entity" contains null values
+QueryFailedError: column "top" of relation "rooms_entity" contains null values
+    at QueryFailedError.TypeORMError [as constructor] (E:\Office\resort management system\resort-management-system\backend\node_modules\src\error\TypeORMError.ts:7:9)
+    at new QueryFailedError (E:\Office\resort management system\resort-management-system\backend\node_modules\src\error\QueryFailedError.ts:9:9)
+    at PostgresQueryRunner.<anonymous> (E:\Office\resort management system\resort-management-system\backend\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:263:19)
+    at step (E:\Office\resort management system\resort-management-system\backend\node_modules\typeorm\node_modules\tslib\tslib.js:195:27)
+    at Object.throw (E:\Office\resort management system\resort-management-system\backend\node_modules\typeorm\node_modules\tslib\tslib.js:176:57)
+    at rejected (E:\Office\resort management system\resort-management-system\backend\node_modules\typeorm\node_modules\tslib\tslib.js:167:69)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
