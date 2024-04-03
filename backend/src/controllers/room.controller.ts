@@ -164,6 +164,7 @@ export class RoomController {
   ): Promise<void> => {
     try {
       const roomId = Number(req.params.id);
+
       const findRoom: Rooms = await this.room.findOneDeletedRoom({
         id: roomId,
       });
