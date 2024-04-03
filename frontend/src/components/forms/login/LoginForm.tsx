@@ -38,6 +38,10 @@ const LoginForm: React.FC = () => {
 		}
 	};
 
+	const handleForgotPassword = () => {
+		navigate("/reset-password");
+	};
+
 	return (
 		<>
 			<ToastContainer />
@@ -99,12 +103,18 @@ const LoginForm: React.FC = () => {
 					className="btn btn-primary w-fit rounded-full self-end px-6 text-lg"
 					disabled={isSubmitting}
 				>
-					{isSubmitting ? "Submitting..." : "Next"}
+					{isSubmitting ? "Submitting..." : "Login"}
 				</button>
-				<Link to="/signup" className="text-gray-100 text-center text-lg w-full max-w-lg mt-2 btn btn-ghost">
+				<Link to="/signup" className="text-gray-100 text-center text-lg w-full max-w-lg btn btn-ghost">
 					Don't have an account? <span className="text-primary font-bold">Sign Up</span>
 				</Link>
-				<p className="text-gray-200 text-center text-sm w-full max-w-lg mt-2">
+				<div className="text-gray-100 text-center text-md w-full max-w-lg">
+					Don't remember your password?{" "}
+					<span className="text-primary font-bold cursor-pointer" onClick={handleForgotPassword}>
+						Forgot Password
+					</span>
+				</div>
+				<p className="text-gray-200 text-center text-sm w-full max-w-lg mt-4">
 					By continuing to use ResortUI, you agree to our{" "}
 					<Link to="terms-and-service" className="text-primary underline font-semibold">
 						Terms of Service
