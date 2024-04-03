@@ -36,7 +36,7 @@ const Map = ({ image, alt, ref }: MapProps) => {
 	};
 
 	const onPan = (dx: number, dy: number) => {
-		console.log("dx", dx, "dy", dy);
+		// console.log("dx", dx, "dy", dy);
 
 		// don't use setDx(100) as when zooming the dx will be multiplied by zoom
 		setDx(dx);
@@ -114,7 +114,7 @@ const Map = ({ image, alt, ref }: MapProps) => {
 
 				{/* map elements */}
 				{roomData.map(room => (
-					<MapElement top={room.top} left={room.left} id={room.id} status={room.status} type={room.type} />
+					<MapElement top={room.top} left={room.left} id={room.id} status={room.status} type={room.type} key={room.id}/>
 				))}
 			</PanViewer>
 
