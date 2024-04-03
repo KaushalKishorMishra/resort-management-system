@@ -177,21 +177,16 @@ export class RoomController {
   ): Promise<void> => {
     try {
       const roomId = Number(req.params.id);
-      console.log("1");
-      const findRoom: Rooms = await this.room.findOneRoom({
+
+      const findRoom: Rooms = await this.room.findOneDeletedRoom({
         id: roomId,
-        withDeleted: true,
       });
-      console.log("2");
 
       if (roomId !== findRoom.id)
         throw new HttpException(404, "room not found");
-      console.log("3");
 
       const recoverRoom: Rooms = await this.room.recoverRoom(roomId);
-      console.log("4");
       if (!recoverRoom) throw new HttpException(401, "could not recover room");
-      console.log("5");
 
       res.status(200).json({
         status: 200,
