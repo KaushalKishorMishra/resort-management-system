@@ -16,13 +16,11 @@ export class AuthApi {
 				},
 			})
 			.then(response => {
-				console.log(response.status);
-				console.log(response.data.message);
+				console.log(response.status, response.data.message);
 				return response;
 			})
 			.catch(error => {
-				console.log(error.response.status);
-				console.error("Error occurred in signup: ", error.response.data);
+				console.error("Error occurred in signup: ", error.response.status, error.response.data.message);
 				return error.response;
 			});
 	}

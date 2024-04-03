@@ -4,7 +4,6 @@ import { useUserStore } from "../store/useUserStore.ts";
 
 export const isAuthenticated = async (): Promise<false | "guest" | "admin" | null> => {
 	const userId = localStorage.getItem("userId");
-	console.log("authIndex", userId);
 	if (typeof window == "undefined") {
 		return false;
 	} else if (userId) {
@@ -25,9 +24,6 @@ export const isAuthenticated = async (): Promise<false | "guest" | "admin" | nul
 				userId: res.data.data.id,
 				name: res.data.data.name,
 			});
-			console.log(useUserStore.getState());
-
-			console.log(res.data);
 			return res.data.data.role;
 		} catch (err) {
 			console.log(err);
