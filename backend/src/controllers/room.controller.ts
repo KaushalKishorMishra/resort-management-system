@@ -45,6 +45,27 @@ export class RoomController {
     }
   };
 
+  public searchAvailableRooms = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const { startDate, endDate } = req.body;
+      const searchData = this.room.searchAvailableRooms({
+        startDate,
+        endDate,
+      });
+      res.status(200).json({
+        status: 200,
+        data: searchData,
+        message: "searched available rooms",
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
   public createRoom = async (
     req: Request,
     res: Response,
@@ -52,15 +73,7 @@ export class RoomController {
   ): Promise<void> => {
     try {
       const roomData: Rooms = req.body;
-      console.log(roomData);
-      const findRoomData: Rooms = await this.room.findOneRoom({
-        name: roomData.name,
-      });
-
-      console.log(findRoomData);
-      if (null !== findRoomData) {
-        throw new HttpException(401, "room already exists");
-      }
+  
       const createRoomData: Rooms = await this.room.createRoom(roomData);
       res.status(200).json({
         status: 200,
