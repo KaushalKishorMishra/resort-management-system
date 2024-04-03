@@ -38,6 +38,7 @@ export class AuthApi {
 				console.warn("success");
 				console.log(response.status, response.data.message);
 				localStorage.setItem("token", response.data.jwt);
+				localStorage.setItem("userId", response.data.data.id);
 				useUserStore.setState({
 					isAuthenticated: response.data.data.role,
 					name: response.data.data.name,
