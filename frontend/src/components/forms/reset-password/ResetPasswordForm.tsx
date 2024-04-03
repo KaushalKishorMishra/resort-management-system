@@ -29,7 +29,7 @@ const ResetPasswordForm: React.FC = () => {
 			});
 			setTimeout(() => {
 				navigate("/login");
-			}, 5000)
+			}, 5000);
 		} else {
 			toast.error(`${response.data.message} Please try again`, {
 				position: "top-right",
@@ -126,13 +126,18 @@ const ResetPasswordForm: React.FC = () => {
 						</span>
 					)}
 				</div>
-				<button
-					type="submit"
-					className="btn btn-primary w-fit rounded-full self-end px-6 text-lg"
-					disabled={isSubmitting}
-				>
-					{isSubmitting ? "Resetting..." : "Confirm Password Reset"}
-				</button>
+				<div className="flex justify-between">
+					<Link to="/forgot-password" className="btn btn-primary btn-outline w-fit rounded-full px-6 text-lg">
+						Back
+					</Link>
+					<button
+						type="submit"
+						className="btn btn-primary w-fit rounded-full self-end px-6 text-lg"
+						disabled={isSubmitting}
+					>
+						{isSubmitting ? "Resetting..." : "Reset"}
+					</button>
+				</div>
 				<Link to="/signup" className="text-gray-100 text-center text-lg w-full max-w-lg mt-2 btn btn-ghost">
 					Remembered you password? <span className="text-primary font-bold">Log In</span>
 				</Link>

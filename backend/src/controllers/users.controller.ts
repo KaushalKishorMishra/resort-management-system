@@ -217,9 +217,9 @@ export class UserController {
       await NodeMailer.sendEmail({
         from: "event-management@api.com",
         to: forgotPasswordData.email,
-        subject: "Email Verification",
-        text: `To verify your event management account use the OTP ${newToken.value}`,
-        html: `<a href="https://localhost:3000/api/user/verify-email">Click to verify ${newToken.value}</a>`,
+        subject: "Reset Password",
+        text: `To reset your account password use the OTP ${newToken.value}`,
+        html: `<a href="https://localhost:5173/reset-password">Click to verify ${newToken.value}</a>`,
       });
 
       // payload
@@ -264,9 +264,9 @@ export class UserController {
       await NodeMailer.sendEmail({
         from: "",
         to: email,
-        subject: "Password Reset",
+        subject: "Password Reset Successfully",
         text: `Your password has been reset successfully`,
-        html: `<a href="https://localhost:3000/users/verify-email">Click to verify</a>`,
+        html: `<a href="https://localhost:5173/login">Goto login page</a>`,
       });
 
       res.status(200).json({
