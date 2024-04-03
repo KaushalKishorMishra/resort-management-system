@@ -24,7 +24,6 @@ export class RoomService extends Repository<Rooms> {
     return room;
   }
 
-
   public async searchAvailableRooms({ startDate, endDate }): Promise<Rooms[]> {
     const rooms: Rooms[] = await RoomRepository.rangeSearch({
       startDate,
@@ -37,12 +36,12 @@ export class RoomService extends Repository<Rooms> {
       throw new HttpException(404, "rooms not available in the range");
     }
     return rooms;
+  }
 
   public async findOneDeletedRoom(key: object): Promise<Rooms> {
     const room: Rooms = await RoomRepository.findOneDeleted(key);
     if (!room) return null;
     return room;
-
   }
 
   public async createRoom(roomData: Rooms): Promise<Rooms> {

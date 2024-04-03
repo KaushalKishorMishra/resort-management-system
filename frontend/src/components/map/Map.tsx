@@ -63,7 +63,7 @@ const Map = ({ image, alt, ref }: MapProps) => {
 	}, []);
 
 	return (
-		<div className="relative bg-slate-400 w-full" id="map-container">
+		<div className="relative bg-slate-400 w-full overflow-clip" id="map-container">
 			{/* map navigation button */}
 			<div className="absolute right-2 z-10 top-2 rounded bg-white shadow divide-y divide-slate-300">
 				<div onClick={zoomIn} className="text-center cursor-pointer h-10 w-10 hover:bg-slate-100">
