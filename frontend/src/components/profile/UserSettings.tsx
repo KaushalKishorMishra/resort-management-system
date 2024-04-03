@@ -4,9 +4,11 @@ import { useUserStore } from "../../store/useUserStore";
 import { toast } from "react-toastify";
 import { GoXCircleFill } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
 
 const UserSettings: React.FC = () => {
 	const navigate = useNavigate();
+	const [hidePassword, setHidePassword] = useState<boolean>(true);
 
 	const [oldPassword, setOldPassword] = useState<string>("");
 	const [newPassword, setNewPassword] = useState<string>("");
@@ -85,17 +87,24 @@ const UserSettings: React.FC = () => {
 					</div>
 					<div className="collapse-content">
 						<form className="form-control w-full items-start p-4">
-							<label className="form-control w-full max-w-lg" htmlFor="oldPassword">
+							<label className="form-control w-full max-w-lg relative" htmlFor="oldPassword">
 								<div className="label">
 									<span className="label-text font-semibold">Old Password</span>
 								</div>
 								<input
-									type="password"
+									type={hidePassword ? "password" : "text"}
 									id="oldPassword"
 									placeholder="Your old password"
 									className="input input-bordered w-full max-w-lg"
 									onChange={e => setOldPassword(e.target.value)}
 									value={oldPassword}
+								/>
+								<FaEye
+									className="absolute right-4 top-12 text-2xl hover:opacity-60"
+									onMouseEnter={() => setHidePassword(false)}
+									onMouseLeave={() => setHidePassword(true)}
+									onTouchStart={() => setHidePassword(false)}
+									onTouchEnd={() => setHidePassword(true)}
 								/>
 							</label>
 							<label className="form-control w-full max-w-lg" htmlFor="newPassword">
@@ -164,17 +173,24 @@ const UserSettings: React.FC = () => {
 									value={email}
 								/>
 							</label>
-							<label className="w-full max-w-lg" htmlFor="deletePassword">
+							<label className="w-full max-w-lg relative" htmlFor="deletePassword">
 								<div className="label">
 									<span className="label-text font-semibold text-white">Password</span>
 								</div>
 								<input
-									type="password"
+									type={hidePassword ? "password" : "text"}
 									id="deletePassword"
 									placeholder="Your password"
 									className="input input-bordered w-full max-w-lg"
 									onChange={e => setDeletePassword(e.target.value)}
 									value={deletePassword}
+								/>
+								<FaEye
+									className="absolute right-4 top-12 text-2xl hover:opacity-60"
+									onMouseEnter={() => setHidePassword(false)}
+									onMouseLeave={() => setHidePassword(true)}
+									onTouchStart={() => setHidePassword(false)}
+									onTouchEnd={() => setHidePassword(true)}
 								/>
 							</label>
 							{confirmState === false ? (

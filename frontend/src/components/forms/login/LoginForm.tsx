@@ -1,12 +1,14 @@
 import { AxiosResponse } from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthApi } from "../../../apis/authApi";
+import { FaEye } from "react-icons/fa";
 
 const LoginForm: React.FC = () => {
 	const navigate = useNavigate();
+	const [hidePassword, setHidePassword] = useState(true);
 	const {
 		register,
 		handleSubmit,
@@ -68,7 +70,7 @@ const LoginForm: React.FC = () => {
 						</span>
 					)}
 				</div>
-				<div className="flex flex-col">
+				<div className="flex flex-col relative">
 					<label htmlFor="password" className="font-semibold text-lg">
 						Password*
 					</label>
@@ -89,7 +91,7 @@ const LoginForm: React.FC = () => {
 							},
 						})}
 						className="signup-input"
-						type="password"
+						type={hidePassword ? "password" : "text"}
 						placeholder="Password"
 					/>
 					{errors.password && (
@@ -97,6 +99,13 @@ const LoginForm: React.FC = () => {
 							<>{errors.password.message}</>
 						</span>
 					)}
+					<FaEye
+						className="absolute right-4 top-10 text-2xl hover:opacity-60"
+						onMouseEnter={() => setHidePassword(false)}
+						onMouseLeave={() => setHidePassword(true)}
+						onTouchStart={() => setHidePassword(false)}
+						onTouchEnd={() => setHidePassword(true)}
+					/>
 				</div>
 				<button
 					type="submit"
