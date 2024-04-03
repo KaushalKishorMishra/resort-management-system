@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { GoInfo, GoScreenFull, GoZoomIn, GoZoomOut } from "react-icons/go";
 import { PanViewer } from "react-image-pan-zoom-rotate";
 import MapElement from "./MapElement";
-import { roomData } from "./mapData";
 import { FaCircle } from "react-icons/fa";
 import { FaHouse } from "react-icons/fa6";
 import { HiMiniXMark } from "react-icons/hi2";
+import { RoomApi } from "../../apis/roomApi";
 
 type MapProps = {
 	image: string;
@@ -43,6 +43,16 @@ const Map = ({ image, alt, ref }: MapProps) => {
 		setDy(dy);
 	};
 
+	const [roomData, setRoomData] = useState<RoomType[]>([]);
+	const getRooms = async () => {
+		const response = await RoomApi.getAllRooms();
+		const roomData: RoomType[] = response.data.data;
+		setRoomData(roomData);
+		// return roomData.map(room => (
+		// 	<MapElement top={room.top} left={room.left} id={room.id} status={room.status} type={room.type} />
+		// ))
+	};
+
 	// note: stopPropagation() didn't perform as expected
 
 	// note: using this combinatin of useEffect and addEventListener to prevent scrolling on touch devices when u touch the map
@@ -60,6 +70,7 @@ const Map = ({ image, alt, ref }: MapProps) => {
 		document?.addEventListener("touchstart", () => {
 			document.documentElement.style.overflow = "auto";
 		});
+		getRooms();
 	}, []);
 
 	return (
