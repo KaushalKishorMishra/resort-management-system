@@ -6,7 +6,7 @@ const Login: React.FC = () => {
 		<>
 			<div
 				data-theme="halloween"
-				className="carousel carousel-vertical h-screen w-screen image-full bg-cover"
+				className="h-screen w-screen image-full bg-cover"
 				style={{
 					backgroundImage: "url('../../public/campfire.jpg')",
 					backgroundPosition: "center",

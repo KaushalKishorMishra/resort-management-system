@@ -14,6 +14,7 @@ import PrivateRoute from "./auth/PrivateRoute";
 import Unauthorized from "./pages/Unauthorized";
 import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
+import Contact from "./pages/Contact";
 
 const MyRoutes: React.FC = () => {
 	return (
@@ -23,7 +24,7 @@ const MyRoutes: React.FC = () => {
 					<Route index element={<Home />} />
 					<Route path="/rooms" element={<Room />} />
 					<Route path="/about" element={<h1>About</h1>} />
-					<Route path="/contact" element={<h1>Contact</h1>} />
+					<Route path="/contact" element={<Contact />} />
 					<Route path="/book" element={<Book />} />
 				</Route>
 				<Route path="" element={<FixedNavLayout />}>

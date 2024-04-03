@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const PrivateRoute: React.FC = () => {
-	const [isAuthorized, setIsAuthorized] = useState<false | "user" | "admin" | null>(null);
+	const [isAuthorized, setIsAuthorized] = useState<false | "guest" | "admin" | null>(null);
 
 	useEffect(() => {
 		const checkAuthorization = async () => {

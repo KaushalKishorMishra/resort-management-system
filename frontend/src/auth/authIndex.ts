@@ -2,8 +2,8 @@ import axios from "axios";
 import serverUrl from "../config.ts";
 import { useUserStore } from "../store/useUserStore.ts";
 
-export const isAuthenticated = async (): Promise<false | "user" | "admin"> => {
-	const userId = useUserStore.getState().userId;
+export const isAuthenticated = async (): Promise<false | "guest" | "admin" | null> => {
+	const userId = localStorage.getItem("userId");
 	if (typeof window == "undefined") {
 		return false;
 	} else if (userId) {
@@ -24,10 +24,7 @@ export const isAuthenticated = async (): Promise<false | "user" | "admin"> => {
 				userId: res.data.data.id,
 				name: res.data.data.name,
 			});
-			console.log(useUserStore.getState());
-
-			console.log(res.data);
-			return res.data.role;
+			return res.data.data.role;
 		} catch (err) {
 			console.log(err);
 			return false;

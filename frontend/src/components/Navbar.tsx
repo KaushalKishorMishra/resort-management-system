@@ -18,8 +18,8 @@ const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
 				setCurrentPage("rooms");
 			} else if (currentUrl.includes("about")) {
 				setCurrentPage("about");
-			} else if (currentUrl.includes("activities")) {
-				setCurrentPage("activities");
+			} else if (currentUrl.includes("contact")) {
+				setCurrentPage("contact");
 			} else {
 				setCurrentPage("explore");
 			}
@@ -82,11 +82,11 @@ const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
 									</li>
 									<li
 										className={`${
-											currentPage == "activities" &&
+											currentPage == "contact" &&
 											"underline decoration-custom-accent underline-offset-4"
 										}`}
 									>
-										<Link to="/activities">ACTIVITIES</Link>
+										<Link to="/contact">CONTACT</Link>
 									</li>
 								</ul>
 							</div>
@@ -123,16 +123,16 @@ const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
 								</li>
 								<li
 									className={`${
-										currentPage == "activities" &&
+										currentPage == "contact" &&
 										"underline decoration-custom-accent underline-offset-4"
 									}`}
 								>
-									<Link to="/activities">ACTIVITIES</Link>
+									<Link to="/contact">CONTACT</Link>
 								</li>
 							</ul>
 						</div>
 						<div className="navbar-end">
-							<Link to="/login">
+							<Link to="/profile">
 								<LuUserCircle2 className="text-4xl me-5 hover:scale-105" />
 							</Link>
 							<Link

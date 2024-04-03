@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
-import { GoScreenFull, GoZoomIn, GoZoomOut } from "react-icons/go";
+import React, { useEffect, useState } from "react";
+import { GoInfo, GoScreenFull, GoZoomIn, GoZoomOut } from "react-icons/go";
 import { PanViewer } from "react-image-pan-zoom-rotate";
 import MapElement from "./MapElement";
 import { roomData } from "./mapData";
+import { FaCircle } from "react-icons/fa";
+import { FaHouse } from "react-icons/fa6";
+import { HiMiniXMark } from "react-icons/hi2";
 
 type MapProps = {
 	image: string;
@@ -14,6 +17,7 @@ const Map = ({ image, alt, ref }: MapProps) => {
 	const [dx, setDx] = React.useState(0);
 	const [dy, setDy] = React.useState(0);
 	const [zoom, setZoom] = React.useState(1);
+	const [showLegend, setShowLegend] = useState(false);
 
 	const resetAll = () => {
 		setDx(0);
@@ -22,7 +26,7 @@ const Map = ({ image, alt, ref }: MapProps) => {
 	};
 
 	const zoomIn = () => {
-		setZoom(zoom + 0.2);
+		if (zoom < 2) setZoom(zoom + 0.2);
 	};
 
 	const zoomOut = () => {
@@ -75,6 +79,14 @@ const Map = ({ image, alt, ref }: MapProps) => {
 					<GoScreenFull className="map-nav-button" />
 				</div>
 			</div>
+			<div className="absolute right-2 z-10 bottom-2 rounded bg-white shadow divide-y divide-slate-300">
+				<div
+					onClick={() => setShowLegend(!showLegend)}
+					className="text-center cursor-pointer h-10 w-10 hover:bg-slate-100"
+				>
+					<GoInfo className="map-nav-button" />
+				</div>
+			</div>
 
 			{/* map */}
 			<PanViewer
@@ -94,6 +106,44 @@ const Map = ({ image, alt, ref }: MapProps) => {
 					<MapElement top={room.top} left={room.left} id={room.id} status={room.status} type={room.type} />
 				))}
 			</PanViewer>
+
+			{/* legend */}
+			{showLegend && (
+				<>
+					<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/90 flex-center flex-col gap-3 p-6 w-80 text-black text-xl border border-black rounded-xl">
+						<div className="w-full flex justify-start items-center relative">
+							<FaHouse className="text-3xl me-3 text-[#c3b919]" />
+							Deluxe Room
+							<div
+								className="absolute top-0 right-0 h-10 w-10 flex-center text-black hover:text-black/70 cursor-pointer"
+								onClick={() => setShowLegend(false)}
+							>
+								<HiMiniXMark size={40} />
+							</div>
+						</div>
+						<div className="w-full flex justify-start items-center">
+							<FaHouse className="text-3xl me-3 text-[#896b4d]" />
+							Family Room
+						</div>
+						<div className="w-full flex justify-start items-center">
+							<FaHouse className="text-3xl me-3 text-[#bf8f47]" />
+							Standard Room
+						</div>
+						<div className="w-full flex justify-start items-center">
+							<FaCircle className="text-3xl me-3 text-green-400" />
+							Available
+						</div>
+						<div className="w-full flex justify-start items-center">
+							<FaCircle className="text-3xl me-3 text-red-600" />
+							Booked
+						</div>
+						<div className="w-full flex justify-start items-center">
+							<FaCircle className="text-3xl me-3 text-[#55e]" />
+							Selected
+						</div>
+					</div>
+				</>
+			)}
 		</div>
 	);
 };
