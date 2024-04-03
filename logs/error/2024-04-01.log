@@ -1,0 +1,1 @@
+2024-04-01 10:40:29 error: [POST] /users/signup >> StatusCode:: 409, Message:: the user with email test5@test.com already exists

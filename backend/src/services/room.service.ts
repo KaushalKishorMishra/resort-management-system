@@ -29,7 +29,7 @@ export class RoomService extends Repository<Rooms> {
     return createRoomData;
   }
 
-  public async updateRoom(roomId: number, roomData: Rooms): Promise<Rooms> {
+  public async updateRoom(roomId: number, roomData: object): Promise<Rooms> {
     const updateRoomData: Rooms = await RoomRepository.update(roomId, roomData);
     return updateRoomData;
   }

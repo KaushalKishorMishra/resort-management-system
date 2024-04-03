@@ -57,11 +57,10 @@ export class ResendVerificationDto {
   public email: string;
 }
 
-export class ForgotPasswordDto{
+export class ForgotPasswordDto {
   @IsEmail()
   @IsNotEmpty()
   public email: string;
-
 }
 
 export class UpdateUserDto {

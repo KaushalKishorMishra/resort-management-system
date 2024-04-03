@@ -1,14 +1,14 @@
 import multer from "multer";
-import { Service } from "./utils";
+import { Utils } from "./utils";
 
 const storageOptions = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, "./public/banner");
   },
   filename: (req, file, callback) => {
-    const randomNumber = Service.generateOTP();
+    const randomNumber = Utils.generateOTP();
     const uniquePrefix = Date.now() + "-" + randomNumber;
-    callback(null, uniquePrefix + file.originalname);
+    callback(null, uniquePrefix + "-" + file.originalname);
   },
 });
 

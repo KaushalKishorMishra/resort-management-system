@@ -205,6 +205,7 @@ export class UserService extends Repository<UserEntity> {
       findUser.id,
       "reset-password",
     );
+    console.log(deleteToken);
     if (!deleteToken) {
       throw new HttpException(401, "Token deletion error");
     }
@@ -220,7 +221,7 @@ export class UserService extends Repository<UserEntity> {
       throw new HttpException(401, "Email not verified");
     }
 
-    let user: GetProfile = {
+    const user: GetProfile = {
       id: findUser.id,
       email: findUser.email,
       phone: findUser.phone,

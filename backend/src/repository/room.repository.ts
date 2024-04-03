@@ -39,6 +39,15 @@ export class RoomRepository extends Repository<RoomsEntity> {
     return deletedRoom;
   }
 
+
+  static async delete(id: number): Promise<RoomsEntity> {
+    const deletedRoom: RoomsEntity =
+      await getRepository(RoomsEntity).findOne(id);
+    await getRepository(RoomsEntity).delete(id);
+    return deletedRoom;
+  }
+
+
   static async recover(id: number): Promise<UpdateResult> {
     // fix type UpdateResult is placeholder
     const test: UpdateResult = await getRepository(RoomsEntity)
@@ -47,5 +56,16 @@ export class RoomRepository extends Repository<RoomsEntity> {
       .where("id = :id", { id: id })
       .execute();
     return test;
+  }
+
+  static async rangeSearch({ startDate, endDate }): Promise<RoomsEntity[]> {
+    const findRangeData: RoomsEntity[] = await getRepository(RoomsEntity)
+      .createQueryBuilder("rooms")
+      .where("room.status BETWEEN :startDate AND :endDate", {
+        startDate,
+        endDate,
+      })
+      .getMany();
+    return findRangeData;
   }
 }

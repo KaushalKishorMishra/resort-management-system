@@ -5,9 +5,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { UserEntity } from "./users.entity";
 
 @Entity()
 export class BookingEntity extends BaseEntity implements Booking {
@@ -27,8 +31,8 @@ export class BookingEntity extends BaseEntity implements Booking {
   @Column()
   extras: string;
 
-  @Column()
-  @IsNotEmpty()
+  @OneToOne(() => UserEntity, (user) => user.id, { nullable: false })
+  @JoinColumn()
   userId: number;
 
   @Column()

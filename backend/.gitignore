@@ -143,6 +143,3 @@ Makefile
 
 #jest files
 jest.config.js
-
-#nodemon
-nodemon.json

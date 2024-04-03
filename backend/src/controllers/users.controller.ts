@@ -49,6 +49,22 @@ export class UserController {
     }
   };
 
+  public findUserByJwt = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const decoded: Payload = req.body.decoded;
+      const findUserByJwtData: User = await this.user.findUser({
+        email: decoded.email,
+      });
+      res.status(200).json({ data: findUserByJwtData, message: "findOne" });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   public createUser = async (
     req: Request,
     res: Response,
@@ -56,7 +72,6 @@ export class UserController {
   ): Promise<void> => {
     try {
       const userData: User = req.body;
-
       // user.service to save user data to database is called
       // repository is not called here rather called in service
       const createUserData: User = await this.user.createUser(userData);
@@ -69,7 +84,7 @@ export class UserController {
       };
 
       // token.service to create token and save to database
-      let createToken: Token = await this.token.createToken(tokenData);
+      const createToken: Token = await this.token.createToken(tokenData);
 
       if (!createToken) {
         throw new HttpException(409, `Token cant be created.`);
@@ -78,7 +93,7 @@ export class UserController {
       // send mail
       //  await NodeMailer.test()
       await NodeMailer.sendEmail({
-        from: "event-management@api.com",
+        from: "restro-management@api.com",
         to: createUserData.email,
         subject: "Email Verification",
         text: `To verify your event management account use the OTP ${createToken.value}`,
@@ -162,12 +177,11 @@ export class UserController {
       const payload: Payload = {
         userId: loginUserData.id,
         email: loginUserData.email,
-        type: loginUserData.role === "guest" ? UserRole.GUEST : UserRole.ADMIN,
+        role: loginUserData.role === "guest" ? UserRole.GUEST : UserRole.ADMIN,
         purpose: PayloadPurpose.LOGIN,
       };
 
       const jwt = Jwt.signJwt(payload, "1m");
-
       res.status(200).json({
         status: 200,
         data: loginUserData,
@@ -226,7 +240,7 @@ export class UserController {
       const payload: Payload = {
         userId: forgotPasswordData.id,
         email: forgotPasswordData.email,
-        type:
+        role:
           forgotPasswordData.role === "guest" ? UserRole.GUEST : UserRole.ADMIN,
         purpose: PayloadPurpose.RESET_PASSWORD,
       };
@@ -351,7 +365,7 @@ export class UserController {
 
       await TokenRepository.deleteToken(findUser.id, "delete-account");
 
-      let newToken: Token = await TokenRepository.createToken({
+      const newToken: Token = await TokenRepository.createToken({
         purpose: "delete-account",
         expires_in: userDeletionTokenTime,
         value: userDeletionToken,
@@ -365,7 +379,7 @@ export class UserController {
       const payload: Payload = {
         userId: findUser.id,
         email: findUser.email,
-        type: findUser.role == "admin" ? UserRole.ADMIN : UserRole.GUEST,
+        role: findUser.role == "admin" ? UserRole.ADMIN : UserRole.GUEST,
         purpose: PayloadPurpose.DELETE_USER,
       };
 
@@ -445,7 +459,7 @@ export class UserController {
           status: 200,
           data: decoded,
           message: "Jwt successfully verified",
-          type: decoded.type,
+          role: decoded.type,
           userId: decoded.userId,
           email: decoded.email,
         });

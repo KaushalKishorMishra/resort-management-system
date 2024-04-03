@@ -75,7 +75,7 @@ export class App {
     const options = {
       swaggerDefinition: {
         info: {
-          title: "REST API",
+          title: "REST API for Resort Management System",
           version: "1.0.0",
           description: "Example docs",
         },
