@@ -389,7 +389,7 @@ export class UserController {
         from: "event-management@api.com",
         to: email,
         subject: "Deletion of User Account",
-        text: `To reset your account password use the OTP ${userDeletionToken}`,
+        text: `To confirm delete account use this OTP ${userDeletionToken}`,
         html: `<a href="https://localhost:3000/users/confirm-delete-user">Click to reset password ${userDeletionToken}</a>`,
       });
 
@@ -414,28 +414,36 @@ export class UserController {
       const { email, user_delete_token } = req.body;
       const decoded = req.body.decoded;
 
+      console.log(1);
       if (!decoded) throw new HttpException(404, "Token not found");
       else if (decoded.email !== email)
         throw new HttpException(401, "Invalid Token, email doesn't match.");
+      console.log(2);
 
-      const findUser = await this.user.findUser({ email });
+      const findUser: User = await this.user.findUser({ email });
+      console.log(3);
 
       if (!findUser) throw new HttpException(404, "User not found");
+      console.log(4);
 
       const deleteToken = await TokenRepository.findOneToken({
         id: decoded.id,
         purpose: "delete-account",
       });
+      console.log(5);
 
       if (!deleteToken) throw new HttpException(404, "Token not found");
       else if (new Date() > deleteToken.expires_in)
         throw new HttpException(401, "Token expired");
       else if (user_delete_token !== deleteToken.value)
         throw new HttpException(401, "Invalid Token");
-
+      console.log(5);
+      
       await UserRepository.delete({ email });
-
+      console.log(6);
+      
       await TokenRepository.deleteToken(deleteToken.id, "delete-account");
+      console.log(7);
 
       res.status(200).json({
         status: 200,

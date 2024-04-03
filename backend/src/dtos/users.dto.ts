@@ -70,3 +70,6 @@ export class UpdateUserDto {
   @MaxLength(32)
   public password: string;
 }
+
+
+

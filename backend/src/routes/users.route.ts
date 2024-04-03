@@ -55,6 +55,7 @@ export class UserRoute implements Routes {
     this.router.delete(
       // delete user by id
       `${this.path}/delete/confirm-delete-user`,
+      AuthorizationMiddleware.authorization,
       this.user.confirmDeleteUser,
     );
 
