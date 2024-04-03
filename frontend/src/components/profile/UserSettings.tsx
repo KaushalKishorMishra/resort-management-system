@@ -76,7 +76,7 @@ const UserSettings: React.FC = () => {
 	return (
 		<>
 			<div className="container mx-auto max-w-lg flex flex-col items- justify-center gap-4 p-4">
-				<h1 className="text-xl font-bold border-b-2">Account Settings</h1>
+				<h1 className="text-4xl font-bold border-b-2">Account Settings</h1>
 
 				<div className="collapse collapse-arrow bg-base-100 border-2">
 					<input type="radio" name="my-accordion-2" defaultChecked />

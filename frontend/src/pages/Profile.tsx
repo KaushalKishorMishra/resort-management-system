@@ -57,8 +57,8 @@ const Profile: React.FC = () => {
 			<ToastContainer />
 			<div className="bg-base-100 py-5 nav-margin">
 				<div className="container bg-base-100 max-w-4xl min-h-screen mx-auto rounded-lg overflow-hidden shadow-lg border">
-					<div className="profile-header flex flex-col md:flex-row justify-between items-center mx-4 my-10 relative">
-						<div className="left md:w-2/5 w-full flex items-center justify-center">
+					<div className="profile-header flex flex-col md:flex-row justify-evenly items-center mx-4 my-10 relative">
+						<div className="left md:w-2/5 w-full flex-center">
 							<div className="w-full max-w-64 mask mask-squircle">
 								<img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
 							</div>
