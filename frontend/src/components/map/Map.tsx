@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { GoInfo, GoScreenFull, GoZoomIn, GoZoomOut } from "react-icons/go";
 import { PanViewer } from "react-image-pan-zoom-rotate";
 import MapElement from "./MapElement";
-import { roomData } from "./mapData";
 import { FaCircle } from "react-icons/fa";
 import { FaHouse } from "react-icons/fa6";
 import { HiMiniXMark } from "react-icons/hi2";
+import { RoomApi } from "../../apis/roomApi";
 
 type MapProps = {
 	image: string;
@@ -36,11 +36,21 @@ const Map = ({ image, alt, ref }: MapProps) => {
 	};
 
 	const onPan = (dx: number, dy: number) => {
-		console.log("dx", dx, "dy", dy);
+		// console.log("dx", dx, "dy", dy);
 
 		// don't use setDx(100) as when zooming the dx will be multiplied by zoom
 		setDx(dx);
 		setDy(dy);
+	};
+
+	const [roomData, setRoomData] = useState<RoomType[]>([]);
+	const getRooms = async () => {
+		const response = await RoomApi.getAllRooms();
+		const roomData: RoomType[] = response.data.data;
+		setRoomData(roomData);
+		// return roomData.map(room => (
+		// 	<MapElement top={room.top} left={room.left} id={room.id} status={room.status} type={room.type} />
+		// ))
 	};
 
 	// note: stopPropagation() didn't perform as expected
@@ -60,10 +70,11 @@ const Map = ({ image, alt, ref }: MapProps) => {
 		document?.addEventListener("touchstart", () => {
 			document.documentElement.style.overflow = "auto";
 		});
+		getRooms();
 	}, []);
 
 	return (
-		<div className="relative bg-slate-400 w-full" id="map-container">
+		<div className="relative bg-slate-400 w-full overflow-clip" id="map-container">
 			{/* map navigation button */}
 			<div className="absolute right-2 z-10 top-2 rounded bg-white shadow divide-y divide-slate-300">
 				<div onClick={zoomIn} className="text-center cursor-pointer h-10 w-10 hover:bg-slate-100">
@@ -103,7 +114,7 @@ const Map = ({ image, alt, ref }: MapProps) => {
 
 				{/* map elements */}
 				{roomData.map(room => (
-					<MapElement top={room.top} left={room.left} id={room.id} status={room.status} type={room.type} />
+					<MapElement top={room.top} left={room.left} id={room.id} status={room.status} type={room.type} key={room.id}/>
 				))}
 			</PanViewer>
 

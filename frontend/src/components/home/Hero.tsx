@@ -42,21 +42,21 @@ const Hero: React.FC = () => {
 						</div>
 						<div className="carousel-item">
 							<div className="bg-[#f1cac5] aspect-square p-6 h-64 w-64 flex flex-col justify-evenly">
-								<FaRegHeart size={30} />
+								<FaRegHeart size={35} />
 								<p className="font-bold text-xl font-kalam">IT'S YOUR OWN. PLAN BIG SHOW</p>
 								<p>We love to orchestrating your events</p>
 							</div>
 						</div>
 						<div className="carousel-item">
 							<div className="bg-[#eed6b2] aspect-square p-6 h-64 w-64 flex flex-col justify-evenly">
-								<TbPlant2 size={30} />
+								<TbPlant2 size={35} />
 								<p className="font-bold text-xl font-kalam">TRY OUR EXHILARATING SPA & GYM</p>
 								<p>Experience world greatest relaxation on earth!</p>
 							</div>
 						</div>
 						<div className="carousel-item">
 							<div className="bg-[#fec93d] aspect-square p-6 h-64 w-64 flex flex-col justify-evenly">
-								<FaMapMarkerAlt size={30} />
+								<FaMapMarkerAlt size={35} />
 								<p className="font-bold text-xl font-kalam">INTUITIVE & INTERACTIVE MAP</p>
 								<p>Explore and book your perfect room</p>
 							</div>

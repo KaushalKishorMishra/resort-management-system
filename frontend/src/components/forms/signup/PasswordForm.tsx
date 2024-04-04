@@ -2,8 +2,11 @@ import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useScrollToElement } from "../../../hooks/useScrollToElement";
 import { useFormStore } from "../../../store/useFormStore";
+import { FaEye } from "react-icons/fa";
 
 const PasswordForm: React.FC = () => {
+	const [hidePassword, setHidePassword] = React.useState<boolean>(true);
+	const [hideConfirmPassword, setHideConfirmPassword] = React.useState<boolean>(true);
 	const {
 		register,
 		handleSubmit,
@@ -38,7 +41,7 @@ const PasswordForm: React.FC = () => {
 					<li className="step step-primary">Password</li>
 					<li className="step">Terms</li>
 				</ul>
-				<div className="flex flex-col">
+				<div className="flex flex-col relative">
 					<label htmlFor="password" className="font-semibold text-lg">
 						Password*
 					</label>
@@ -46,7 +49,7 @@ const PasswordForm: React.FC = () => {
 						{...register("password", {
 							required: "Password is required",
 							minLength: {
-								value: 8,
+								value: 9,
 								message: "Password must be at least 9 characters",
 							},
 							maxLength: {
@@ -59,7 +62,7 @@ const PasswordForm: React.FC = () => {
 							},
 						})}
 						className="input input-bordered border-1 rounded-full bg-opacity-60"
-						type="text"
+						type={hidePassword ? "password" : "text"}
 						placeholder="Password"
 						autoComplete="off"
 					/>
@@ -68,8 +71,15 @@ const PasswordForm: React.FC = () => {
 							<>{errors.password.message}</>
 						</span>
 					)}
+					<FaEye
+						className="absolute right-4 top-10 text-2xl hover:opacity-60"
+						onMouseEnter={() => setHidePassword(false)}
+						onMouseLeave={() => setHidePassword(true)}
+						onTouchStart={() => setHidePassword(false)}
+						onTouchEnd={() => setHidePassword(true)}
+					/>
 				</div>
-				<div className="flex flex-col">
+				<div className="flex flex-col relative">
 					<label htmlFor="confirmPassword" className="font-semibold text-lg">
 						Confirm Password*
 					</label>
@@ -79,7 +89,7 @@ const PasswordForm: React.FC = () => {
 							validate: value => getValues("password") === value || "Passwords do not match",
 						})}
 						className="input input-bordered border-1 rounded-full bg-opacity-60"
-						type="text"
+						type={hideConfirmPassword ? "password" : "text"}
 						placeholder="Confirm Password"
 						autoComplete="off"
 					/>
@@ -88,6 +98,13 @@ const PasswordForm: React.FC = () => {
 							<>{errors.confirmPassword.message}</>
 						</span>
 					)}
+					<FaEye
+						className="absolute right-4 top-10 text-2xl"
+						onMouseEnter={() => setHideConfirmPassword(false)}
+						onMouseLeave={() => setHideConfirmPassword(true)}
+						onTouchStart={() => setHideConfirmPassword(false)}
+						onTouchEnd={() => setHideConfirmPassword(true)}
+					/>
 				</div>
 				<div className="flex justify-between">
 					<div className="btn btn-primary btn-outline w-fit rounded-full px-6 text-lg" onClick={onPrev}>

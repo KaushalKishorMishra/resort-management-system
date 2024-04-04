@@ -5,7 +5,7 @@ import { AuthApi } from "../../../apis/authApi";
 import { AxiosResponse } from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
-const EmailForm: React.FC= () => {
+const EmailForm: React.FC = () => {
 	const navigate = useNavigate();
 	const {
 		register,
@@ -18,17 +18,17 @@ const EmailForm: React.FC= () => {
 	const onSubmit = async (data: FieldValues) => {
 		const forgotPasswordData = { email: data.email as string };
 		const response: AxiosResponse = await AuthApi.forgotPassword(forgotPasswordData);
-		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("Password reset token has been sent to you email.", {
 				position: "top-right",
 				theme: "dark",
+				autoClose: 2000,
 			});
 			localStorage.setItem("resetEmail", forgotPasswordData.email);
 			localStorage.setItem("resetJwt", response.data.jwt);
 			setTimeout(() => {
 				navigate("/reset-password");
-			}, 3000)
+			}, 2000);
 		} else {
 			toast.error(response.data.message, {
 				position: "top-right",

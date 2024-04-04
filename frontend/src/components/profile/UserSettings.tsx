@@ -4,9 +4,11 @@ import { useUserStore } from "../../store/useUserStore";
 import { toast } from "react-toastify";
 import { GoXCircleFill } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
 
 const UserSettings: React.FC = () => {
 	const navigate = useNavigate();
+	const [hidePassword, setHidePassword] = useState<boolean>(true);
 
 	const [oldPassword, setOldPassword] = useState<string>("");
 	const [newPassword, setNewPassword] = useState<string>("");
@@ -23,6 +25,7 @@ const UserSettings: React.FC = () => {
 		localStorage.removeItem("jwt");
 		localStorage.removeItem("userId");
 		localStorage.removeItem("email");
+		localStorage.removeItem("name");
 		useUserStore.setState({ isAuthenticated: false });
 		useUserStore.setState({ userId: null });
 		useUserStore.setState({ name: "" });
@@ -34,11 +37,11 @@ const UserSettings: React.FC = () => {
 	const handleDeleteAccount = async () => {
 		setDisableDeleteButton(true);
 		const response = await AuthApi.deleteAccount({ email: email, password: deletePassword });
-		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("Confirmation token has been sent to your Email", {
 				position: "top-right",
 				theme: "dark",
+				autoClose: 3000,
 			});
 			setConfirmState(true);
 			setEmailMessage({ state: "success", message: "Email sent" });
@@ -55,11 +58,11 @@ const UserSettings: React.FC = () => {
 	const handleConfirmDelete = async () => {
 		setDisableDeleteButton(true);
 		const response = await AuthApi.confirmDeleteAccount({ email: email, user_delete_token: deleteAccountToken });
-		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("Account Deleted. Redirecting...", {
 				position: "top-right",
 				theme: "dark",
+				autoClose: 3000,
 			});
 			setConfirmState(true);
 			setEmailMessage({ state: "success", message: "Deleted" });
@@ -85,17 +88,24 @@ const UserSettings: React.FC = () => {
 					</div>
 					<div className="collapse-content">
 						<form className="form-control w-full items-start p-4">
-							<label className="form-control w-full max-w-lg" htmlFor="oldPassword">
+							<label className="form-control w-full max-w-lg relative" htmlFor="oldPassword">
 								<div className="label">
 									<span className="label-text font-semibold">Old Password</span>
 								</div>
 								<input
-									type="password"
+									type={hidePassword ? "password" : "text"}
 									id="oldPassword"
 									placeholder="Your old password"
 									className="input input-bordered w-full max-w-lg"
 									onChange={e => setOldPassword(e.target.value)}
 									value={oldPassword}
+								/>
+								<FaEye
+									className="absolute right-4 top-12 text-2xl hover:opacity-60"
+									onMouseEnter={() => setHidePassword(false)}
+									onMouseLeave={() => setHidePassword(true)}
+									onTouchStart={() => setHidePassword(false)}
+									onTouchEnd={() => setHidePassword(true)}
 								/>
 							</label>
 							<label className="form-control w-full max-w-lg" htmlFor="newPassword">
@@ -137,7 +147,7 @@ const UserSettings: React.FC = () => {
 				<div className="collapse collapse-arrow bg-base-100 border-2">
 					<input type="radio" name="my-accordion-2" />
 					<div className="collapse-title">
-						<h2 className="font-semibold text-lg">Delete Account</h2>
+						<h2 className="font-semibold text-lg text-rose-600">Delete Account</h2>
 						<p className="text-warning p-2">
 							Warning: Deleting your account is irreversible. All your data will be permanently deleted.
 							Are you sure you want to proceed?
@@ -164,17 +174,24 @@ const UserSettings: React.FC = () => {
 									value={email}
 								/>
 							</label>
-							<label className="w-full max-w-lg" htmlFor="deletePassword">
+							<label className="w-full max-w-lg relative" htmlFor="deletePassword">
 								<div className="label">
 									<span className="label-text font-semibold text-white">Password</span>
 								</div>
 								<input
-									type="password"
+									type={hidePassword ? "password" : "text"}
 									id="deletePassword"
 									placeholder="Your password"
 									className="input input-bordered w-full max-w-lg"
 									onChange={e => setDeletePassword(e.target.value)}
 									value={deletePassword}
+								/>
+								<FaEye
+									className="absolute right-4 top-12 text-2xl hover:opacity-60"
+									onMouseEnter={() => setHidePassword(false)}
+									onMouseLeave={() => setHidePassword(true)}
+									onTouchStart={() => setHidePassword(false)}
+									onTouchEnd={() => setHidePassword(true)}
 								/>
 							</label>
 							{confirmState === false ? (

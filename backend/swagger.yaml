@@ -1,175 +1,291 @@
 tags:
-- name: users
-  description: users API
+  - name: users
+    description: users API
 
 paths:
-# [GET] users
+  # [GET] users
   /users:
     get:
       tags:
-      - users
+        - users
       summary: Find All Users
       responses:
         200:
-          description: 'OK'
+          description: "OK"
         500:
-          description: 'Server Error'
+          description: "Server Error"
 
-# [POST] users
+  # [POST] users/signup
+  /users/signup:
     post:
       tags:
-      - users
-      summary: Add User
+        - users
+      summary: Signup User
       parameters:
-      - name: body
-        in: body
-        description: user Data
-        required: true
-        schema:
-          $ref: '#/definitions/users'
+        - name: name
+          in: body
+          description: User Name
+          required: true
+          schema:
+            $ref: "#/definitions/users"
       responses:
         201:
-          description: 'Created'
+          description: "Created"
         400:
-          description: 'Bad Request'
+          description: "Bad Request"
         409:
-          description: 'Conflict'
+          description: "Conflict"
         500:
-          description: 'Server Error'
+          description: "Server Error"
 
-# [GET] users/id
+  # [POST] 
+  /users/login:
+    post:
+      tags:
+        - users
+      summary: Login User
+      parameters:
+        - name: email
+          in: body
+          description: User Email
+          required: true
+          type: string
+        - name: password
+          in: body
+          description: User Password
+          required: true
+          type: string
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        409:
+          description: "Conflict"
+        500:
+          description: "Server Error"
+
+  # [GET] users/id
   /users/{id}:
     get:
       tags:
-      - users
+        - users
       summary: Find User By Id
       parameters:
-      - name: id
-        in: path
-        description: User Id
-        required: true
-        type: integer
+        - name: id
+          in: path
+          description: User Id
+          required: true
+          type: integer
       responses:
         200:
-          description: 'OK'
+          description: "OK"
         409:
-          description: 'Conflict'
+          description: "Conflict"
         500:
-          description: 'Server Error'
+          description: "Server Error"
 
-# [PUT] users/id
+  # [PUT] users/update/id
+  /users/update/{id}:
     put:
       tags:
-      - users
+        - users
       summary: Update User By Id
       parameters:
-      - name: id
-        in: path
-        description: user Id
-        required: true
-        type: integer
-      - name: body
-        in: body
-        description: user Data
-        required: true
-        schema:
-          $ref: '#/definitions/users'
+        - name: id
+          in: path
+          description: user Id
+          required: true
+          type: integer
+        - name: body
+          in: body
+          description: user Data
+          required: true
+          schema:
+            $ref: "#/definitions/users"
       responses:
         200:
-          description: 'OK'
+          description: "OK"
         400:
-          description: 'Bad Request'
+          description: "Bad Request"
         409:
-          description: 'Conflict'
+          description: "Conflict"
         500:
-          description: 'Server Error'
+          description: "Server Error"
 
-# [DELETE] users/id
-    delete:
-      tags:
-      - users
-      summary: Delete User By Id
-      parameters:
-      - name: id
-        in: path
-        description: user Id
-        required: true
-        type: integer
-      responses:
-        200:
-          description: 'OK'
-        409:
-          description: 'Conflict'
-        500:
-          description: 'Server Error'
-
-# [POST] users/forgot-password
-    post:
-      tags:
-      - users
-      summary: Forgot Password
-      parameters:
-      - name: email
-        in: body
-        description: user email
-        required: true
-        type: string
-      responses:
-        201:
-          description: 'OK'
-        400:
-          description: 'Bad Request'
-        409:
-          description: 'Conflict'
-        500:
-          description: 'Server Error'
-
-# [PATCH] users/reset-password
+  # [PATCH] users/verify-user
+  /users/verify-user:
     patch:
       tags:
-      - users
-      summary: Reset Password
+        - users
+      summary: Verify User's Email
       parameters:
-      - name: email
-        in: body
-        description: user email
-        required: true
-        type: string
-      - password: password
-        in: body
-        description: new password
-        required: true
-        type: string
-      - name: password_reset_token
-        in: body
-        description: password reset token 
-        required: true
-        type: string
+        - name: email
+          in: body
+          description: user email
+          required: true
+          type: string
+        - name: value
+          in: body
+          description: user verify token is sent in email
+          required: true
+          type: string
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Server Error"
+
+  # [PATCH] users/resend-verification
+  /users/resend-verification:
+    patch:
+      tags:
+        - users
+      summary: Resend Verification Email
+      parameters:
+        - name: email
+          in: body
+          description: user email
+          required: true
+          type: string
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Server Error"
+
+  # [DELETE] users/delete
+  /users/delete:
+    delete:
+      tags:
+        - users
+      summary: Delete User By Email and Password
+      parameters:
+        - name: email
+          in: body
+          description: user email
+          required: true
+          type: string
+        - name: password
+          in: body
+          description: user password
+          required: true
+          type: string
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Server Error"
+
+  # [DELETE] users/delete/confirm-user-delete
+  /users/delete/confirm-user-delete:
+    delete:
+      tags:
+        - users
+      summary: Confirm delete user
+      parameters:
+        - name: email
+          in: body
+          description: user email
+          required: true
+          type: string
+        - name: user_delete_token
+          in: body
+          description: user delete token is sent in email
+          required: true
+          type: string
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Server Error"
+      security:
+        - BearerAuth: []
+
+  # [POST] users/forgot-password
+  /users/forgot-password:
+    post:
+      tags:
+        - users
+      summary: Forgot Password
+      parameters:
+        - name: email
+          in: body
+          description: user email
+          required: true
+          type: string
       responses:
         201:
-          description: 'OK'
+          description: "OK"
         400:
-          description: 'Bad Request'
+          description: "Bad Request"
         409:
-          description: 'Conflict'
+          description: "Conflict"
         500:
-          description: 'Server Error'
+          description: "Server Error"
+
+  # [PATCH] users/reset-password
+  /users/reset-password:
+    patch:
+      tags:
+        - users
+      summary: Reset Password
+      parameters:
+        - name: email
+          in: body
+          description: user email
+          required: true
+          type: string
+        - password: password
+          in: body
+          description: new password
+          required: true
+          type: string
+        - name: password_reset_token
+          in: body
+          description: password reset token
+          required: true
+          type: string
+      responses:
+        201:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        409:
+          description: "Conflict"
+        500:
+          description: "Server Error"
 
 # definitions
 definitions:
   users:
     type: object
     required:
-        - email
-        - password
+      - name
+      - email
+      - password
     properties:
+      name:
+        type: string
+        description: user Name
       email:
         type: string
         description: user Email
+      phone:
+        type: string
+        description: user Phone
       password:
         type: string
         description: user Password
 
 schemes:
- - https
- - http
+  - https
+  - http

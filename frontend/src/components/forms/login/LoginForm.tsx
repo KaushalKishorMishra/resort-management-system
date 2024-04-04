@@ -1,12 +1,14 @@
 import { AxiosResponse } from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthApi } from "../../../apis/authApi";
+import { FaEye } from "react-icons/fa";
 
 const LoginForm: React.FC = () => {
 	const navigate = useNavigate();
+	const [hidePassword, setHidePassword] = useState(true);
 	const {
 		register,
 		handleSubmit,
@@ -21,15 +23,15 @@ const LoginForm: React.FC = () => {
 			password: data.password,
 		};
 		const response: AxiosResponse = await AuthApi.login(signUpData);
-		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("Login Successful. Redirecting...", {
 				position: "top-right",
 				theme: "dark",
+				autoClose: 2000,
 			});
 			setTimeout(() => {
-				navigate("/");
-			}, 3000);
+				navigate("/profile");
+			}, 2000);
 		} else {
 			toast.error(response.data.message, {
 				position: "top-right",
@@ -68,7 +70,7 @@ const LoginForm: React.FC = () => {
 						</span>
 					)}
 				</div>
-				<div className="flex flex-col">
+				<div className="flex flex-col relative">
 					<label htmlFor="password" className="font-semibold text-lg">
 						Password*
 					</label>
@@ -89,7 +91,7 @@ const LoginForm: React.FC = () => {
 							},
 						})}
 						className="signup-input"
-						type="password"
+						type={hidePassword ? "password" : "text"}
 						placeholder="Password"
 					/>
 					{errors.password && (
@@ -97,6 +99,13 @@ const LoginForm: React.FC = () => {
 							<>{errors.password.message}</>
 						</span>
 					)}
+					<FaEye
+						className="absolute right-4 top-10 text-2xl hover:opacity-60"
+						onMouseEnter={() => setHidePassword(false)}
+						onMouseLeave={() => setHidePassword(true)}
+						onTouchStart={() => setHidePassword(false)}
+						onTouchEnd={() => setHidePassword(true)}
+					/>
 				</div>
 				<button
 					type="submit"

@@ -10,7 +10,7 @@ export class AuthApi {
 		phone: string;
 	}): Promise<AxiosResponse> {
 		return axios
-			.post(`${serverUrl}/users/create`, data, {
+			.post(`${serverUrl}/users/signup`, data, {
 				headers: {
 					"Content-Type": "application/json",
 				},
@@ -35,8 +35,9 @@ export class AuthApi {
 			.then(response => {
 				console.warn("success");
 				console.log(response.status, response.data.message);
-				localStorage.setItem("token", response.data.jwt);
+				localStorage.setItem("jwt", response.data.jwt);
 				localStorage.setItem("userId", response.data.data.id);
+				localStorage.setItem("name", response.data.data.name);
 				useUserStore.setState({
 					isAuthenticated: response.data.data.role,
 					name: response.data.data.name,
