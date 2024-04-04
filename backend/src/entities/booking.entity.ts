@@ -32,13 +32,17 @@ export class BookingEntity extends BaseEntity implements Booking {
   @Column()
   extras: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.id, { nullable: false })
+  @Column()
+  @ManyToOne(() => UserEntity, (user) => user.id)
+  @JoinColumn()
   userId: number;
-
-  @OneToOne(() => RoomsEntity, (room) => room.id, { nullable: false })
+  
+  @Column()
+  @OneToOne(() => RoomsEntity, (room) => room.id)
+  @JoinColumn()
   roomId: number;
 
-  // @OneToOne(() => PaymentEntity, (payment) => payment.id, { nullable: false })
+  // @OneToOne(() => PaymentEntity, (payment) => payment.id)
   // @JoinColumn()
   // paymentId: number;
 
