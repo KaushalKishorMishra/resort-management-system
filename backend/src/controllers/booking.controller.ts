@@ -103,18 +103,19 @@ export class BookingController {
       };
 
       const bookingExist = await this.booking.rangeSearch(start_date, end_date);
-      if (bookingExist !== null) {
+      if(bookingExist !== null){
         throw new HttpException(409, "room is already booked for this date");
       }
 
-      const findRoom = await this.room.findOneRoom({ id: roomId });
-      if (!findRoom) throw new HttpException(404, "room not found");
-
-      const updateRoom = await this.room.updateRoom(roomId, {
-        status: RoomStatus.BOOKED,
-      });
       const booking = await this.booking.createBooking(bookingData);
       if (!booking) throw new HttpException(409, "booking not created");
+
+      const findRoom = await this.room.findOneRoom({ id: booking.roomId });
+      if (!findRoom) throw new HttpException(404, "room not found");
+
+      const updateRoom = await this.room.updateRoom(booking.roomId, {
+        status: RoomStatus.BOOKED,
+      });
 
       const findUser: User = await this.user.findUser({ id: booking.userId });
       // send mail confirming booking
@@ -169,16 +170,16 @@ export class BookingController {
       const id = Number(req.params.id);
       const decoded: Payload = req.body.decoded;
 
-      if (!decoded) {
-        throw new HttpException(401, "token not found");
+      if(!decoded){
+        throw new HttpException(401, "token not found" );
       }
       console.log(1);
       const booking: Booking = await this.booking.findBooking({ id: id });
       if (!booking)
         throw new HttpException(404, `no booking with ${id}  exist`);
-      if (decoded.userId !== booking.userId) {
-        console.log(decoded.userId, booking.userId);
-        throw new HttpException(401, "unauthorized");
+      if(decoded.userId !== booking.userId){
+        console.log(decoded.userId, booking.userId)
+        throw new HttpException(401, "unauthorized" );
       }
       console.log(2);
 
@@ -192,15 +193,15 @@ export class BookingController {
           404,
           `room status could not be changed after canceling booking`,
         );
-      const updateBooking = await this.booking.updateBooking(id, {
-        status: BookingStatus.CANCELED,
-      });
-      console.log(3);
-      if (!updateBooking)
-        throw new HttpException(
-          404,
-          `booking with ${id} could not be canceled`,
-        );
+        const updateBooking = await this.booking.updateBooking(id, {
+          status: BookingStatus.CANCELED,
+        });
+        console.log(3);
+        if (!updateBooking)
+          throw new HttpException(
+            404,
+            `booking with ${id} could not be canceled`,
+          );  
       console.log(6);
       res.status(200).json({
         status: 200,
