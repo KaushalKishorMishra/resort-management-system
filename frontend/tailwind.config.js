@@ -3,7 +3,11 @@ import daisyui from "daisyui";
 import typography from "@tailwindcss/typography";
 
 export default {
-	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+	content: [
+		"./index.html",
+		"./src/**/*.{js,ts,jsx,tsx}",
+		"./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
+	],
 	theme: {
 		container: {
 			center: true,
@@ -14,7 +18,7 @@ export default {
 				"custom-accent": "#e87030",
 				"custom-bg-dark": "#2c2421",
 				"custom-bg-light": "#fcf7f1",
-				"scarlet": "#FF2400",
+				scarlet: "#FF2400",
 			},
 			fontFamily: {
 				maconda: "Maconda, cursive",
