@@ -43,5 +43,12 @@ export class BookingRoute implements Routes {
       `${this.path}/range`,
       this.bookingController.findBookingRange,
     );
+
+    this.router.patch(
+      `${this.path}/cancel-booking/:id(\\d+)`,
+      // AuthorizationMiddleware.adminAuthorization,
+      // AuthorizationMiddleware.authorization,
+      this.bookingController.cancelBooking,
+    );
   }
 }

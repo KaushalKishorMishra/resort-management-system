@@ -24,20 +24,7 @@ export class RoomService extends Repository<Rooms> {
     return room;
   }
 
-  public async searchAvailableRooms({ startDate, endDate }): Promise<Rooms[]> {
-    const rooms: Rooms[] = await RoomRepository.rangeSearch({
-      startDate,
-      endDate,
-    });
-
-    console.log(rooms);
-
-    if (!rooms) {
-      throw new HttpException(404, "rooms not available in the range");
-    }
-    return rooms;
-  }
-
+  
   public async createRoom(roomData: Rooms): Promise<Rooms> {
     const findRoom = await this.findOneRoom({ name: roomData.name });
     if (findRoom) throw new HttpException(401, "room already exists");

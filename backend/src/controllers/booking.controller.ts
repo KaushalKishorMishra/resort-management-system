@@ -1,3 +1,4 @@
+import { BookingStatus } from "@/enums/booking.enum";
 import { RoomStatus } from "@/enums/rooms.enum";
 import { HttpException } from "@/exceptions/httpException";
 import { Booking } from "@/interfaces/booking.interface";
@@ -72,8 +73,8 @@ export class BookingController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const userId = Number(req.params.userId);
-      const booking = await this.booking.findBooking({ userId: userId });
+      const userId: number = Number(req.params.userId);
+      const booking: Booking[] = await this.booking.findAllBookingUser(userId);
       if (!booking)
         throw new HttpException(404, `no booking with ${userId}  exist`);
       res.status(200).json({ data: booking, message: "findBookingByUser" });
@@ -147,6 +148,57 @@ export class BookingController {
       res
         .status(200)
         .json({ status: 200, data: booking, message: "deleteBooking" });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public cancelBooking = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const id = Number(req.params.id);
+      // const decoded = req.body.decoded;
+
+      console.log(1);
+      const booking = await this.booking.findBooking({ id: id });
+      if (!booking)
+        throw new HttpException(404, `no booking with ${id}  exist`);
+
+      // if (decoded.userId !== booking.userId) {
+      //   throw new HttpException(
+      //     401,
+      //     `you are not authorized to cancel this booking`,
+      //   );
+      // }
+      console.log(2);
+      const updateBooking = await this.booking.updateBooking(id, {
+        status: BookingStatus.CANCELED,
+      });
+      console.log(3);
+      if (!updateBooking)
+        throw new HttpException(
+          404,
+          `booking with ${id} could not be canceled`,
+        );
+      console.log(4);
+      const updateRoom = await this.room.updateRoom(booking.roomId, {
+        status: RoomStatus.AVAILABLE,
+      });
+      console.log(5);
+      if (!updateRoom)
+        throw new HttpException(
+          404,
+          `room status could not be changed after canceling booking`,
+        );
+      console.log(6);
+      res.status(200).json({
+        status: 200,
+        data: updateBooking,
+        message: "canceled booking",
+      });
     } catch (error) {
       next(error);
     }

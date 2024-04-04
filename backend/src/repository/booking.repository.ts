@@ -12,6 +12,9 @@ export class BookingRepository extends Repository<Booking> {
   static async findAll(): Promise<Booking[]> {
     return await getRepository(BookingEntity).find();
   }
+  static async findAllBookingUser(userId: number): Promise<Booking[]> {
+    return await getRepository(BookingEntity).find({where:{id:userId}});
+  }
   static async findOne(key: object): Promise<Booking> {
     return await getRepository(BookingEntity).findOne({ where: key });
   }
