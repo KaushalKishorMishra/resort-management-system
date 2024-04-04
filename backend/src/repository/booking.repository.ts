@@ -1,7 +1,6 @@
 import { BookingEntity } from "@/entities/booking.entity";
 import { Booking } from "@/interfaces/booking.interface";
 import {
-  Between,
   LessThanOrEqual,
   MoreThanOrEqual,
   Repository,
@@ -49,12 +48,12 @@ export class BookingRepository extends Repository<Booking> {
     start_date: Date,
     end_date: Date,
   ): Promise<Booking[]> {
-    const findRangeData: Booking[] = await getRepository(BookingEntity).find({
+    const bookings: Booking[] = await getRepository(BookingEntity).find({
       where: {
         start_date: LessThanOrEqual(end_date),
         end_date: MoreThanOrEqual(start_date),
       },
     });
-    return findRangeData;
+    return bookings;
   }
 }

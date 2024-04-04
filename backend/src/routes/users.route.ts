@@ -22,8 +22,8 @@ export class UserRoute implements Routes {
   private initializeRoutes() {
     this.router.get(
       `${this.path}`,
-      // AuthorizationMiddleware.authorization,
-      // AuthorizationMiddleware.adminAuthorization,
+      AuthorizationMiddleware.authorization,
+      AuthorizationMiddleware.adminAuthorization,
       this.user.getUsers,
     );
     this.router.get(`${this.path}/:id(\\d+)`, this.user.getUserById);

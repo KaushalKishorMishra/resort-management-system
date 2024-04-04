@@ -20,12 +20,6 @@ export class UserRepository extends Repository<User> {
     return updatedUser;
   }
 
-  static async softDelete(id: number): Promise<User> {
-    const deletedUser: User = await getRepository(UserEntity).findOne(id);
-    await getRepository(UserEntity).softDelete(deletedUser.id);
-    return deletedUser;
-  }
-
   static async delete(key: object): Promise<User> {
     const deletedUser: User = await getRepository(UserEntity).findOne({
       where: key,

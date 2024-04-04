@@ -29,7 +29,7 @@ export class BookingRoute implements Routes {
     );
 
     this.router.post(
-      `${this.path}/create/:userId(\\d+)`,
+      `${this.path}/create`,
       this.bookingController.createBooking,
     );
 
@@ -40,8 +40,8 @@ export class BookingRoute implements Routes {
     );
 
     this.router.get(
-      `${this.path}/range`,
-      this.bookingController.findBookingRange,
-    );
+      `${this.path}/range-search`,
+      this.bookingController.searchRangeBooking,
+    )
   }
 }

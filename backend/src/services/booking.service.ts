@@ -44,11 +44,10 @@ export class BookingService extends Repository<BookingEntity> {
     start_date: Date,
     end_date: Date,
   ): Promise<Booking[]> {
-    const booking: Booking[] = await BookingRepository.rangeSearch(
+    const bookings: Booking[] = await BookingRepository.rangeSearch(
       start_date,
       end_date,
     );
-    if (!booking) throw new HttpException(409, "no booking found");
-    return booking;
+    return bookings;
   }
 }

@@ -13,8 +13,6 @@ import {
 } from "typeorm";
 import { UserEntity } from "./users.entity";
 import { RoomsEntity } from "./rooms.entity";
-import { PaymentEntity } from "./payment.entity";
-import { BookingStatus } from "@/enums/booking.enum";
 
 @Entity()
 export class BookingEntity extends BaseEntity implements Booking {
@@ -22,12 +20,14 @@ export class BookingEntity extends BaseEntity implements Booking {
   id?: number;
 
   @Column()
+  @IsDate()
   @IsNotEmpty()
-  start_date: string;
+  start_date: Date;
 
   @Column()
+  @IsDate()
   @IsNotEmpty()
-  end_date: string;
+  end_date: Date;
 
   @Column()
   extras: string;
@@ -38,17 +38,12 @@ export class BookingEntity extends BaseEntity implements Booking {
   @OneToOne(() => RoomsEntity, (room) => room.id, { nullable: false })
   roomId: number;
 
-  // @OneToOne(() => PaymentEntity, (payment) => payment.id, { nullable: false })
-  // @JoinColumn()
-  // paymentId: number;
+  @Column()
+  @IsNotEmpty()
+  paymentId: number;
 
-  @Column({
-    type: "enum",
-    enum: BookingStatus,
-    default: BookingStatus.BOOKED,
-    nullable: true,
-  })
-  status?: string;
+  @Column()
+  status: string;
 
   @Column()
   @CreateDateColumn()
