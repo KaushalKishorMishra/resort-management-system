@@ -54,16 +54,16 @@ export class BookingController {
   ): Promise<void> => {
     try {
       const { start_date, end_date } = req.body;
-      const booking: Booking[] = await this.booking.rangeSearch(
+      const booking: Booking[] = await this.booking.rangeSearchService(
         start_date,
         end_date,
       );
-      if (!booking)
+      if (booking.length === 0)
         throw new HttpException(
           404,
-          `no booking between ${start_date} and ${end_date}  exist`,
+          `no booking between ${start_date} and ${end_date} exist`,
         );
-      res.status(200).json({ data: booking, message: "findBookingRange" });
+      res.status(200).json({ data: booking, message: "find booking range" });
     } catch (error) {
       next(error);
     }
@@ -102,20 +102,23 @@ export class BookingController {
         roomId,
       };
 
-      const bookingExist = await this.booking.rangeSearch(start_date, end_date);
-      if(bookingExist !== null){
+      const bookingExist: Booking[] = await this.booking.rangeSearchService(
+        start_date,
+        end_date,
+      );
+      if (bookingExist.length > 0) {
         throw new HttpException(409, "room is already booked for this date");
       }
 
-      const booking = await this.booking.createBooking(bookingData);
-      if (!booking) throw new HttpException(409, "booking not created");
-
-      const findRoom = await this.room.findOneRoom({ id: booking.roomId });
+      const findRoom = await this.room.findOneRoom({ id: roomId });
       if (!findRoom) throw new HttpException(404, "room not found");
 
-      const updateRoom = await this.room.updateRoom(booking.roomId, {
+      const updateRoom = await this.room.updateRoom(roomId, {
         status: RoomStatus.BOOKED,
       });
+
+      const booking = await this.booking.createBooking(bookingData);
+      if (!booking) throw new HttpException(409, "booking not created");
 
       const findUser: User = await this.user.findUser({ id: booking.userId });
       // send mail confirming booking
@@ -123,7 +126,7 @@ export class BookingController {
         from: "restro-management@api.com",
         to: findUser.email,
         subject: "Email Verification",
-        text: `You successfully booked ${findRoom.name} for ${booking.start_date} to ${booking.end_date}`,
+        text: `You successfully booked ${findRoom.name} for ${booking.start_date} to ${booking.end_date} under the name ${findUser.name}.`,
         html: `Click <a href="http://localhost:3000/booking/${booking.id}">here</a> to view your booking`,
       });
 
@@ -170,16 +173,16 @@ export class BookingController {
       const id = Number(req.params.id);
       const decoded: Payload = req.body.decoded;
 
-      if(!decoded){
-        throw new HttpException(401, "token not found" );
+      if (!decoded) {
+        throw new HttpException(401, "token not found");
       }
       console.log(1);
       const booking: Booking = await this.booking.findBooking({ id: id });
       if (!booking)
         throw new HttpException(404, `no booking with ${id}  exist`);
-      if(decoded.userId !== booking.userId){
-        console.log(decoded.userId, booking.userId)
-        throw new HttpException(401, "unauthorized" );
+      if (decoded.userId !== booking.userId) {
+        console.log(decoded.userId, booking.userId);
+        throw new HttpException(401, "unauthorized");
       }
       console.log(2);
 
@@ -193,15 +196,15 @@ export class BookingController {
           404,
           `room status could not be changed after canceling booking`,
         );
-        const updateBooking = await this.booking.updateBooking(id, {
-          status: BookingStatus.CANCELED,
-        });
-        console.log(3);
-        if (!updateBooking)
-          throw new HttpException(
-            404,
-            `booking with ${id} could not be canceled`,
-          );  
+      const updateBooking = await this.booking.updateBooking(id, {
+        status: BookingStatus.CANCELED,
+      });
+      console.log(3);
+      if (!updateBooking)
+        throw new HttpException(
+          404,
+          `booking with ${id} could not be canceled`,
+        );
       console.log(6);
       res.status(200).json({
         status: 200,
