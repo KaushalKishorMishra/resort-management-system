@@ -27,10 +27,11 @@ const VerifyEmailForm: React.FC = () => {
 			toast.success("Email Verified. Redirecting...", {
 				position: "top-right",
 				theme: "dark",
+				autoClose: 2000,
 			});
 			setTimeout(() => {
 				navigate("/");
-			}, 3000);
+			}, 2000);
 		} else {
 			toast.error(response.data.message, {
 				position: "top-right",
@@ -39,13 +40,14 @@ const VerifyEmailForm: React.FC = () => {
 		}
 	};
 
-	const resendVerificationEmail = async ()=>{
-		const response: AxiosResponse = await AuthApi.resendVerificationEmail({email: email!});
+	const resendVerificationEmail = async () => {
+		const response: AxiosResponse = await AuthApi.resendVerificationEmail({ email: email! });
 		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("Resent Verification Email", {
 				position: "top-right",
 				theme: "dark",
+				autoClose: 3000,
 			});
 		} else {
 			toast.error(response.data.message, {
@@ -53,7 +55,7 @@ const VerifyEmailForm: React.FC = () => {
 				theme: "dark",
 			});
 		}
-	}
+	};
 
 	return (
 		<>
@@ -100,7 +102,7 @@ const VerifyEmailForm: React.FC = () => {
 							pattern: {
 								value: /^[0-9]*$/,
 								message: "Verification token must be a number",
-							}
+							},
 						})}
 						className="signup-input"
 						type="text"
@@ -119,7 +121,10 @@ const VerifyEmailForm: React.FC = () => {
 				>
 					{isSubmitting ? "verifying..." : "Verify"}
 				</button>
-				<div className={`text-gray-100 text-center text-lg w-full max-w-lg mt-2 btn btn-ghost`} onClick={resendVerificationEmail}>
+				<div
+					className={`text-gray-100 text-center text-lg w-full max-w-lg mt-2 btn btn-ghost`}
+					onClick={resendVerificationEmail}
+				>
 					Didn't receive email? <span className="text-primary font-bold">Resend Email</span>
 				</div>
 			</form>

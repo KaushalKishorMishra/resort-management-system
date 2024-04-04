@@ -38,15 +38,16 @@ const TermsForm: React.FC = () => {
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("SignUp Successful. Redirecting...", {
 				position: "top-right",
-				theme: "dark"
+				theme: "dark",
+				autoClose: 2000,
 			});
 			setTimeout(() => {
 				navigate(`/verify-email/${signUpData.email}`);
-			},3000)
+			}, 2000);
 		} else {
 			toast.error(response.data.message, {
 				position: "top-right",
-				theme: "dark"
+				theme: "dark",
 			});
 		}
 	};

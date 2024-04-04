@@ -23,12 +23,13 @@ const EmailForm: React.FC= () => {
 			toast.success("Password reset token has been sent to you email.", {
 				position: "top-right",
 				theme: "dark",
+				autoClose: 2000,
 			});
 			localStorage.setItem("resetEmail", forgotPasswordData.email);
 			localStorage.setItem("resetJwt", response.data.jwt);
 			setTimeout(() => {
 				navigate("/reset-password");
-			}, 3000)
+			}, 2000)
 		} else {
 			toast.error(response.data.message, {
 				position: "top-right",

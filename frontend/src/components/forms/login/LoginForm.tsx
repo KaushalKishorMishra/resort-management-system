@@ -28,10 +28,11 @@ const LoginForm: React.FC = () => {
 			toast.success("Login Successful. Redirecting...", {
 				position: "top-right",
 				theme: "dark",
+				autoClose: 2000,
 			});
 			setTimeout(() => {
-				navigate("/");
-			}, 3000);
+				navigate("/profile");
+			}, 2000);
 		} else {
 			toast.error(response.data.message, {
 				position: "top-right",

@@ -25,6 +25,7 @@ const UserSettings: React.FC = () => {
 		localStorage.removeItem("jwt");
 		localStorage.removeItem("userId");
 		localStorage.removeItem("email");
+		localStorage.removeItem("name");
 		useUserStore.setState({ isAuthenticated: false });
 		useUserStore.setState({ userId: null });
 		useUserStore.setState({ name: "" });
@@ -41,6 +42,7 @@ const UserSettings: React.FC = () => {
 			toast.success("Confirmation token has been sent to your Email", {
 				position: "top-right",
 				theme: "dark",
+				autoClose: 3000,
 			});
 			setConfirmState(true);
 			setEmailMessage({ state: "success", message: "Email sent" });
@@ -62,6 +64,7 @@ const UserSettings: React.FC = () => {
 			toast.success("Account Deleted. Redirecting...", {
 				position: "top-right",
 				theme: "dark",
+				autoClose: 3000,
 			});
 			setConfirmState(true);
 			setEmailMessage({ state: "success", message: "Deleted" });
@@ -146,7 +149,7 @@ const UserSettings: React.FC = () => {
 				<div className="collapse collapse-arrow bg-base-100 border-2">
 					<input type="radio" name="my-accordion-2" />
 					<div className="collapse-title">
-						<h2 className="font-semibold text-lg">Delete Account</h2>
+						<h2 className="font-semibold text-lg text-rose-600">Delete Account</h2>
 						<p className="text-warning p-2">
 							Warning: Deleting your account is irreversible. All your data will be permanently deleted.
 							Are you sure you want to proceed?

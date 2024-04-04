@@ -26,10 +26,11 @@ const ResetPasswordForm: React.FC = () => {
 			toast.success("Your account password has been reset. Redirecting to Login page...", {
 				position: "top-right",
 				theme: "dark",
+				autoClose: 2000,
 			});
 			setTimeout(() => {
 				navigate("/login");
-			}, 5000);
+			}, 2000);
 		} else {
 			toast.error(`${response.data.message} Please try again`, {
 				position: "top-right",

@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { LuUserCircle2 } from "react-icons/lu";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useUiAvatar } from "../hooks/useUiAvatar";
+import { useUserStore } from "../store/useUserStore";
 
 type NavbarProps = {
 	positionFixed: boolean;
@@ -10,6 +12,22 @@ type NavbarProps = {
 const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
 	const [currentPage, setCurrentPage] = React.useState<string>("");
 	const location = useLocation();
+	const userName = localStorage.getItem("name");
+
+	const navigate = useNavigate();
+
+	const handleSignOut = () => {
+		localStorage.removeItem("jwt");
+		localStorage.removeItem("userId");
+		localStorage.removeItem("email");
+		localStorage.removeItem("name");
+		useUserStore.setState({ isAuthenticated: false });
+		useUserStore.setState({ userId: null });
+		useUserStore.setState({ name: "" });
+		navigate("/");
+	};
+
+	const uiAvatarLink = useUiAvatar(userName!, 40);
 
 	useEffect(() => {
 		const highlightCurrentPage = () => {
@@ -132,9 +150,28 @@ const Navbar: React.FC<NavbarProps> = ({ positionFixed }) => {
 							</ul>
 						</div>
 						<div className="navbar-end">
-							<Link to="/profile">
-								<LuUserCircle2 className="text-4xl me-5 hover:scale-105" />
-							</Link>
+							{localStorage.getItem("jwt") ? (
+								<div className="dropdown dropdown-end">
+									<div tabIndex={0} role="button" className="m-1">
+										<img src={uiAvatarLink} alt="avatar" className="image-full me-5" />
+									</div>
+									<ul
+										tabIndex={0}
+										className="dropdown-content z-10 menu font-sans text-base p-2 shadow bg-base-300 rounded-box w-52 divide-y"
+									>
+										<li>
+											<Link to={"/profile"}>Profile</Link>
+										</li>
+										<li>
+											<div onClick={handleSignOut}>Sign Out</div>
+										</li>
+									</ul>
+								</div>
+							) : (
+								<Link to="/login">
+									<LuUserCircle2 className="text-4xl me-5 hover:scale-105" />
+								</Link>
+							)}
 							<Link
 								to="/rooms"
 								className="btn text-lg rounded-none text-white border-white bg-transparent hover:bg-white hover:text-custom-bg-dark"
