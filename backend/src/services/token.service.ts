@@ -13,10 +13,10 @@ export class TokenService extends Repository<TokenEntity> {
     return tokens;
   }
 
-  public async getUserToken({tokenId, purpose}): Promise<Token> {
+  public async getUserToken({ tokenId, tokenPurpose }): Promise<Token> {
     const token: Token = await TokenRepository.findOneToken({
       token: tokenId,
-      purpose: purpose,
+      purpose: tokenPurpose,
     });
     return token;
   }

@@ -8,6 +8,7 @@ import {
 } from "@dtos/users.dto";
 import { Routes } from "@interfaces/routes.interface";
 import { ValidationMiddleware } from "@middlewares/validation.middleware";
+import { AuthorizationMiddleware } from "@/middlewares/authorization.middleware";
 
 export class UserRoute implements Routes {
   public path = "/users";
@@ -19,18 +20,31 @@ export class UserRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, this.user.getUsers);
+    this.router.get(
+      `${this.path}`,
+      // AuthorizationMiddleware.authorization,
+      // AuthorizationMiddleware.adminAuthorization,
+      this.user.getUsers,
+    );
     this.router.get(`${this.path}/:id(\\d+)`, this.user.getUserById);
+
+    this.router.get(
+      `${this.path}/verify-jwt`,
+      AuthorizationMiddleware.authorization,
+      this.user.verifyJwt,
+    );
+
     this.router.post(
       // create user
-      `${this.path}/create`,
+      `${this.path}/signup`,
       ValidationMiddleware(CreateUserDto),
       this.user.createUser,
     );
-    this.router.put(
+    this.router.patch(
       // update user
       `${this.path}/:id(\\d+)`,
       ValidationMiddleware(CreateUserDto, true),
+      // AuthorizationMiddleware.authorization,
       this.user.updateUser,
     );
     this.router.delete(
@@ -42,9 +56,10 @@ export class UserRoute implements Routes {
     this.router.delete(
       // delete user by id
       `${this.path}/delete/confirm-delete-user`,
+      AuthorizationMiddleware.authorization,
       this.user.confirmDeleteUser,
     );
-    
+
     this.router.post(
       // login user
       `${this.path}/login`,
@@ -82,6 +97,7 @@ export class UserRoute implements Routes {
     // reset password
     this.router.patch(
       `${this.path}/reset-password`,
+      AuthorizationMiddleware.authorization,
       ValidationMiddleware(LoginUserDto),
       this.user.resetPassword,
     );

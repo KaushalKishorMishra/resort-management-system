@@ -21,16 +21,14 @@ import { NodeMailer } from "@/utils/nodeMailer";
 @EntityRepository()
 export class UserService extends Repository<UserEntity> {
   public async findAllUser(email): Promise<User[]> {
-    const findOne: User = await UserRepository.findOne({ email });
-    if (findOne.role === "admin") {
-      const users: User[] = await UserRepository.findAll();
-      return users;
-    }
+    const users: User[] = await UserRepository.findAll();
+    return users;
   }
 
   public async findUser(key: object): Promise<User> {
+    console.log("findUser");
     const findUser: User = await UserRepository.findOne(key);
-    // console.log(findUser);
+    console.log(findUser);
     if (!findUser) throw new HttpException(409, "User doesn't exist");
     return findUser;
   }
@@ -205,6 +203,7 @@ export class UserService extends Repository<UserEntity> {
       findUser.id,
       "reset-password",
     );
+    console.log(deleteToken);
     if (!deleteToken) {
       throw new HttpException(401, "Token deletion error");
     }
@@ -220,7 +219,7 @@ export class UserService extends Repository<UserEntity> {
       throw new HttpException(401, "Email not verified");
     }
 
-    let user: GetProfile = {
+    const user: GetProfile = {
       id: findUser.id,
       email: findUser.email,
       phone: findUser.phone,
@@ -235,17 +234,10 @@ export class UserService extends Repository<UserEntity> {
   }
 
   public async updateUser(userId: number, userData: User): Promise<User> {
-    const findUser: User = await UserRepository.findOne({
-      where: { id: userId },
-    });
+    const findUser: User = await UserRepository.findOne({ id: userId });
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
-    const hashedPassword = await hash(userData.password, 10);
-    await UserEntity.update(userId, { ...userData, password: hashedPassword });
-
-    const updateUser: User = await UserEntity.findOne({
-      where: { id: userId },
-    });
+    const updateUser: User = await UserRepository.update(userId, userData);
     return updateUser;
   }
 

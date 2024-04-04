@@ -1,10 +1,19 @@
 import { BookingEntity } from "@/entities/booking.entity";
 import { Booking } from "@/interfaces/booking.interface";
-import { Repository, getRepository } from "typeorm";
+import {
+  Between,
+  LessThanOrEqual,
+  MoreThanOrEqual,
+  Repository,
+  getRepository,
+} from "typeorm";
 
 export class BookingRepository extends Repository<Booking> {
   static async findAll(): Promise<Booking[]> {
     return await getRepository(BookingEntity).find();
+  }
+  static async findAllBookingUser(userId: number): Promise<Booking[]> {
+    return await getRepository(BookingEntity).find({where:{id:userId}});
   }
   static async findOne(key: object): Promise<Booking> {
     return await getRepository(BookingEntity).findOne({ where: key });
@@ -37,5 +46,18 @@ export class BookingRepository extends Repository<Booking> {
     await getRepository(BookingEntity).restore(id);
     const restoredBooking: Booking = await this.findOne({ id });
     return restoredBooking;
+  }
+
+  static async rangeSearch(
+    start_date: Date,
+    end_date: Date,
+  ): Promise<Booking[]> {
+    const findRangeData: Booking[] = await getRepository(BookingEntity).find({
+      where: {
+        start_date: LessThanOrEqual(end_date),
+        end_date: MoreThanOrEqual(start_date),
+      },
+    });
+    return findRangeData;
   }
 }

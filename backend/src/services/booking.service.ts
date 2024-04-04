@@ -14,6 +14,12 @@ export class BookingService extends Repository<BookingEntity> {
       throw new HttpException(409, "no booking available at the moment");
     return bookings;
   }
+  public async findAllBookingUser(userId:number): Promise<Booking[]> {
+    const bookings: Booking[] = await BookingRepository.findAllBookingUser(userId);
+    if (!bookings)
+      throw new HttpException(409, "no booking available at the moment");
+    return bookings;
+  }
 
   public async findBooking(key: object): Promise<Booking> {
     const booking: Booking = await BookingRepository.findOne(key);
@@ -22,9 +28,6 @@ export class BookingService extends Repository<BookingEntity> {
   }
 
   public async createBooking(bookingData: object): Promise<Booking> {
-    const findBooking: Booking = await BookingRepository.findOne(bookingData);
-    if (findBooking)
-      throw new HttpException(409, "already booked for that day");
     const booking: Booking = await BookingRepository.create(bookingData);
     return booking;
   }
@@ -33,10 +36,25 @@ export class BookingService extends Repository<BookingEntity> {
     id: number,
     bookingData: object,
   ): Promise<Booking> {
-    const findBooking: Booking = await BookingRepository.findOne({ id });
-    if (!findBooking) throw new HttpException(409, "booking not found");
     const booking: Booking = await BookingRepository.update(id, bookingData);
+    return booking;
+  }
+
+  public async deleteBooking(key: object): Promise<Booking> {
+    const booking: Booking = await BookingRepository.delete(key);
     if (!booking) throw new HttpException(409, "booking not found");
+    return booking;
+  }
+
+  public async rangeSearch(
+    start_date: Date,
+    end_date: Date,
+  ): Promise<Booking[]> {
+    const booking: Booking[] = await BookingRepository.rangeSearch(
+      start_date,
+      end_date,
+    );
+    if (!booking) throw new HttpException(409, "no booking found");
     return booking;
   }
 }

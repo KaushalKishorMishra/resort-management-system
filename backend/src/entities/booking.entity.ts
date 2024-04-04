@@ -5,9 +5,16 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { UserEntity } from "./users.entity";
+import { RoomsEntity } from "./rooms.entity";
+import { PaymentEntity } from "./payment.entity";
+import { BookingStatus } from "@/enums/booking.enum";
 
 @Entity()
 export class BookingEntity extends BaseEntity implements Booking {
@@ -15,32 +22,33 @@ export class BookingEntity extends BaseEntity implements Booking {
   id?: number;
 
   @Column()
-  @IsDate()
   @IsNotEmpty()
-  start_date: Date;
+  start_date: string;
 
   @Column()
-  @IsDate()
   @IsNotEmpty()
-  end_date: Date;
+  end_date: string;
 
   @Column()
   extras: string;
 
-  @Column()
-  @IsNotEmpty()
+  @ManyToOne(() => UserEntity, (user) => user.id, { nullable: false })
   userId: number;
 
-  @Column()
-  @IsNotEmpty()
+  @OneToOne(() => RoomsEntity, (room) => room.id, { nullable: false })
   roomId: number;
 
-  @Column()
-  @IsNotEmpty()
-  paymentId: number;
+  // @OneToOne(() => PaymentEntity, (payment) => payment.id, { nullable: false })
+  // @JoinColumn()
+  // paymentId: number;
 
-  @Column()
-  status: string;
+  @Column({
+    type: "enum",
+    enum: BookingStatus,
+    default: BookingStatus.BOOKED,
+    nullable: true,
+  })
+  status?: string;
 
   @Column()
   @CreateDateColumn()

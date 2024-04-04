@@ -52,15 +52,7 @@ export class RoomController {
   ): Promise<void> => {
     try {
       const roomData: Rooms = req.body;
-      console.log(roomData);
-      const findRoomData: Rooms = await this.room.findOneRoom({
-        name: roomData.name,
-      });
-
-      console.log(findRoomData);
-      if (null !== findRoomData) {
-        throw new HttpException(401, "room already exists");
-      }
+  
       const createRoomData: Rooms = await this.room.createRoom(roomData);
       res.status(200).json({
         status: 200,
@@ -78,7 +70,7 @@ export class RoomController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const roomId: number = Number(req.params.id);
+      const roomId = Number(req.params.id);
 
       const roomData: Rooms = req.body;
 
@@ -111,7 +103,7 @@ export class RoomController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const roomId: number = Number(req.params.id);
+      const roomId = Number(req.params.id);
 
       const findRoom: Rooms = await this.room.findOneRoom({ id: roomId });
 
@@ -137,7 +129,7 @@ export class RoomController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const roomId: number = Number(req.params.id);
+      const roomId = Number(req.params.id);
 
       const findRoom: Rooms = await this.room.findOneRoom({ id: roomId });
 
@@ -163,9 +155,12 @@ export class RoomController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const roomId: number = Number(req.params.id);
+      const roomId = Number(req.params.id);
       console.log("1");
-      const findRoom: Rooms = await this.room.findOneRoom({ id: roomId, withDeleted: true, });
+      const findRoom: Rooms = await this.room.findOneRoom({
+        id: roomId,
+        withDeleted: true,
+      });
       console.log("2");
 
       if (roomId !== findRoom.id)

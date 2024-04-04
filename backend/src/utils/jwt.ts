@@ -1,10 +1,7 @@
 import * as jwt from "jsonwebtoken";
 
 export class Jwt {
-  static signJwt(
-    payload: Record<string, any>,
-    expiresIn: string = "10d",
-  ): string {
+  static signJwt(payload: Record<string, any>, expiresIn = "10d"): string {
     const token: string = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
       expiresIn: expiresIn,
       issuer: "event-management-system",
@@ -18,7 +15,7 @@ export class Jwt {
         if (err) {
           reject(err);
         } else if (!decoded) {
-          let error = new Error("Invalid JsonWebToken");
+          const error = new Error("Invalid JsonWebToken");
           (error as any).errorStatus = 401;
           reject(error);
         } else {

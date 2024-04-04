@@ -27,9 +27,14 @@ export class TokenRepository extends Repository<Token> {
     return updatedToken;
   }
 
-  static async deleteToken(id: number, purpose: string): Promise<Token> {
-    const deletedToken: Token = await getRepository(TokenEntity).findOne(id);
-    await getRepository(TokenEntity).delete({ id, purpose });
-    return deletedToken;
+  static async deleteToken(
+    id: number,
+    purpose: string,
+  ): Promise<Token | boolean> {
+    // const deletedToken: Token = await getRepository(TokenEntity).findOne(id);
+    if (await getRepository(TokenEntity).delete({ id, purpose })) {
+      return true;
+    }
+    return false;
   }
 }

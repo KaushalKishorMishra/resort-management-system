@@ -14,36 +14,44 @@ import {
 @Entity()
 export class RoomsEntity extends BaseEntity implements Rooms {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @Column()
   @IsNotEmpty()
   name: string;
 
   @Column()
-  description: string;
+  description?: string;
 
   @Column()
   @IsNotEmpty()
-  price: number;
+  price?: number;
 
   @Column()
   @IsNotEmpty()
-  capacity: number;
+  capacity?: number;
 
   @Column({
     type: "enum",
     enum: RoomStatus,
   })
   @IsNotEmpty()
-  status: string;
+  status?: string;
 
   @Column({
     type: "enum",
     enum: RoomType,
   })
   @IsNotEmpty()
-  type: string;
+  type?: string;
+
+  @Column()
+  @IsNotEmpty()
+  top: string;
+
+  @Column()
+  @IsNotEmpty()
+  left: string;
 
   @Column()
   @CreateDateColumn()

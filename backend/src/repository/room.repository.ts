@@ -40,10 +40,12 @@ export class RoomRepository extends Repository<RoomsEntity> {
   }
 
   static async recover(id: number): Promise<RoomsEntity> {
-    const recoveredRoom: RoomsEntity =
-      await getRepository(RoomsEntity).findOne(id, {
+    const recoveredRoom: RoomsEntity = await getRepository(RoomsEntity).findOne(
+      id,
+      {
         withDeleted: true,
-      });
+      },
+    );
     await getRepository(RoomsEntity)
       .createQueryBuilder()
       .restore()
@@ -51,4 +53,6 @@ export class RoomRepository extends Repository<RoomsEntity> {
       .execute();
     return recoveredRoom;
   }
+
+
 }
