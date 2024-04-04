@@ -40,10 +40,11 @@ export class UserRoute implements Routes {
       ValidationMiddleware(CreateUserDto),
       this.user.createUser,
     );
-    this.router.put(
+    this.router.patch(
       // update user
       `${this.path}/:id(\\d+)`,
       ValidationMiddleware(CreateUserDto, true),
+      // AuthorizationMiddleware.authorization,
       this.user.updateUser,
     );
     this.router.delete(

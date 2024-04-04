@@ -26,7 +26,7 @@ export class UserService extends Repository<UserEntity> {
   }
 
   public async findUser(key: object): Promise<User> {
-    console.log("findUser")
+    console.log("findUser");
     const findUser: User = await UserRepository.findOne(key);
     console.log(findUser);
     if (!findUser) throw new HttpException(409, "User doesn't exist");
@@ -234,17 +234,10 @@ export class UserService extends Repository<UserEntity> {
   }
 
   public async updateUser(userId: number, userData: User): Promise<User> {
-    const findUser: User = await UserRepository.findOne({
-      where: { id: userId },
-    });
+    const findUser: User = await UserRepository.findOne({ id: userId });
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
-    const hashedPassword = await hash(userData.password, 10);
-    await UserEntity.update(userId, { ...userData, password: hashedPassword });
-
-    const updateUser: User = await UserEntity.findOne({
-      where: { id: userId },
-    });
+    const updateUser: User = await UserRepository.update(userId, userData);
     return updateUser;
   }
 
