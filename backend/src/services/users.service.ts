@@ -21,11 +21,8 @@ import { NodeMailer } from "@/utils/nodeMailer";
 @EntityRepository()
 export class UserService extends Repository<UserEntity> {
   public async findAllUser(email): Promise<User[]> {
-    const findOne: User = await UserRepository.findOne({ email });
-    if (findOne.role === "admin") {
-      const users: User[] = await UserRepository.findAll();
-      return users;
-    }
+    const users: User[] = await UserRepository.findAll();
+    return users;
   }
 
   public async findUser(key: object): Promise<User> {

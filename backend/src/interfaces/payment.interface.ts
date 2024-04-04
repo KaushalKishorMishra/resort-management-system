@@ -1,4 +1,7 @@
 export interface Payment{
+    id?: number;
     amount: number;
-    currency: string;
+    status: string;
+    createdAt?: Date;
+    updatedAt?: Date;
 }

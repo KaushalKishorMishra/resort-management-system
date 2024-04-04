@@ -412,25 +412,16 @@ export class UserController {
   ): Promise<void> {
     try {
       const { email, user_delete_token } = req.body;
-      const decoded = req.body.decoded;
+      const decoded: Payload = req.body.decoded;
 
-      console.log(1);
       if (!decoded) throw new HttpException(404, "Token not found");
       else if (decoded.email !== email)
         throw new HttpException(401, "Invalid Token, email doesn't match.");
-      console.log(2);
-
-      const findUser: User = await this.user.findUser({ email });
-      console.log(3);
-
-      if (!findUser) throw new HttpException(404, "User not found");
-      console.log(4);
 
       const deleteToken = await TokenRepository.findOneToken({
-        id: decoded.id,
+        userId: decoded.userId,
         purpose: "delete-account",
       });
-      console.log(5);
 
       if (!deleteToken) throw new HttpException(404, "Token not found");
       else if (new Date() > deleteToken.expires_in)
@@ -438,16 +429,17 @@ export class UserController {
       else if (user_delete_token !== deleteToken.value)
         throw new HttpException(401, "Invalid Token");
       console.log(5);
-      
-      await UserRepository.delete({ email });
+
+      // await UserRepository.delete({ email });
+      await UserRepository.softDelete(decoded.userId);
       console.log(6);
-      
+
       await TokenRepository.deleteToken(deleteToken.id, "delete-account");
       console.log(7);
 
       res.status(200).json({
         status: 200,
-        data: findUser,
+        // data: findUser,
         message: "User deleted successfully",
       });
     } catch (error) {

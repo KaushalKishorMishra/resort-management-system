@@ -39,4 +39,16 @@ export class BookingService extends Repository<BookingEntity> {
     if (!booking) throw new HttpException(409, "booking not found");
     return booking;
   }
+
+  public async rangeSearch(
+    start_date: Date,
+    end_date: Date,
+  ): Promise<Booking[]> {
+    const booking: Booking[] = await BookingRepository.rangeSearch(
+      start_date,
+      end_date,
+    );
+    if (!booking) throw new HttpException(409, "no booking found");
+    return booking;
+  }
 }
