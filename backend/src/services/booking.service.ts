@@ -23,6 +23,7 @@ export class BookingService extends Repository<BookingEntity> {
 
   public async findBooking(key: object): Promise<Booking> {
     const booking: Booking = await BookingRepository.findOne(key);
+    console.log(booking)
     if (!booking) throw new HttpException(409, `no booking with ${key}  exist`);
     return booking;
   }

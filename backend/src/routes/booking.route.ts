@@ -47,7 +47,7 @@ export class BookingRoute implements Routes {
     this.router.patch(
       `${this.path}/cancel-booking/:id(\\d+)`,
       // AuthorizationMiddleware.adminAuthorization,
-      // AuthorizationMiddleware.authorization,
+      AuthorizationMiddleware.authorization,
       this.bookingController.cancelBooking,
     );
   }

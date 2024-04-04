@@ -2,6 +2,7 @@ import { BookingStatus } from "@/enums/booking.enum";
 import { RoomStatus } from "@/enums/rooms.enum";
 import { HttpException } from "@/exceptions/httpException";
 import { Booking } from "@/interfaces/booking.interface";
+import { Payload } from "@/interfaces/payload.interface";
 import { User } from "@/interfaces/users.interface";
 import { BookingService } from "@/services/booking.service";
 import { RoomService } from "@/services/room.service";
@@ -9,6 +10,7 @@ import { UserService } from "@/services/users.service";
 import { NodeMailer } from "@/utils/nodeMailer";
 import { Utils } from "@/utils/utils";
 import { NextFunction, Request, Response } from "express";
+import { decode } from "punycode";
 import Container from "typedi";
 
 export class BookingController {
@@ -82,6 +84,7 @@ export class BookingController {
       next(error);
     }
   };
+
   public createBooking = async (
     req: Request,
     res: Response,
@@ -98,6 +101,11 @@ export class BookingController {
         userId: userId,
         roomId,
       };
+
+      const bookingExist = await this.booking.rangeSearch(start_date, end_date);
+      if(bookingExist !== null){
+        throw new HttpException(409, "room is already booked for this date");
+      }
 
       const booking = await this.booking.createBooking(bookingData);
       if (!booking) throw new HttpException(409, "booking not created");
@@ -160,29 +168,21 @@ export class BookingController {
   ): Promise<void> => {
     try {
       const id = Number(req.params.id);
-      // const decoded = req.body.decoded;
+      const decoded: Payload = req.body.decoded;
 
+      if(!decoded){
+        throw new HttpException(401, "token not found" );
+      }
       console.log(1);
-      const booking = await this.booking.findBooking({ id: id });
+      const booking: Booking = await this.booking.findBooking({ id: id });
       if (!booking)
         throw new HttpException(404, `no booking with ${id}  exist`);
-
-      // if (decoded.userId !== booking.userId) {
-      //   throw new HttpException(
-      //     401,
-      //     `you are not authorized to cancel this booking`,
-      //   );
-      // }
+      if(decoded.userId !== booking.userId){
+        console.log(decoded.userId, booking.userId)
+        throw new HttpException(401, "unauthorized" );
+      }
       console.log(2);
-      const updateBooking = await this.booking.updateBooking(id, {
-        status: BookingStatus.CANCELED,
-      });
-      console.log(3);
-      if (!updateBooking)
-        throw new HttpException(
-          404,
-          `booking with ${id} could not be canceled`,
-        );
+
       console.log(4);
       const updateRoom = await this.room.updateRoom(booking.roomId, {
         status: RoomStatus.AVAILABLE,
@@ -193,6 +193,15 @@ export class BookingController {
           404,
           `room status could not be changed after canceling booking`,
         );
+        const updateBooking = await this.booking.updateBooking(id, {
+          status: BookingStatus.CANCELED,
+        });
+        console.log(3);
+        if (!updateBooking)
+          throw new HttpException(
+            404,
+            `booking with ${id} could not be canceled`,
+          );  
       console.log(6);
       res.status(200).json({
         status: 200,
