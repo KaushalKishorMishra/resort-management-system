@@ -18,7 +18,7 @@ export class BookingService extends Repository<BookingEntity> {
     const bookings: Booking[] =
       await BookingRepository.findAllBookingUser(userId);
     if (!bookings)
-      throw new HttpException(409, "no booking available at the moment");
+      throw new HttpException(409, `no bookings associated with ${userId} available`);
     return bookings;
   }
 

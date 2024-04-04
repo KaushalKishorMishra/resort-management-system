@@ -8,9 +8,7 @@ import { BookingService } from "@/services/booking.service";
 import { RoomService } from "@/services/room.service";
 import { UserService } from "@/services/users.service";
 import { NodeMailer } from "@/utils/nodeMailer";
-import { Utils } from "@/utils/utils";
 import { NextFunction, Request, Response } from "express";
-import { decode } from "punycode";
 import Container from "typedi";
 
 export class BookingController {
@@ -58,12 +56,25 @@ export class BookingController {
         start_date,
         end_date,
       );
+
+
+      // for (let oneBooking in booking) {
+      //   // const findBooking: Booking = await this.booking.findBooking({id:oneBooking.});
+      //   const tempData = await this.booking.findBooking({
+      //     id: booking[oneBooking].id,
+      //   });
+      //   bookingData.push(tempData);
+      //   findRoom = await this.room.findOneRoom({ id: tempData.roomId });
+      // }
       if (booking.length === 0)
         throw new HttpException(
           404,
           `no booking between ${start_date} and ${end_date} exist`,
         );
-      res.status(200).json({ data: booking, message: "find booking range" });
+      res.status(200).json({
+        data: booking,
+        message: "find booking range",
+      });
     } catch (error) {
       next(error);
     }
@@ -99,7 +110,7 @@ export class BookingController {
         end_date,
         extras,
         userId: userId,
-        roomId,
+        roomId: Number(roomId),
       };
 
       const bookingExist: Booking[] = await this.booking.rangeSearchService(
@@ -120,6 +131,8 @@ export class BookingController {
       const booking = await this.booking.createBooking(bookingData);
       if (!booking) throw new HttpException(409, "booking not created");
 
+      const findBooking = await this.booking.findBooking({ id: booking.id });
+
       const findUser: User = await this.user.findUser({ id: booking.userId });
       // send mail confirming booking
       await NodeMailer.sendEmail({
@@ -132,7 +145,7 @@ export class BookingController {
 
       res
         .status(201)
-        .json({ status: 200, data: booking, message: "created booking" });
+        .json({ status: 200, data: findBooking, message: "created booking" });
     } catch (error) {
       next(error);
     }
