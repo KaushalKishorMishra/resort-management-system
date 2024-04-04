@@ -52,9 +52,6 @@ export class UserEntity extends BaseEntity implements User {
   @OneToMany(() => TokenEntity, (token) => token.id, { nullable: false })
   token: Token[];
 
-  @OneToMany(() => BookingEntity, (booking) => booking.id, { nullable: false })
-  bookingId: number;
-
   @Column()
   @CreateDateColumn()
   createdAt: Date;

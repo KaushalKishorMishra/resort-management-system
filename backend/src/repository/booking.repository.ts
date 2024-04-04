@@ -13,7 +13,7 @@ export class BookingRepository extends Repository<Booking> {
     return await getRepository(BookingEntity).find();
   }
   static async findAllBookingUser(userId: number): Promise<Booking[]> {
-    return await getRepository(BookingEntity).find({where:{id:userId}});
+    return await getRepository(BookingEntity).find({ where: { id: userId } });
   }
   static async findOne(key: object): Promise<Booking> {
     return await getRepository(BookingEntity).findOne({ where: key });
@@ -25,7 +25,8 @@ export class BookingRepository extends Repository<Booking> {
 
   static async update(id: number, key: object): Promise<Booking> {
     await getRepository(BookingEntity).update(id, key);
-    const updatedBooking: Booking = await this.findOne({ id });
+    const updatedBooking: Booking =
+      await getRepository(BookingEntity).findOne(id);
     return updatedBooking;
   }
 
@@ -52,12 +53,13 @@ export class BookingRepository extends Repository<Booking> {
     start_date: Date,
     end_date: Date,
   ): Promise<Booking[]> {
-    const findRangeData: Booking[] = await getRepository(BookingEntity).find({
+    const findRangeData = await getRepository(BookingEntity).find({
       where: {
         start_date: LessThanOrEqual(end_date),
         end_date: MoreThanOrEqual(start_date),
       },
     });
+    console.log(findRangeData);
     return findRangeData;
   }
 }
