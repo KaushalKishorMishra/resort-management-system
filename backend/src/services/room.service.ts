@@ -24,7 +24,6 @@ export class RoomService extends Repository<Rooms> {
     return room;
   }
 
-
   public async searchAvailableRooms({ startDate, endDate }): Promise<Rooms[]> {
     const rooms: Rooms[] = await RoomRepository.rangeSearch({
       startDate,

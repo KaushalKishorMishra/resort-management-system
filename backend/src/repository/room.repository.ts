@@ -58,14 +58,5 @@ export class RoomRepository extends Repository<RoomsEntity> {
     return test;
   }
 
-  static async rangeSearch({ startDate, endDate }): Promise<RoomsEntity[]> {
-    const findRangeData: RoomsEntity[] = await getRepository(RoomsEntity)
-      .createQueryBuilder("rooms")
-      .where("room.status BETWEEN :startDate AND :endDate", {
-        startDate,
-        endDate,
-      })
-      .getMany();
-    return findRangeData;
-  }
+
 }

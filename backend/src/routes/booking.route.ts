@@ -29,7 +29,7 @@ export class BookingRoute implements Routes {
     );
 
     this.router.post(
-      `${this.path}/create`,
+      `${this.path}/create/:userId(\\d+)`,
       this.bookingController.createBooking,
     );
 
@@ -37,6 +37,18 @@ export class BookingRoute implements Routes {
       `${this.path}/delete/:id(\\d+)`,
       AuthorizationMiddleware.adminAuthorization,
       this.bookingController.deleteBooking,
+    );
+
+    this.router.get(
+      `${this.path}/range`,
+      this.bookingController.findBookingRange,
+    );
+
+    this.router.patch(
+      `${this.path}/cancel-booking/:id(\\d+)`,
+      // AuthorizationMiddleware.adminAuthorization,
+      // AuthorizationMiddleware.authorization,
+      this.bookingController.cancelBooking,
     );
   }
 }

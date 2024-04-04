@@ -22,8 +22,8 @@ export class UserRoute implements Routes {
   private initializeRoutes() {
     this.router.get(
       `${this.path}`,
-      AuthorizationMiddleware.authorization,
-      AuthorizationMiddleware.adminAuthorization,
+      // AuthorizationMiddleware.authorization,
+      // AuthorizationMiddleware.adminAuthorization,
       this.user.getUsers,
     );
     this.router.get(`${this.path}/:id(\\d+)`, this.user.getUserById);
@@ -40,10 +40,11 @@ export class UserRoute implements Routes {
       ValidationMiddleware(CreateUserDto),
       this.user.createUser,
     );
-    this.router.put(
+    this.router.patch(
       // update user
       `${this.path}/:id(\\d+)`,
       ValidationMiddleware(CreateUserDto, true),
+      // AuthorizationMiddleware.authorization,
       this.user.updateUser,
     );
     this.router.delete(

@@ -45,27 +45,6 @@ export class RoomController {
     }
   };
 
-  public searchAvailableRooms = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): Promise<void> => {
-    try {
-      const { startDate, endDate } = req.body;
-      const searchData = this.room.searchAvailableRooms({
-        startDate,
-        endDate,
-      });
-      res.status(200).json({
-        status: 200,
-        data: searchData,
-        message: "searched available rooms",
-      });
-    } catch (err) {
-      next(err);
-    }
-  };
-
   public createRoom = async (
     req: Request,
     res: Response,

@@ -8,11 +8,13 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  DeleteDateColumn,
 } from "typeorm";
 import { User } from "@interfaces/users.interface";
 import { UserRole } from "@/enums/users.enum";
 import { Token } from "@/interfaces/tokens.interface";
 import { TokenEntity } from "./tokens.entity";
+import { BookingEntity } from "./booking.entity";
 
 @Entity()
 export class UserEntity extends BaseEntity implements User {
@@ -50,6 +52,9 @@ export class UserEntity extends BaseEntity implements User {
   @OneToMany(() => TokenEntity, (token) => token.id, { nullable: false })
   token: Token[];
 
+  @OneToMany(() => BookingEntity, (booking) => booking.id, { nullable: false })
+  bookingId: number;
+
   @Column()
   @CreateDateColumn()
   createdAt: Date;
@@ -57,4 +62,8 @@ export class UserEntity extends BaseEntity implements User {
   @Column()
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Column()
+  @DeleteDateColumn()
+  deletedAt: Date;
 }
