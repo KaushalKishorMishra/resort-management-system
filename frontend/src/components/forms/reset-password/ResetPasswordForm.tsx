@@ -21,7 +21,6 @@ const ResetPasswordForm: React.FC = () => {
 			password_reset_token: data.password_reset_token as string,
 		};
 		const response = await AuthApi.resetPassword(ResetPasswordData);
-		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("Your account password has been reset. Redirecting to Login page...", {
 				position: "top-right",

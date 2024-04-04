@@ -34,7 +34,6 @@ const TermsForm: React.FC = () => {
 			return;
 		}
 		const response: AxiosResponse = await AuthApi.signup(signUpData);
-		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("SignUp Successful. Redirecting...", {
 				position: "top-right",

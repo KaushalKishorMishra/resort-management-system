@@ -3,6 +3,7 @@ import React from "react";
 import { GiPlainCircle } from "react-icons/gi";
 import { useRoomStore } from "../../store/useRoomStore";
 import { FaDiamond } from "react-icons/fa6";
+import { ToastContainer, toast } from "react-toastify";
 
 type MapElementProps = {
 	top: string;
@@ -19,6 +20,7 @@ const MapElement: React.FC<MapElementProps> = ({ top, left, id, status, type }) 
 	// text-[#bbcb31]
 	return (
 		<>
+			<ToastContainer />
 			<span
 				className={`${
 					id == selectedId && "animate-ping absolute inline-flex h-5 w-5 bg-green-300 rounded-full opacity-75"
@@ -26,7 +28,7 @@ const MapElement: React.FC<MapElementProps> = ({ top, left, id, status, type }) 
 				style={{ top: `${top}`, left: `${left}`, translate: "-50% -50%" }}
 			></span>
 			<div
-				className={`absolute h-6 w-6 cursor-pointer flex-center text-xl lg:text-2xl text-opacity-75
+				className={`absolute h-6 w-6 cursor-pointer flex-center text-xl lg:text-2xl
 					${status == "available" && "text-green-400"} 
 					${status == "cleaning" && "text-green-400"} 
 					${status == "booked" && "text-red-600"}`}
@@ -41,7 +43,12 @@ const MapElement: React.FC<MapElementProps> = ({ top, left, id, status, type }) 
 					if (status == "available" || status == "cleaning") {
 						setSelectedRoom(id);
 					} else if (status == "booked") {
-						alert("Room is already booked");
+						setSelectedRoom(id);
+						toast.info("Room is already booked", {
+							position: "top-right",
+							theme: "dark",
+							autoClose: 1500,
+						});
 					} else if (status == "maintenance") {
 						alert("Room is under maintenance");
 					}

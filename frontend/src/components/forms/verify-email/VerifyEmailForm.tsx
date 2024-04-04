@@ -22,7 +22,6 @@ const VerifyEmailForm: React.FC = () => {
 			value: data.verificationToken,
 		};
 		const response: AxiosResponse = await AuthApi.verifyEmail(verifyEmailData);
-		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("Email Verified. Redirecting...", {
 				position: "top-right",
@@ -42,7 +41,6 @@ const VerifyEmailForm: React.FC = () => {
 
 	const resendVerificationEmail = async () => {
 		const response: AxiosResponse = await AuthApi.resendVerificationEmail({ email: email! });
-		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("Resent Verification Email", {
 				position: "top-right",

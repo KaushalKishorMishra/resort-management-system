@@ -37,7 +37,6 @@ const UserSettings: React.FC = () => {
 	const handleDeleteAccount = async () => {
 		setDisableDeleteButton(true);
 		const response = await AuthApi.deleteAccount({ email: email, password: deletePassword });
-		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("Confirmation token has been sent to your Email", {
 				position: "top-right",
@@ -59,7 +58,6 @@ const UserSettings: React.FC = () => {
 	const handleConfirmDelete = async () => {
 		setDisableDeleteButton(true);
 		const response = await AuthApi.confirmDeleteAccount({ email: email, user_delete_token: deleteAccountToken });
-		console.log(response.data.message);
 		if (response.status >= 200 && response.status < 300) {
 			toast.success("Account Deleted. Redirecting...", {
 				position: "top-right",

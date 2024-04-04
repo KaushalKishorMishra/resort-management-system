@@ -35,7 +35,6 @@ const Profile: React.FC = () => {
 	useEffect(() => {
 		const fetchUser = async () => {
 			const response = await UserApi.findOne({ userId: localStorage.getItem("userId")! });
-			console.log(response.data.message);
 			if (response.status >= 300) {
 				toast.error("something went wrong.", {
 					position: "top-right",
