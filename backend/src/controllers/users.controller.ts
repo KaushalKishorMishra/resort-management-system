@@ -181,7 +181,7 @@ export class UserController {
         purpose: PayloadPurpose.LOGIN,
       };
 
-      const jwt = Jwt.signJwt(payload, "1m");
+      const jwt = Jwt.signJwt(payload, "7d");
       res.status(200).json({
         status: 200,
         data: loginUserData,
@@ -424,18 +424,17 @@ export class UserController {
       });
 
       if (!deleteToken) throw new HttpException(404, "Token not found");
-      else if (new Date() > deleteToken.expires_in)
+      // this may cause error if there exists an old token that hasn't been used
+      else if (new Date() > deleteToken.expires_in) {
+        await TokenRepository.deleteToken(deleteToken.id, "delete-old-token");
         throw new HttpException(401, "Token expired");
-      else if (user_delete_token !== deleteToken.value)
+      } else if (user_delete_token !== deleteToken.value)
         throw new HttpException(401, "Invalid Token");
-      console.log(5);
 
       // await UserRepository.delete({ email });
       await UserRepository.softDelete(decoded.userId);
-      console.log(6);
 
       await TokenRepository.deleteToken(deleteToken.id, "delete-account");
-      console.log(7);
 
       res.status(200).json({
         status: 200,

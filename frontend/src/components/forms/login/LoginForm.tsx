@@ -124,7 +124,7 @@ const LoginForm: React.FC = () => {
 					</span>
 				</div>
 				<p className="text-gray-200 text-center text-sm w-full max-w-lg mt-4">
-					By continuing to use ResortUI, you agree to our{" "}
+					By continuing to use Cozy Cottage, you agree to our{" "}
 					<Link to="terms-and-service" className="text-primary underline font-semibold">
 						Terms of Service
 					</Link>{" "}
@@ -132,7 +132,7 @@ const LoginForm: React.FC = () => {
 					<Link to="privacy-policy" className="text-primary underline font-semibold">
 						Privacy Policy
 					</Link>
-					. Personal data added to ResortUI is public by default
+					. Personal data added to Cozy Cottage is public by default
 				</p>
 			</form>
 		</>
