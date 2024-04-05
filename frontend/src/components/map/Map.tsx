@@ -48,9 +48,10 @@ const Map = ({ image, alt, ref }: MapProps) => {
 		const response = await RoomApi.getAllRooms();
 		const roomData: RoomType[] = response.data.data;
 		setRoomData(roomData);
-		// return roomData.map(room => (
-		// 	<MapElement top={room.top} left={room.left} id={room.id} status={room.status} type={room.type} />
-		// ))
+
+		return roomData.map(room => (
+			<MapElement top={room.top} left={room.left} id={room.id} type={room.type} />
+		))
 	};
 
 	// note: stopPropagation() didn't perform as expected

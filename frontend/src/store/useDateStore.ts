@@ -6,6 +6,6 @@ type DateStore = {
 };
 
 export const useDateStore = create<DateStore>(() => ({
-	startDate: "",
-	endDate: "",
+	startDate: "2024-04-05",
+	endDate: "2024-04-06",
 }));

@@ -39,7 +39,7 @@ export class BookingRoute implements Routes {
       this.bookingController.deleteBooking,
     );
 
-    this.router.get(
+    this.router.post(
       `${this.path}/range`,
       this.bookingController.findBookingRange,
     );
