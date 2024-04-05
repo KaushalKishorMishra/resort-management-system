@@ -7,32 +7,30 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 export class PaymentController {
   // process payment
   public processPayment = async (req, res) => {
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: req.body.amount,
-      currency: "npr",
-      metadata: { integration_check: "accept_a_payment" },
+    const session = await stripe.checkout.sessions.create({
+      ui_mode: "embedded",
+      line_items: [
+        {
+          // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+          price: "{{PRICE_ID}}",
+          quantity: 1,
+        },
+      ],
+      mode: "payment",
+      return_url: `${process.env.FRONTEND_URL}/return?session_id={CHECKOUT_SESSION_ID}`,
     });
-    const paymentId = paymentIntent.id;
-    const amount = paymentIntent.amount;
-    const status = paymentIntent.status;
-    const createdAt = paymentIntent.created;
-    const updatedAt = paymentIntent.created;
-    const paymentData: Payment = {
-      id: paymentId,
-      amount,
-      status,
-      createdAt,
-      updatedAt,
-    };
-
-    await getRepository(PaymentEntity).save(paymentData);
-    res.json({ client_secret: paymentIntent.client_secret });
+    res.send({ clientSecret: session.client_secret });
   };
 
   // send stripe api key to frontend
   public sendStripeApi = async (req, res) => {
-    res.json({
-      stripeApiKey: process.env.STRIPE_API_KEY,
+    const session = await stripe.checkout.sessions.retrieve(
+      req.query.session_id,
+    );
+
+    res.send({
+      status: session.status,
+      customer_email: session.customer_details.email,
     });
   };
 }

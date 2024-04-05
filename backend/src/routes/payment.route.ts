@@ -13,11 +13,11 @@ export class PaymentRoute implements Routes  {
 
     private initializeRoutes() {
         this.router.post(
-            `${this.path}/process`,
+            `${this.path}/create-checkout-session`,
             this.paymentController.processPayment
         )
         this.router.get(
-            `${this.path}/api`,
+            `${this.path}/session-status`,
             this.paymentController.sendStripeApi
         )
     }

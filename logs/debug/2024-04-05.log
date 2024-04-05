@@ -392,3 +392,19 @@
 2024-04-05 09:45:29 info: ======= ENV: development =======
 2024-04-05 09:45:29 info: 🚀 App listening on the port 3000
 2024-04-05 09:45:29 info: =================================
+2024-04-05 09:45:42 info: =================================
+2024-04-05 09:45:42 info: ======= ENV: development =======
+2024-04-05 09:45:42 info: 🚀 App listening on the port 3000
+2024-04-05 09:45:42 info: =================================
+2024-04-05 09:51:55 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with 2  exist 😔
+2024-04-05 09:51:55 info: [0mGET /bookings/2 [33m409[0m 95.963 ms - 43[0m
+2024-04-05 09:51:58 info: [0mGET /bookings/all [32m200[0m 7.809 ms - 602[0m
+2024-04-05 09:52:03 info: [0mGET /bookings/8 [32m200[0m 4.684 ms - 226[0m
+2024-04-05 09:52:08 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with 2  exist 😔
+2024-04-05 09:52:08 info: [0mGET /bookings/2 [33m409[0m 4.504 ms - 43[0m
+2024-04-05 09:52:25 info: [0mGET /bookings/8 [32m200[0m 53.409 ms - 226[0m
+2024-04-05 09:52:49 info: [0mGET /bookings/range [32m200[0m 95.644 ms - 609[0m
+2024-04-05 09:53:34 info: =================================
+2024-04-05 09:53:34 info: ======= ENV: development =======
+2024-04-05 09:53:34 info: 🚀 App listening on the port 3000
+2024-04-05 09:53:34 info: =================================

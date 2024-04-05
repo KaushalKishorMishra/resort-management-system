@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Room from "./pages/Room";
-import Book from "./pages/Book";
+// import Book from "./pages/Book";
 import Signup from "./pages/SignUp";
 import FixedNavLayout from "./layouts/FixedNavLayout";
 import BasicLayout from "./layouts/BasicLayout";
@@ -27,7 +27,7 @@ const MyRoutes: React.FC = () => {
 					<Route path="/rooms" element={<Room />} />
 					<Route path="/about" element={<About />} />
 					<Route path="/contact" element={<Contact />} />
-					<Route path="/book" element={<Book />} />
+					{/* <Route path="/book" element={<Book />} /> */}
 				</Route>
 				<Route path="" element={<FixedNavLayout />}>
 					<Route path="/signup" element={<Signup />} />

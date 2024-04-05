@@ -149,3 +149,5 @@ TSError: ⨯ Unable to compile TypeScript:
 2024-04-05 09:42:43 error: [GET] /bookings/1 >> StatusCode:: 409, Message:: no booking with 1  exist 😔
 2024-04-05 09:42:49 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with 2  exist 😔
 2024-04-05 09:44:33 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with 2  exist 😔
+2024-04-05 09:51:55 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with 2  exist 😔
+2024-04-05 09:52:08 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with 2  exist 😔
