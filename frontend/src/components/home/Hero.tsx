@@ -6,33 +6,25 @@ const Hero: React.FC = () => {
 	return (
 		<>
 			<div className="bg-custom-bg-dark">
-				<div className="md:container pt-10 md:pt-20">
+				<div className="md:container pt-4 md:pt-10">
 					<div className="hero-img w-full relative md:px-10">
 						{/* src: https://unsplash.com/photos/brown-wooden-table-and-chairs-JTUmzXLoqHQ */}
 						<img className="image-full" src="../../../public/2-chairs-in-resort.jpg" alt="Resort image" />
-						<div
-							className="text-box absolute w-full text-center top-[40%] md:top-0 left-0"
-							style={{
-								transform: "translate(0, -55%)",
-							}}
-						>
+						<div className="absolute w-full text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-evenly flex-col">
 							<h1 className="text-white font-bold drop-shadow-lg w-full text-6xl md:text-6xl lg:text-8xl break-words">
 								STAY WITH COMFORT
 							</h1>
-							{/* todo make the header always take 100% width */}
-							{/* <h1 className="" style={{
-								whiteSpace: "nowrap",
-								overflow: "hidden",
-								textOverflow: "ellipsis",
-								width: "100%",
-								fontSize: "100%",
-								margin: "0",
-							}}>STAY WITH COMFORT</h1> */}
+							{/* <div className="mt-4 md:mt-10 text-white bg-[#E87030] hover:bg-[#e87030]/90 focus:outline-none focus:ring-4 focus:ring-[#e87030]/30 font-semibold rounded-md border border-bg-custom-dark text-lg px-5 py-2.5 text-center me-2 mb-2 cursor-pointer">
+								Get Started
+							</div> */}
 						</div>
 					</div>
 
 					{/* cards carousel */}
-					<div className="visible md:hidden carousel carousel-center space-x-5 text-[#18130f] w-full p-5" data-carousel="static">
+					<div
+						className="visible md:hidden carousel carousel-center space-x-5 text-[#18130f] w-full p-5"
+						data-carousel="static"
+					>
 						<div className="carousel-item">
 							<div className="bg-[#9fd76a] aspect-square p-6 h-64 w-64 flex flex-col justify-center text-2xl font-bold font-kalam">
 								<span>DESTINATION.</span>

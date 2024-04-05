@@ -33,7 +33,11 @@ const Footer: React.FC = () => {
 								ROOMS
 							</Link>
 						</span>
-						<p className="text-4xl">ResortUI</p>
+						<img
+							src="../../public/logo/logo-no-background.png"
+							alt="logo"
+							className="w-40 cursor-pointer hover:brightness-90"
+						/>
 						<span className="flex w-full justify-evenly">
 							<Link to="/about" className="btn btn-ghost text-xl">
 								ABOUT

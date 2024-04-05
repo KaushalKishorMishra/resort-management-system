@@ -66,7 +66,9 @@ const UserSettings: React.FC = () => {
 			});
 			setConfirmState(true);
 			setEmailMessage({ state: "success", message: "Deleted" });
-			handleSignOut();
+			setTimeout(() => {
+				handleSignOut();
+			},3000);
 		} else {
 			toast.error(response.data.message, {
 				position: "top-right",

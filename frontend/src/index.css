@@ -22,6 +22,12 @@
 	.signup-input {
 		@apply input input-bordered border-white rounded-full bg-opacity-60;
 	}
+	.btn-square-outline-light {
+		@apply btn text-lg rounded-none text-custom-bg-dark hover:text-white border-custom-bg-dark bg-transparent hover:bg-custom-bg-dark;
+	}
+	.btn-square-outline-dark {
+		@apply btn text-lg rounded-none text-white hover:text-custom-bg-dark border-custom-bg-light bg-transparent hover:bg-custom-bg-light;
+	}
 }
 
 html {
