@@ -36,9 +36,9 @@ export class BookingController {
   ): Promise<void> => {
     try {
       const id = Number(req.params.id);
-      const booking = await this.booking.findBooking({ id: id });
+      const booking: Booking = await this.booking.findBookingById(id);
       if (!booking)
-        throw new HttpException(404, `no booking with ${id}  exist`);
+        throw new HttpException(404, `no booking with ${booking.id} exist`);
       res.status(200).json({ data: booking, message: "findBookingById" });
     } catch (error) {
       next(error);
@@ -56,7 +56,6 @@ export class BookingController {
         start_date,
         end_date,
       );
-
 
       // for (let oneBooking in booking) {
       //   // const findBooking: Booking = await this.booking.findBooking({id:oneBooking.});
@@ -87,9 +86,13 @@ export class BookingController {
   ): Promise<void> => {
     try {
       const userId: number = Number(req.params.userId);
-      const booking: Booking[] = await this.booking.findAllBookingUser(userId);
+      const booking: Booking[] =
+        await this.booking.findAllBookingUserId(userId);
       if (!booking)
-        throw new HttpException(404, `no booking with ${userId}  exist`);
+        throw new HttpException(
+          404,
+          `no booking under user ${booking[0].userId}  exist 😔 lado`,
+        );
       res.status(200).json({ data: booking, message: "findBookingByUser" });
     } catch (error) {
       next(error);
@@ -131,7 +134,7 @@ export class BookingController {
       const booking = await this.booking.createBooking(bookingData);
       if (!booking) throw new HttpException(409, "booking not created");
 
-      const findBooking = await this.booking.findBooking({ id: booking.id });
+      const findBooking = await this.booking.findBookingById(booking.id);
 
       const findUser: User = await this.user.findUser({ id: booking.userId });
       // send mail confirming booking
@@ -159,6 +162,7 @@ export class BookingController {
     try {
       const id = Number(req.params.id);
       const booking = await this.booking.deleteBooking({ id: id });
+
       if (!booking)
         throw new HttpException(404, `no booking with ${id}  exist`);
       const updateRoom = await this.room.updateRoom(booking.roomId, {
@@ -190,7 +194,7 @@ export class BookingController {
         throw new HttpException(401, "token not found");
       }
       console.log(1);
-      const booking: Booking = await this.booking.findBooking({ id: id });
+      const booking: Booking = await this.booking.findBookingById(id);
       if (!booking)
         throw new HttpException(404, `no booking with ${id}  exist`);
       if (decoded.userId !== booking.userId) {
@@ -218,6 +222,8 @@ export class BookingController {
           404,
           `booking with ${id} could not be canceled`,
         );
+
+      const deletedBooking = await this.booking.deleteBooking({ id: id });
       console.log(6);
       res.status(200).json({
         status: 200,

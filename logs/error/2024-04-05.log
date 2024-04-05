@@ -1,0 +1,151 @@
+2024-04-05 08:56:30 error: [POST] /bookings/create/2 >> StatusCode:: 404, Message:: room not found
+2024-04-05 08:57:07 error: [POST] /bookings/create/2 >> StatusCode:: 500, Message:: duplicate key value violates unique constraint "REL_5721d262c907a9c9e6273d9142"
+2024-04-05 08:58:36 error: [POST] /bookings/create/2 >> StatusCode:: 500, Message:: duplicate key value violates unique constraint "REL_5721d262c907a9c9e6273d9142"
+2024-04-05 09:01:51 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/booking.controller.ts[0m:[93m224[0m:[93m14[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m224[0m       console.log(6);
+[7m   [0m [91m             ~[0m
+[96msrc/controllers/booking.controller.ts[0m:[93m224[0m:[93m18[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m224[0m       console.log(6);
+[7m   [0m [91m                 ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/booking.controller.ts[0m:[93m224[0m:[93m14[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m224[0m       console.log(6);
+[7m   [0m [91m             ~[0m
+[96msrc/controllers/booking.controller.ts[0m:[93m224[0m:[93m18[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m224[0m       console.log(6);
+[7m   [0m [91m                 ~[0m
+
+    at createTSError (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:863:19)
+    at E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-04-05 09:02:02 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/booking.controller.ts[0m:[93m223[0m:[93m38[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m223[0m         const deletedBooking = await ;
+[7m   [0m [91m                                     ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/booking.controller.ts[0m:[93m223[0m:[93m38[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m223[0m         const deletedBooking = await ;
+[7m   [0m [91m                                     ~[0m
+
+    at createTSError (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:863:19)
+    at E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-04-05 09:06:02 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with [object Object]  exist
+2024-04-05 09:06:56 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with [object Object]  exist
+2024-04-05 09:07:40 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with [object Object]  exist
+2024-04-05 09:08:26 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with [object Object]  exist
+2024-04-05 09:08:51 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with [object Object]  exist
+2024-04-05 09:09:39 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with [object Object]  exist
+2024-04-05 09:13:37 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with [object Object]  exist
+2024-04-05 09:14:21 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with [object Object]  exist
+2024-04-05 09:15:49 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with [object Object]  exist
+2024-04-05 09:17:30 error: [GET] /bookings/1 >> StatusCode:: 409, Message:: no booking with [object Object]  exist
+2024-04-05 09:17:48 error: [GET] /bookings/5 >> StatusCode:: 409, Message:: no booking with [object Object]  exist
+2024-04-05 09:18:35 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/booking.controller.ts[0m:[93m41[0m:[93m57[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m41[0m         throw new HttpException(404, `no booking with ${} exist`);
+[7m  [0m [91m                                                        ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/booking.controller.ts[0m:[93m41[0m:[93m57[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m41[0m         throw new HttpException(404, `no booking with ${} exist`);
+[7m  [0m [91m                                                        ~[0m
+
+    at createTSError (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:863:19)
+    at E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-04-05 09:19:44 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/booking.controller.ts[0m:[93m91[0m:[93m57[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m91[0m         throw new HttpException(404, `no booking with ${}  exist`);
+[7m  [0m [91m                                                        ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/booking.controller.ts[0m:[93m91[0m:[93m57[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m91[0m         throw new HttpException(404, `no booking with ${}  exist`);
+[7m  [0m [91m                                                        ~[0m
+
+    at createTSError (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:863:19)
+    at E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-04-05 09:19:50 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/booking.controller.ts[0m:[93m91[0m:[93m57[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m91[0m         throw new HttpException(404, `no booking with ${}  exist`);
+[7m  [0m [91m                                                        ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/booking.controller.ts[0m:[93m91[0m:[93m57[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m91[0m         throw new HttpException(404, `no booking with ${}  exist`);
+[7m  [0m [91m                                                        ~[0m
+
+    at createTSError (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:863:19)
+    at E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (E:\Office\resort management system\resort-management-system\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-04-05 09:20:22 error: [GET] /bookings/1 >> StatusCode:: 409, Message:: no booking with [object Object]  exist
+2024-04-05 09:20:46 error: [GET] /bookings/1 >> StatusCode:: 409, Message:: no booking with [object Object]  exist
+2024-04-05 09:21:39 error: [GET] /bookings/1 >> StatusCode:: 409, Message:: no booking with [object Object]  exist 😔
+2024-04-05 09:26:13 error: [GET] /bookings/1 >> StatusCode:: 500, Message:: Cannot read properties of undefined (reading 'id')
+2024-04-05 09:26:48 error: [GET] /bookings/1 >> StatusCode:: 500, Message:: Cannot read properties of undefined (reading 'id')
+2024-04-05 09:27:18 error: [GET] /bookings/1 >> StatusCode:: 500, Message:: Cannot read properties of undefined (reading 'id')
+2024-04-05 09:30:40 error: [GET] /bookings/1 >> StatusCode:: 409, Message:: no booking with [object Object]  exist 😔
+2024-04-05 09:32:18 error: [GET] /bookings/1 >> StatusCode:: 409, Message:: no booking with [object Object]  exist 😔
+2024-04-05 09:33:10 error: [GET] /bookings/1 >> StatusCode:: 500, Message:: No entity column "key" was found.
+2024-04-05 09:33:22 error: [GET] /bookings/5 >> StatusCode:: 500, Message:: No entity column "key" was found.
+2024-04-05 09:33:26 error: [GET] /bookings/6 >> StatusCode:: 500, Message:: No entity column "key" was found.
+2024-04-05 09:33:30 error: [GET] /bookings/4 >> StatusCode:: 500, Message:: No entity column "key" was found.
+2024-04-05 09:34:29 error: [GET] /bookings/4 >> StatusCode:: 500, Message:: invalid input syntax for type integer: "{"key":{"id":4}}"
+2024-04-05 09:35:42 error: [GET] /bookings/4 >> StatusCode:: 500, Message:: No entity column "key" was found.
+2024-04-05 09:39:57 error: [POST] /bookings/create/2 >> StatusCode:: 500, Message:: duplicate key value violates unique constraint "REL_5721d262c907a9c9e6273d9142"
+2024-04-05 09:40:57 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with 2  exist 😔
+2024-04-05 09:42:43 error: [GET] /bookings/1 >> StatusCode:: 409, Message:: no booking with 1  exist 😔
+2024-04-05 09:42:49 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with 2  exist 😔
+2024-04-05 09:44:33 error: [GET] /bookings/2 >> StatusCode:: 409, Message:: no booking with 2  exist 😔

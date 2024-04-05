@@ -14,18 +14,16 @@ export class BookingService extends Repository<BookingEntity> {
       throw new HttpException(409, "no booking available at the moment");
     return bookings;
   }
-  public async findAllBookingUser(userId: number): Promise<Booking[]> {
-    const bookings: Booking[] =
-      await BookingRepository.findAllBookingUser(userId);
-    if (!bookings)
-      throw new HttpException(409, `no bookings associated with ${userId} available`);
+  public async findAllBookingUserId(userId: number): Promise<Booking[]> {
+    const bookings: Booking[] = await BookingRepository.findAllBooking(userId);
     return bookings;
   }
 
-  public async findBooking(key: object): Promise<Booking> {
-    const booking: Booking = await BookingRepository.findOne(key);
-    console.log(booking);
-    if (!booking) throw new HttpException(409, `no booking with ${key}  exist`);
+  public async findBookingById(id): Promise<Booking> {
+    const booking: Booking = await BookingRepository.findBookingById(id);
+    // console.log(booking);
+    if (!booking)
+      throw new HttpException(409, `no booking with ${id}  exist 😔`);
     return booking;
   }
 

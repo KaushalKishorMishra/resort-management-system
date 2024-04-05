@@ -15,7 +15,7 @@ export class BookingRoute implements Routes {
   private initializeRoutes() {
     this.router.get(
       `${this.path}/all`,
-      AuthorizationMiddleware.adminAuthorization,
+      // AuthorizationMiddleware.adminAuthorization,
       this.bookingController.findAllBooking,
     );
     this.router.get(
@@ -35,7 +35,7 @@ export class BookingRoute implements Routes {
 
     this.router.delete(
       `${this.path}/delete/:id(\\d+)`,
-      AuthorizationMiddleware.adminAuthorization,
+      // AuthorizationMiddleware.adminAuthorization,
       this.bookingController.deleteBooking,
     );
 
