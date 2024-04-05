@@ -16,6 +16,7 @@ import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import Contact from "./pages/Contact";
 import About from "./components/home/About";
+import Payment from "./pages/Payment";
 
 const MyRoutes: React.FC = () => {
 	return (
@@ -40,6 +41,7 @@ const MyRoutes: React.FC = () => {
 					<Route path="profile" element={<Profile />} />
 				</Route>
 				{/* exceptions */}
+				<Route path="/payment" element={<Payment />} />
 				<Route path="*" element={<PageNotFound />} />
 				<Route path="/unauthorized" element={<Unauthorized />} />
 			</Routes>
