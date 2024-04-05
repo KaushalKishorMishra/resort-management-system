@@ -1,30 +1,23 @@
 import { useEffect, useState } from "react";
 import { GoXCircleFill } from "react-icons/go";
 import { FaCheckCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 import { UserApi } from "../../apis/userApi";
 import { toast } from "react-toastify";
 import { UserType } from "../../types/user";
 import { useUserStore } from "../../store/useUserStore";
-import { AuthApi } from "../../apis/authApi";
 
 const EditUser: React.FC = () => {
 	const [errorMessage, setErrorMessage] = useState<string>("");
 	const [successMessage, setSuccessMessage] = useState<string>("");
 	const [initialData, setInitialData] = useState<{
 		name: string;
-		email: string;
 		phone: string;
 	}>({
 		name: "",
-		email: "",
 		phone: "",
 	});
 	const [name, setName] = useState<string>("");
-	const [email, setEmail] = useState<string>("");
 	const [phone, setPhone] = useState<string>("");
-	const [emailInfo, setEmailInfo] = useState<string>("");
-	const navigate = useNavigate();
 
 	const fetchInitialData = async () => {
 		const userId = localStorage.getItem("userId") || useUserStore.getState().userId?.toString();
@@ -35,53 +28,39 @@ const EditUser: React.FC = () => {
 				position: "top-right",
 				theme: "dark",
 			});
+			setSuccessMessage("");
 			setErrorMessage("Error fetching user");
 			throw new Error("Error fetching user");
 		}
 		setInitialData({
 			name: data.name,
-			email: data.email,
 			phone: data.phone,
 		});
 		setName(data.name);
-		setEmail(data.email);
 		setPhone(data.phone);
 	};
 
-	const handleUpdate = () => {
-		// const updatedData = {
-		// 	name: name,
-		// 	email: email,
-		// 	phone: phone,
-		// };
-		// replace wit update route
-		UserApi.findOne({ userId: "1" })
-			.then(() => {
-				setErrorMessage("");
-				setSuccessMessage("Profile updated successfully");
-				setTimeout(() => {
-					if (email !== initialData.email) {
-						useUserStore.setState({ email: email });
-						localStorage.setItem("email", email);
-
-						// resend otp
-						AuthApi.resendVerificationEmail({ email: email })
-							.then(res => {
-								console.log(res.data);
-								navigate("/verify-email");
-							})
-							.catch(err => {
-								console.log(err);
-							});
-					} else {
-						window.location.reload();
-					}
-				}, 1000);
-			})
-			.catch(err => {
-				setErrorMessage("Error updating profile");
-				console.log(err);
+	const handleUpdate = async () => {
+		const updatedData = {
+			name: name,
+			phone: phone,
+		};
+		const response = await UserApi.update(
+			updatedData,
+			localStorage.getItem("userId") || useUserStore.getState().userId!.toString()!
+		);
+		if (response.status >= 200 && response.status < 300) {
+			toast.success("Update Successful.", {
+				position: "top-right",
+				theme: "dark",
+				autoClose: 2000,
 			});
+		} else {
+			toast.error(response.data.message, {
+				position: "top-right",
+				theme: "dark",
+			});
+		}
 	};
 
 	useEffect(() => {
@@ -139,29 +118,6 @@ const EditUser: React.FC = () => {
 							onChange={e => setName(e.target.value)}
 							value={name}
 						/>
-					</label>
-					<label className="form-control w-full max-w-lg" htmlFor="email">
-						<div className="label">
-							<span className="label-text font-semibold">Email Address</span>
-						</div>
-						<input
-							type="email"
-							id="email"
-							placeholder="Email address"
-							className={`input input-bordered w-full max-w-lg ${
-								email === initialData.email ? "" : "input-success"
-							}`}
-							onChange={e => {
-								setEmail(e.target.value);
-								if (e.target.value !== initialData.email) {
-									setEmailInfo("You will need reverify your new email.");
-								} else {
-									setEmailInfo("");
-								}
-							}}
-							value={email}
-						/>
-						<p className="text-info text-sm">{emailInfo}</p>
 					</label>
 					<label className="form-control w-full max-w-lg" htmlFor="phone">
 						<div className="label">

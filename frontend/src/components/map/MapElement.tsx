@@ -1,21 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { FaMapMarkerAlt } from "react-icons/fa";
 import { GiPlainCircle } from "react-icons/gi";
 import { useRoomStore } from "../../store/useRoomStore";
 import { FaDiamond } from "react-icons/fa6";
 import { ToastContainer, toast } from "react-toastify";
+import { BookingApi } from "../../apis/bookingApi";
 
 type MapElementProps = {
 	top: string;
 	left: string;
 	id: number;
-	status: "booked" | "available" | "cleaning" | "maintenance";
+	// status: "booked" | "available" | "cleaning" | "maintenance";
 	type: "deluxe" | "family" | "standard";
 };
 
-const MapElement: React.FC<MapElementProps> = ({ top, left, id, status, type }) => {
+const MapElement: React.FC<MapElementProps> = ({ top, left, id, type }) => {
+	const [status, setStatus] = React.useState("available");
 	const selectedId = useRoomStore(state => state.selectedRoom);
 	const setSelectedRoom = useRoomStore(state => state.setSelectedRoom);
+
+	useEffect(() => {
+		const checkAvailability = async () => {
+			const startDate = sessionStorage.getItem("startDate");
+			const endDate = sessionStorage.getItem("endDate");
+			console.log(startDate, endDate);
+			const res = await BookingApi.rangeSearch({
+				start_date: startDate || "2024-04-05",
+				end_date: endDate || "2024-04-06",
+			});
+			const array = res.data.data;
+			for (const x in array) {
+				if (array[x].roomId == id) {
+					setStatus("booked");
+					console.log(id, "is booked");
+					return;
+				}
+				setStatus("available");
+			}
+		};
+		// setInterval(() => {
+		checkAvailability();
+		// }, 5000);
+	}, []);
 	// text-red-600 for booked
 	// text-[#bbcb31]
 	return (
@@ -29,9 +55,9 @@ const MapElement: React.FC<MapElementProps> = ({ top, left, id, status, type }) 
 			></span>
 			<div
 				className={`absolute h-6 w-6 cursor-pointer flex-center text-xl lg:text-2xl
-					${status == "available" && "text-green-400"} 
+					${status == "available" ? "text-green-400" : ""} 
 					${status == "cleaning" && "text-green-400"} 
-					${status == "booked" && "text-red-600"}`}
+					${status == "booked" ? "text-red-600" : "text-green-400"}`}
 				style={{
 					top: `${top}`,
 					left: `${left}`,

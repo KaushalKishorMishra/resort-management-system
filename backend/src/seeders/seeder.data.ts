@@ -4,8 +4,9 @@ import { Rooms } from "@/interfaces/rooms.interface";
 export const roomSeedData: Rooms[] = [
   {
     id: 1,
-    name: "room 1",
-    description: "This is room for 2 people.",
+    name: "Lakeside Retreat A",
+    description:
+      "Experience the epitome of comfort and luxury at our Deluxe Lakeside Retreats. Nestled amidst the tranquil beauty of the lake, these rooms offer breathtaking views and indulgent amenities. Each room is elegantly furnished with plush bedding, stylish décor, and modern conveniences to ensure a truly memorable stay. Whether you're seeking a romantic getaway or a peaceful retreat, our Deluxe Lakeside Retreats promise a haven of relaxation and rejuvenation.",
     type: "deluxe",
     top: "31.2%",
     left: "33%",
@@ -15,8 +16,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 2,
-    name: "room 2",
-    description: "This is room for 2 people.",
+    name: "Lakeside Retreat B",
+    description:
+      "Experience the epitome of comfort and luxury at our Deluxe Lakeside Retreats. Nestled amidst the tranquil beauty of the lake, these rooms offer breathtaking views and indulgent amenities. Each room is elegantly furnished with plush bedding, stylish décor, and modern conveniences to ensure a truly memorable stay. Whether you're seeking a romantic getaway or a peaceful retreat, our Deluxe Lakeside Retreats promise a haven of relaxation and rejuvenation.",
     type: "deluxe",
     top: "31.9%",
     left: "41.3%",
@@ -26,8 +28,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 3,
-    name: "room 3",
-    description: "This is room for 2 people.",
+    name: "Lakeside Retreat C",
+    description:
+      "Experience the epitome of comfort and luxury at our Deluxe Lakeside Retreats. Nestled amidst the tranquil beauty of the lake, these rooms offer breathtaking views and indulgent amenities. Each room is elegantly furnished with plush bedding, stylish décor, and modern conveniences to ensure a truly memorable stay. Whether you're seeking a romantic getaway or a peaceful retreat, our Deluxe Lakeside Retreats promise a haven of relaxation and rejuvenation.",
     type: "deluxe",
     top: "34.1%",
     left: "50.1%",
@@ -37,8 +40,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 4,
-    name: "room 4",
-    description: "This is room for 5 people.",
+    name: "Family Escape A",
+    description:
+      "Designed with families in mind, our Family Lakeside Havens provide the perfect blend of space, comfort, and convenience. These spacious rooms feature separate sleeping areas, ideal for accommodating families of all sizes. With thoughtful amenities and charming décor, our Family Lakeside Havens offer a welcoming retreat for bonding and creating lasting memories by the lake. Treat your loved ones to a delightful stay surrounded by nature's beauty.",
     type: "family",
     top: "43.6%",
     left: "33.9%",
@@ -48,8 +52,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 5,
-    name: "room 5",
-    description: "This is room for 5 people.",
+    name: "Family Escape B",
+    description:
+      "Designed with families in mind, our Family Lakeside Havens provide the perfect blend of space, comfort, and convenience. These spacious rooms feature separate sleeping areas, ideal for accommodating families of all sizes. With thoughtful amenities and charming décor, our Family Lakeside Havens offer a welcoming retreat for bonding and creating lasting memories by the lake. Treat your loved ones to a delightful stay surrounded by nature's beauty.",
     type: "family",
     top: "44.5%",
     left: "40.1%",
@@ -59,8 +64,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 6,
-    name: "room 6",
-    description: "This is room for 5 people.",
+    name: "Family Escape C",
+    description:
+      "Designed with families in mind, our Family Lakeside Havens provide the perfect blend of space, comfort, and convenience. These spacious rooms feature separate sleeping areas, ideal for accommodating families of all sizes. With thoughtful amenities and charming décor, our Family Lakeside Havens offer a welcoming retreat for bonding and creating lasting memories by the lake. Treat your loved ones to a delightful stay surrounded by nature's beauty.",
     type: "family",
     top: "45%",
     left: "47.2%",
@@ -70,8 +76,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 7,
-    name: "room 7",
-    description: "This is room for 5 people.",
+    name: "Family Escape D",
+    description:
+      "Designed with families in mind, our Family Lakeside Havens provide the perfect blend of space, comfort, and convenience. These spacious rooms feature separate sleeping areas, ideal for accommodating families of all sizes. With thoughtful amenities and charming décor, our Family Lakeside Havens offer a welcoming retreat for bonding and creating lasting memories by the lake. Treat your loved ones to a delightful stay surrounded by nature's beauty.",
     type: "family",
     top: "44.8%",
     left: "54.9%",
@@ -81,8 +88,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 8,
-    name: "room 8",
-    description: "This is room for 5 people.",
+    name: "Family Escape E",
+    description:
+      "Designed with families in mind, our Family Lakeside Havens provide the perfect blend of space, comfort, and convenience. These spacious rooms feature separate sleeping areas, ideal for accommodating families of all sizes. With thoughtful amenities and charming décor, our Family Lakeside Havens offer a welcoming retreat for bonding and creating lasting memories by the lake. Treat your loved ones to a delightful stay surrounded by nature's beauty.",
     type: "family",
     top: "36.1%",
     left: "59.6%",
@@ -92,8 +100,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 9,
-    name: "room 9",
-    description: "This is room for 5 people.",
+    name: "Family Escape F",
+    description:
+      "Designed with families in mind, our Family Lakeside Havens provide the perfect blend of space, comfort, and convenience. These spacious rooms feature separate sleeping areas, ideal for accommodating families of all sizes. With thoughtful amenities and charming décor, our Family Lakeside Havens offer a welcoming retreat for bonding and creating lasting memories by the lake. Treat your loved ones to a delightful stay surrounded by nature's beauty.",
     type: "family",
     top: "33.2%",
     left: "65.1%",
@@ -103,8 +112,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 10,
-    name: "room 10",
-    description: "This is room for 5 people.",
+    name: "Family Escape G",
+    description:
+      "Designed with families in mind, our Family Lakeside Havens provide the perfect blend of space, comfort, and convenience. These spacious rooms feature separate sleeping areas, ideal for accommodating families of all sizes. With thoughtful amenities and charming décor, our Family Lakeside Havens offer a welcoming retreat for bonding and creating lasting memories by the lake. Treat your loved ones to a delightful stay surrounded by nature's beauty.",
     type: "family",
     top: "31.1%",
     left: "78.6%",
@@ -114,8 +124,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 11,
-    name: "room 11",
-    description: "This is room for 5 people.",
+    name: "Family Escape H",
+    description:
+      "Designed with families in mind, our Family Lakeside Havens provide the perfect blend of space, comfort, and convenience. These spacious rooms feature separate sleeping areas, ideal for accommodating families of all sizes. With thoughtful amenities and charming décor, our Family Lakeside Havens offer a welcoming retreat for bonding and creating lasting memories by the lake. Treat your loved ones to a delightful stay surrounded by nature's beauty.",
     type: "family",
     top: "29.7%",
     left: "85.2%",
@@ -125,8 +136,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 12,
-    name: "room 12",
-    description: "This is room for 5 people.",
+    name: "Family Escape I",
+    description:
+      "Designed with families in mind, our Family Lakeside Havens provide the perfect blend of space, comfort, and convenience. These spacious rooms feature separate sleeping areas, ideal for accommodating families of all sizes. With thoughtful amenities and charming décor, our Family Lakeside Havens offer a welcoming retreat for bonding and creating lasting memories by the lake. Treat your loved ones to a delightful stay surrounded by nature's beauty.",
     type: "family",
     top: "40.1%",
     left: "89.4%",
@@ -136,8 +148,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 13,
-    name: "room 13",
-    description: "This is room for 5 people.",
+    name: "Family Escape J",
+    description:
+      "Designed with families in mind, our Family Lakeside Havens provide the perfect blend of space, comfort, and convenience. These spacious rooms feature separate sleeping areas, ideal for accommodating families of all sizes. With thoughtful amenities and charming décor, our Family Lakeside Havens offer a welcoming retreat for bonding and creating lasting memories by the lake. Treat your loved ones to a delightful stay surrounded by nature's beauty.",
     type: "family",
     top: "47.1%",
     left: "92.8%",
@@ -147,8 +160,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 14,
-    name: "room 14",
-    description: "This is room for 3 people.",
+    name: "Comfort Room A",
+    description:
+      "Embrace the essence of lakeside living in our Standard Lakeside Serenity rooms. Offering comfort and simplicity, these cozy accommodations are perfect for solo travelers or couples seeking a peaceful getaway. Admire stunning views of the lake from your private balcony or unwind in the comfort of your well-appointed room. With all the essentials for a relaxing stay, our Standard Lakeside Serenity rooms provide a tranquil escape amidst nature's beauty.",
     type: "standard",
     top: "60.4%",
     left: "47.8%",
@@ -158,8 +172,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 15,
-    name: "room 15",
-    description: "This is room for 3 people.",
+    name: "Comfort Room B",
+    description:
+      "Embrace the essence of lakeside living in our Standard Lakeside Serenity rooms. Offering comfort and simplicity, these cozy accommodations are perfect for solo travelers or couples seeking a peaceful getaway. Admire stunning views of the lake from your private balcony or unwind in the comfort of your well-appointed room. With all the essentials for a relaxing stay, our Standard Lakeside Serenity rooms provide a tranquil escape amidst nature's beauty.",
     type: "standard",
     top: "59.7%",
     left: "59.3%",
@@ -169,8 +184,9 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 16,
-    name: "room 16",
-    description: "This is room for 3 people.",
+    name: "Comfort Room C",
+    description:
+      "Embrace the essence of lakeside living in our Standard Lakeside Serenity rooms. Offering comfort and simplicity, these cozy accommodations are perfect for solo travelers or couples seeking a peaceful getaway. Admire stunning views of the lake from your private balcony or unwind in the comfort of your well-appointed room. With all the essentials for a relaxing stay, our Standard Lakeside Serenity rooms provide a tranquil escape amidst nature's beauty.",
     type: "standard",
     top: "55.9%",
     left: "66.7%",
@@ -180,7 +196,7 @@ export const roomSeedData: Rooms[] = [
   },
   {
     id: 17,
-    name: "room 17",
+    name: "Comfort Room D",
     description: "This is room for 4 people.",
     type: "standard",
     top: "49.6%",
