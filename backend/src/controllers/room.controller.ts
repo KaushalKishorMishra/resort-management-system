@@ -52,7 +52,7 @@ export class RoomController {
   ): Promise<void> => {
     try {
       const roomData: Rooms = req.body;
-  
+
       const createRoomData: Rooms = await this.room.createRoom(roomData);
       res.status(200).json({
         status: 200,

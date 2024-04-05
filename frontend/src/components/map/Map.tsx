@@ -115,7 +115,7 @@ const Map = ({ image, alt, ref }: MapProps) => {
 
 				{/* map elements */}
 				{roomData.map(room => (
-					<MapElement top={room.top} left={room.left} id={room.id} status={room.status} type={room.type} key={room.id}/>
+					<MapElement top={room.top} left={room.left} id={room.id} type={room.type} key={room.id}/>
 				))}
 			</PanViewer>
 
